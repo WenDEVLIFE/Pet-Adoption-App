@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="headerText"></style>
+
+    <style name="parent"></style>
+
+    <style name="loginParent"></style>
+</resources>

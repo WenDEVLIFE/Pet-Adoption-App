@@ -4,41 +4,49 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F1DEDE"
+        android:background="@drawable/background"
         tools:context=".MainActivity">
 
     <TextView
-            android:text="Login"
-            android:layout_width="143dp"
-            android:layout_height="80dp"
+            android:text="Adopt, Don't Shop: Find Your Furry Soulmate."
+            android:layout_width="357dp"
+            android:layout_height="40dp"
             android:id="@+id/textView"
-            android:textSize="@dimen/_50sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15sdp"
             android:fontFamily="sans-serif-condensed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            android:layout_marginTop="40dp" />
+            android:layout_marginTop="32dp"
+            app:layout_constraintHorizontal_bias="0.703" />
 
     <EditText
-            android:layout_width="298dp"
-            android:layout_height="62dp"
+            android:layout_width="@dimen/_239sdp"
+            android:layout_height="@dimen/_50sdp"
             android:inputType="text"
-            android:text="Name"
+            android:hint="Username"
+            android:textColorHint="@color/black"
             android:background="@drawable/textfield"
             android:ems="10"
             android:id="@+id/editTextText"
-            tools:layout_editor_absoluteY="368dp"
-            tools:layout_editor_absoluteX="60dp" />
+            tools:layout_editor_absoluteY="251dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-            android:layout_width="299dp"
-            android:layout_height="62dp"
+            android:layout_width="@dimen/_239sdp"
+            android:layout_height="@dimen/_50sdp"
             android:inputType="textPassword"
+            android:hint="Password"
+            android:textColorHint="@color/black"
             android:background="@drawable/textfield"
             android:ems="10"
             android:id="@+id/editTextTextPassword2"
-            tools:layout_editor_absoluteY="474dp"
-            tools:layout_editor_absoluteX="61dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextText"
+            android:layout_marginTop="28dp" />
 
     <ImageView
             android:layout_width="87dp"
@@ -48,13 +56,41 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="44dp" />
+            android:layout_marginTop="24dp" />
 
     <Button
-            android:text="Button"
-            android:layout_width="142dp"
-            android:layout_height="51dp"
+            android:text="Sign Up"
+            android:layout_width="197dp"
+            android:layout_height="63dp"
             android:id="@+id/button"
-            tools:layout_editor_absoluteY="609dp"
-            tools:layout_editor_absoluteX="125dp" />
+            android:textColor="@color/white"
+            android:background="@drawable/button"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox"
+            android:layout_marginTop="36dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <CheckBox
+            android:text="Check to see the password"
+            android:layout_width="315dp"
+            android:layout_height="56dp"
+            android:id="@+id/checkBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2"
+            android:layout_marginTop="28dp"
+            app:layout_constraintHorizontal_bias="0.479" />
+
+    <TextView
+            android:text="Don't have account? Sign Up"
+            android:layout_width="@dimen/_260sdp"
+            android:textSize="@dimen/_20sdp"
+            android:layout_height="44dp"
+            android:textColor="@color/black"
+            android:id="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.63"
+            android:layout_marginBottom="72dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
