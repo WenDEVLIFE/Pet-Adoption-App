@@ -17,14 +17,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
-            tools:layout_editor_absoluteY="104dp"
-            tools:layout_editor_absoluteX="71dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="76dp"
+            app:layout_constraintHorizontal_bias="0.541" />
 
     <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="289dp"
-            android:layout_height="125dp"
+            android:layout_width="337dp"
+            android:layout_height="68dp"
             android:id="@+id/progressBar"
-            tools:layout_editor_absoluteY="437dp"
-            tools:layout_editor_absoluteX="76dp" />
+            android:progressBackgroundTint="#ED6B86"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            android:layout_marginTop="48dp"
+            app:layout_constraintHorizontal_bias="0.591" />
+
+    <ImageView
+            android:layout_width="153dp"
+            android:layout_height="138dp"
+            app:srcCompat="@drawable/paws"
+            android:id="@+id/imageView3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            android:layout_marginTop="32dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

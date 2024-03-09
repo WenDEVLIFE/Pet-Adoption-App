@@ -14,33 +14,19 @@
             tools:targetApi="31">
         <activity
                 android:name=".LoadingApp"
-                android:exported="false" />
-        <activity
-                android:name=".PetLoading"
-                android:exported="false"
-                android:theme="@style/Theme.Pet_Adoption_App" />
-        <activity
-                android:name=".Signin_Activity"
-                android:exported="false"
-                android:theme="@style/Theme.Pet_Adoption_App">
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".Signin"
+                android:name=".Signin_Activity"
                 android:exported="false"
                 android:theme="@style/Theme.Pet_Adoption_App" />
         <activity
                 android:name=".MainActivity"
                 android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
