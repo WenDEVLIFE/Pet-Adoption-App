@@ -5,4 +5,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F1DEDE"
-        tools:context=".MainActivity"/>
+        tools:context=".MainActivity">
+
+    <TextView
+            android:text="Login"
+            android:layout_width="143dp"
+            android:layout_height="80dp"
+            android:id="@+id/textView"
+            android:textSize="@dimen/_50sdp"
+            android:fontFamily="sans-serif-condensed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:layout_marginTop="40dp" />
+
+    <EditText
+            android:layout_width="298dp"
+            android:layout_height="62dp"
+            android:inputType="text"
+            android:text="Name"
+            android:background="@drawable/textfield"
+            android:ems="10"
+            android:id="@+id/editTextText"
+            tools:layout_editor_absoluteY="368dp"
+            tools:layout_editor_absoluteX="60dp" />
+
+    <EditText
+            android:layout_width="299dp"
+            android:layout_height="62dp"
+            android:inputType="textPassword"
+            android:background="@drawable/textfield"
+            android:ems="10"
+            android:id="@+id/editTextTextPassword2"
+            tools:layout_editor_absoluteY="474dp"
+            tools:layout_editor_absoluteX="61dp" />
+
+    <ImageView
+            android:layout_width="87dp"
+            android:layout_height="83dp"
+            app:srcCompat="@drawable/shiba"
+            android:id="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="44dp" />
+
+    <Button
+            android:text="Button"
+            android:layout_width="142dp"
+            android:layout_height="51dp"
+            android:id="@+id/button"
+            tools:layout_editor_absoluteY="609dp"
+            tools:layout_editor_absoluteX="125dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
