@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".LoadingApp"
+        android:background="@drawable/liquidcheese"
+        >
+
+    <TextView
+            android:text=" Pet Adoption"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="@dimen/_40sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            tools:layout_editor_absoluteY="104dp"
+            tools:layout_editor_absoluteX="71dp" />
+
+    <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="289dp"
+            android:layout_height="125dp"
+            android:id="@+id/progressBar"
+            tools:layout_editor_absoluteY="437dp"
+            tools:layout_editor_absoluteX="76dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

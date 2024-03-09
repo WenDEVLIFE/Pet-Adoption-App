@@ -9,9 +9,9 @@
 
     <TextView
             android:text="Adopt, Don't Shop"
-            android:layout_width="199dp"
+            android:layout_width="@dimen/_199sdp"
             android:textFontWeight="@integer/material_motion_duration_long_1"
-            android:layout_height="59dp"
+            android:layout_height="@dimen/_40sdp"
             android:id="@+id/textView"
             android:textColor="@color/black"
             android:textSize="@dimen/_15sdp"
@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
             android:layout_marginTop="16dp"
-            app:layout_constraintHorizontal_bias="0.668" />
+            app:layout_constraintHorizontal_bias="0.631" />
 
     <EditText
             android:layout_width="@dimen/_239sdp"
@@ -31,9 +31,11 @@
             android:background="@drawable/textfield"
             android:ems="10"
             android:id="@+id/editTextText"
-            tools:layout_editor_absoluteY="251dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:layout_marginTop="60dp"
+            app:layout_constraintHorizontal_bias="0.48" />
 
     <EditText
             android:layout_width="@dimen/_239sdp"
@@ -66,15 +68,16 @@
             android:id="@+id/button"
             android:textColor="@color/white"
             android:background="@drawable/button"
-            tools:layout_editor_absoluteY="521dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497" />
+            app:layout_constraintHorizontal_bias="0.497"
+            android:layout_marginBottom="19dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView5" />
 
     <CheckBox
             android:text="Check to see the password"
-            android:layout_width="315dp"
-            android:layout_height="56dp"
+            android:layout_width="@dimen/_215sdp"
+            android:layout_height="@dimen/_40sdp"
             android:id="@+id/checkBox"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +86,7 @@
 
     <TextView
             android:text="Don't have account? Sign Up"
-            android:layout_width="304dp"
+            android:layout_width="@dimen/_204sdp"
             android:textSize="@dimen/_15sdp"
             android:layout_height="48dp"
             android:textColor="@color/black"
@@ -91,6 +94,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.742"
-            android:layout_marginBottom="116dp" />
+            app:layout_constraintHorizontal_bias="0.551"
+            android:layout_marginBottom="112dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
