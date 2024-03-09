@@ -4,17 +4,20 @@
     <!-- Define the background properties like color, shape etc -->
     <item android:id="@android:id/background">
         <shape>
-            <corners android:radius="5dp" />
-            <solid android:color="#D3D3D3" />
+            <corners android:radius="50dp" />
+            <solid android:color="#6A994E" />
         </shape>
     </item>
 
-    <!-- Define the progress properties like color, shape etc -->
+    <!-- Define the progress properties like gradient color, shape etc -->
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-                <corners android:radius="5dp" />
-                <solid android:color="#FF4500" />
+                <corners android:radius="50dp" />
+                <gradient
+                        android:startColor="#6A994E"
+                        android:endColor="#6A994E"
+                        android:angle="0"/>
             </shape>
         </clip>
     </item>

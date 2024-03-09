@@ -25,10 +25,11 @@
 
     <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="337dp"
-            android:layout_height="68dp"
+            android:layout_width="359dp"
+            android:layout_height="69dp"
             android:id="@+id/progressBar"
-            android:progressBackgroundTint="#ED6B86"
+            android:progressDrawable="@drawable/custom_progressbar"
+            android:progressBackgroundTint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3"
