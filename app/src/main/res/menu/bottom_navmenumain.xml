@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="@string/home"
+            android:icon="@drawable/baseline_home_24"
+            android:id="@+id/home"
+            />
+
+    <item android:title="@string/adopt_pet"
+            android:id="@+id/adopt_pet"
+            android:icon="@drawable/paw_icon"
+            />
+
+    <item android:title="@string/notifications"
+            android:icon="@drawable/baseline_notifications_active_24"
+            android:id="@+id/notifications"
+            />
+</menu>

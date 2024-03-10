@@ -13,7 +13,7 @@
             android:theme="@style/Theme.Pet_Adoption_App"
             tools:targetApi="31">
         <activity
-                android:name=".Home"
+                android:name=".FragementController"
                 android:exported="false"
                 android:label="@string/title_activity_home"
                 android:theme="@style/Theme.Pet_Adoption_App.NoActionBar" />

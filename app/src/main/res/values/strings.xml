@@ -49,4 +49,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="Adopt_pet" />
+    <string name="notifications">Notifications</string>
+    <string name="adopt_pet">Adopt Pet</string>
+    <string name="home">Home</string>
+    <string name="Home" />
+    <string name="home1" />
 </resources>
