@@ -30,7 +30,7 @@
             android:textColorHint="@color/black"
             android:background="@drawable/textfield"
             android:ems="10"
-            android:id="@+id/editTextText"
+            android:id="@+id/username"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -45,10 +45,10 @@
             android:textColorHint="@color/black"
             android:background="@drawable/textfield"
             android:ems="10"
-            android:id="@+id/editTextTextPassword2"
+            android:id="@+id/password"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText"
+            app:layout_constraintTop_toBottomOf="@+id/username"
             android:layout_marginTop="28dp" />
 
     <ImageView
@@ -72,7 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             android:layout_marginBottom="19dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView5" />
+            app:layout_constraintBottom_toTopOf="@+id/sigin" />
 
     <CheckBox
             android:text="Check to see the password"
@@ -91,7 +91,7 @@
             android:textSize="@dimen/_15sdp"
             android:layout_height="48dp"
             android:textColor="@color/black"
-            android:id="@+id/textView5"
+            android:id="@+id/sigin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
