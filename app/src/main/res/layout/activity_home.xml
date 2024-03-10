@@ -12,33 +12,24 @@
             android:background="@drawable/background_gradient">
 
         <FrameLayout
-                android:id="@+id/nav_host_fragment"
+                android:id="@+id/fragment_container"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/background_gradient"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-        </FrameLayout>
+                app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
+    <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@drawable/navbottom">
-
-        <com.google.android.material.navigation.NavigationView
-                android:id="@+id/nav_view"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:headerLayout="@drawable/nav_userinfo"
-                android:background="@drawable/navbottom"
-                app:menu="@menu/bottom_navmenumain"
-                />
-
-    </FrameLayout>
+            android:background="@drawable/navbottom"
+            app:headerLayout="@drawable/nav_userinfo"
+            app:menu="@menu/bottom_navmenumain" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
