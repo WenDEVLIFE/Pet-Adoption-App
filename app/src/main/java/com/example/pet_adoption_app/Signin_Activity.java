@@ -1,8 +1,11 @@
 package com.example.pet_adoption_app;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -10,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Signin_Activity extends AppCompatActivity {
 
+     Button Register , Back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +24,27 @@ public class Signin_Activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+         Register = findViewById(R.id.button);
+         Register.setOnClickListener(v-> {
+             AlertDialog alertDialog = new AlertDialog.Builder(Signin_Activity.this).create();
+                alertDialog.setTitle("Alert");
+                alertDialog.setMessage("Sign up successful");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        (dialog, which) -> dialog.dismiss());
+                alertDialog.show();
+
+                Intent intent = new Intent(Signin_Activity.this, Signin_Activity.class);
+                startActivity(intent);
+        });
+
+            Back = findViewById(R.id.buttonback);
+            Back.setOnClickListener(v -> {
+                Intent intent = new Intent(Signin_Activity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            });
+
 
 
     }

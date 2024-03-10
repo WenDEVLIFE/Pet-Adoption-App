@@ -6,4 +6,11 @@
     </style>
 
     <style name="Theme.Pet_Adoption_App" parent="Base.Theme.Pet_Adoption_App" />
+    <style name="Theme.Pet_Adoption_App.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.Pet_Adoption_App.AppBarOverlay"
+            parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Pet_Adoption_App.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

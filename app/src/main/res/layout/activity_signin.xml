@@ -9,7 +9,7 @@
         tools:context=".Signin_Activity">
 
     <Button
-            android:text="Sign Up"
+            android:text="Register"
             android:layout_width="169dp"
             android:layout_height="54dp"
             android:id="@+id/button"
@@ -62,6 +62,7 @@
             android:layout_width="319dp"
             android:layout_height="58dp"
             android:inputType="textPassword"
+            android:textColor="@color/black"
             android:hint="Password"
             android:textColorHint="@color/black"
             android:background="@drawable/textfield"
@@ -89,6 +90,7 @@
             android:inputType="textPassword"
             android:hint="Confirm Password"
             android:textColorHint="@color/black"
+            android:textColor="@color/black"
             android:background="@drawable/textfield"
             android:ems="10"
             android:id="@+id/confirmpassword"
@@ -102,6 +104,7 @@
             android:layout_width="316dp"
             android:layout_height="56dp"
             android:inputType="text"
+            android:textColor="@color/black"
             android:hint="Username"
             android:textColorHint="@color/black"
             android:background="@drawable/textfield"
@@ -117,6 +120,7 @@
             android:layout_height="52dp"
             android:inputType="text"
             android:hint="Email"
+            android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:background="@drawable/textfield"
             android:ems="10"
@@ -131,6 +135,7 @@
             android:layout_width="315dp"
             android:layout_height="59dp"
             android:inputType="text"
+            android:textColor="@color/black"
             android:hint="Name"
             android:textColorHint="@color/black"
             android:background="@drawable/textfield"
