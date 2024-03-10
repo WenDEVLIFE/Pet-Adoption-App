@@ -3,13 +3,13 @@
 
 
     <item android:title="@string/home"
-            android:icon="@drawable/baseline_home_24"
+            android:icon="@drawable/home"
             android:id="@+id/home"
             />
 
     <item android:title="@string/adopt_pet"
             android:id="@+id/adopt_pet"
-            android:icon="@drawable/paw_icon"
+            android:icon="@drawable/paw_icons"
             />
 
     <item android:title="@string/notifications"

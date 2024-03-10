@@ -34,8 +34,7 @@ public class Signin_Activity extends AppCompatActivity {
                         (dialog, which) -> dialog.dismiss());
                 alertDialog.show();
 
-                Intent intent = new Intent(Signin_Activity.this, Signin_Activity.class);
-                startActivity(intent);
+
         });
 
             Back = findViewById(R.id.buttonback);

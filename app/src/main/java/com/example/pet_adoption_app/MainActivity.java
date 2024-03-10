@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
                     (dialog, which) -> dialog.dismiss());
             alertDialog.show();
 
+            Intent intent = new Intent(MainActivity.this, FragementController.class);
+            startActivity(intent);
+
         });
 
         CheckBox checkBox = findViewById(R.id.checkBox);
