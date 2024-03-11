@@ -30,6 +30,8 @@
             android:layout_gravity="start"
             android:background="@drawable/navbottom"
             app:headerLayout="@drawable/nav_userinfo"
-            app:menu="@menu/bottom_navmenumain" />
+            app:menu="@menu/bottom_navmenumain"
+            app:itemIconTint="#D5E2BC"
+            />
 
 </androidx.drawerlayout.widget.DrawerLayout>

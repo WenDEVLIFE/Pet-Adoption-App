@@ -1,11 +1,12 @@
 package com.example.pet_adoption_app;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -13,13 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.pet_adoption_app.databinding.ActivityMainBinding;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 public class FragementController extends AppCompatActivity {
 
-     ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +30,13 @@ public class FragementController extends AppCompatActivity {
             return insets;
         });
 
+        // This will call the home fragment
         replaceFragement(new HomeFragment());
 
         // Get the NavigationView reference using findViewById
         NavigationView navView = findViewById(R.id.navView);
+        ColorStateList csl = ContextCompat.getColorStateList(this, R.color.Cool_gray);
+        navView.setItemIconTintList(csl);
         navView.setNavigationItemSelectedListener(item -> {
             if(item.getItemId() == R.id.home){
                 replaceFragement(new HomeFragment());
@@ -44,6 +45,8 @@ public class FragementController extends AppCompatActivity {
                 builder.setMessage("Home Fragment");
                 builder.show();
             }
+
+            // This will go to Notification Fragements
             else if(item.getItemId() == R.id.notifications){
                 replaceFragement(new NotificationFragment());
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -51,6 +54,8 @@ public class FragementController extends AppCompatActivity {
                 builder.setMessage("Notifications Fragment");
                 builder.show();
             }
+
+            // This will go to Adopt Pet Fragements
             else if(item.getItemId() == R.id.adopt_pet){
                 replaceFragement(new NotificationFragment());
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -62,7 +67,10 @@ public class FragementController extends AppCompatActivity {
         });
     }
 
+    // This will call the fragments
     private void replaceFragement(Fragment fragment) {
+
+        // Call the fragment manager and begin the transaction to replace the fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);

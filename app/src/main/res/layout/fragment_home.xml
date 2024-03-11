@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -8,12 +9,33 @@
         >
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-            android:layout_width="263dp"
-            android:layout_height="180dp"
-            android:text="Home Fragement"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:textSize="@dimen/_40sdp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="380dp"
+                android:layout_height="97dp"
+                android:background="@drawable/panes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="124dp"
+                app:layout_constraintHorizontal_bias="0.483">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+                android:layout_width="291dp"
+                android:layout_height="46dp"
+                android:text="Welcome"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:textSize="@dimen/_20sdp"
+                tools:layout_editor_absoluteY="33dp"
+                tools:layout_editor_absoluteX="75dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
