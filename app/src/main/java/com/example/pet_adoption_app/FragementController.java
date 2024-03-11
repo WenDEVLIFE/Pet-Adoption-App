@@ -48,7 +48,7 @@ public class FragementController extends AppCompatActivity {
 
             // This will go to Notification Fragements
             else if(item.getItemId() == R.id.notifications){
-                replaceFragement(new NotificationFragment());
+                replaceFragement(new AdoptionFragments());
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Notifications");
                 builder.setMessage("Notifications Fragment");
@@ -57,7 +57,7 @@ public class FragementController extends AppCompatActivity {
 
             // This will go to Adopt Pet Fragements
             else if(item.getItemId() == R.id.adopt_pet){
-                replaceFragement(new NotificationFragment());
+                replaceFragement(new AdoptionFragments());
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Adopt Pet");
                 builder.setMessage("Adopt Pet Fragment");
