@@ -16,15 +16,86 @@
             tools:layout_editor_absoluteX="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="380dp"
-                android:layout_height="97dp"
+                android:layout_width="349dp"
+                android:layout_height="456dp"
                 android:background="@drawable/panes"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="124dp"
-                app:layout_constraintHorizontal_bias="0.483">
+                android:id="@+id/constraintLayout"
+                tools:layout_editor_absoluteY="159dp"
+                tools:layout_editor_absoluteX="11dp">
 
+            <ImageButton
+                    android:src="@drawable/file"
+                    android:layout_width="63dp"
+                    android:layout_height="62dp"
+                    android:background="transparent"
+                    android:id="@+id/imageButton"
+                    tools:layout_editor_absoluteY="53dp"
+                    tools:layout_editor_absoluteX="270dp" />
+
+            <ImageButton
+                    android:src="@drawable/footprint"
+                    android:layout_width="63dp"
+                    android:layout_height="62dp"
+                    android:background="transparent"
+                    android:id="@+id/imageButton"
+                    tools:layout_editor_absoluteY="175dp"
+                    tools:layout_editor_absoluteX="48dp" />
+
+            <ImageButton
+                    android:src="@drawable/footprint"
+                    android:layout_width="63dp"
+                    android:layout_height="62dp"
+                    android:background="transparent"
+                    android:id="@+id/imageButton"
+                    tools:layout_editor_absoluteY="53dp"
+                    tools:layout_editor_absoluteX="45dp" />
+
+            <ImageButton
+                    android:src="@drawable/pawprint"
+                    android:layout_width="63dp"
+                    android:layout_height="62dp"
+                    android:background="transparent"
+                    android:id="@+id/imageButton"
+                    tools:layout_editor_absoluteY="53dp"
+                    tools:layout_editor_absoluteX="156dp" />
+
+            <TextView
+                    android:text="Your pets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+
+                    android:id="@+id/textView4"
+                    tools:layout_editor_absoluteY="130dp"
+                    tools:layout_editor_absoluteX="56dp" />
+
+            <TextView
+                    android:text="Your pets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+
+                    android:id="@+id/textView4"
+                    tools:layout_editor_absoluteY="273dp"
+                    tools:layout_editor_absoluteX="48dp" />
+
+            <TextView
+                    android:text="Adopted pets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:id="@+id/textView4"
+                    tools:layout_editor_absoluteY="130dp"
+                    tools:layout_editor_absoluteX="156dp" />
+
+            <TextView
+                    android:text="Pending"
+                    android:layout_width="74dp"
+                    android:layout_height="21dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:id="@+id/textView4"
+                    tools:layout_editor_absoluteY="131dp"
+                    tools:layout_editor_absoluteX="270dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -34,8 +105,20 @@
                 android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:textSize="@dimen/_20sdp"
-                tools:layout_editor_absoluteY="33dp"
-                tools:layout_editor_absoluteX="75dp" />
+                android:id="@+id/textView3"
+                tools:layout_editor_absoluteY="22dp"
+                tools:layout_editor_absoluteX="92dp" />
+
+        <ImageView
+                android:src="@drawable/pet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView3"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintHorizontal_bias="0.4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

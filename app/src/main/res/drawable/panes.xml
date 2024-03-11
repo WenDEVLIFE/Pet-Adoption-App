@@ -3,12 +3,11 @@
     <item>
         <shape android:shape="rectangle">
             <gradient
-                    android:startColor="#7699D4"
+                    android:startColor="@color/white"
                     android:endColor="@color/Cool_gray"
                     android:angle="315"/>
             <corners
-                    android:topLeftRadius="50dp"
-                    android:topRightRadius="50dp" />
+                   android:radius="40dp" />
         </shape>
     </item>
 </selector>
