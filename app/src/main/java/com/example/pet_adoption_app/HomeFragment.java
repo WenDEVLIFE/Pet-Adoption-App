@@ -2,11 +2,13 @@ package com.example.pet_adoption_app;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +61,53 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        ImageButton buttonPending = rootView.findViewById(R.id.imageButton_pending);
+        ImageButton buttonMissing = rootView.findViewById(R.id.missing_button);
+        ImageButton buttonDonate = rootView.findViewById(R.id.donatebutton);
+        ImageButton buttonAdopt = rootView.findViewById(R.id.buttonadopt);
+        ImageButton buttonAdoptPet = rootView.findViewById(R.id.button_adopt_pet);
+        buttonPending.setOnClickListener(v -> {
+            // Handle button pending click
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Pending");
+            builder.setMessage("Pending Fragment");
+            builder.show();
+        });
+
+        buttonMissing.setOnClickListener(v -> {
+            // Handle button pending click
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Pending");
+            builder.setMessage("Pending Fragment");
+            builder.show();
+        });
+
+        buttonDonate.setOnClickListener(v -> {
+            // Handle button pending click
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Pending");
+            builder.setMessage("Pending Fragment");
+            builder.show();
+        });
+
+        buttonAdopt.setOnClickListener(v -> {
+            // Handle button pending click
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Pending");
+            builder.setMessage("Pending Fragment");
+            builder.show();
+        });
+
+        buttonAdoptPet.setOnClickListener(v -> {
+            // Handle button pending click
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Pending");
+            builder.setMessage("Pending Fragment");
+            builder.show();
+        });
+
+        return rootView;
     }
 }
