@@ -3,10 +3,47 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main"
-        android:background="@drawable/background"
+        android:background="@color/Cool_gray"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Signin_Activity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="@dimen/_320sdp"
+            android:layout_height="@dimen/_180sdp"
+            android:background="@drawable/toplogin_design"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            android:id="@+id/constraintLayout2">
+
+        <ImageView
+                android:layout_width="87dp"
+                android:layout_height="83dp"
+                app:srcCompat="@drawable/shiba"
+                android:id="@+id/imageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="4dp"
+                app:layout_constraintHorizontal_bias="0.501" />
+
+        <TextView
+                android:text="Sign up, to adopt our precious pets"
+                android:layout_width="259dp"
+                android:textFontWeight="@integer/material_motion_duration_long_1"
+                android:layout_height="69dp"
+                android:id="@+id/textView"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20sdp"
+                android:fontFamily="sans-serif-condensed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                android:layout_marginTop="4dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
             android:text="Register"
@@ -32,31 +69,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.637"
             android:layout_marginBottom="20dp" />
-
-    <ImageView
-            android:layout_width="87dp"
-            android:layout_height="83dp"
-            app:srcCompat="@drawable/shiba"
-            android:id="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
-            app:layout_constraintHorizontal_bias="0.45" />
-
-    <TextView
-            android:text="Sign in to Adopt our precious pets"
-            android:layout_width="266dp"
-            android:textFontWeight="@integer/material_motion_duration_long_1"
-            android:layout_height="39dp"
-            android:id="@+id/textView"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_15sdp"
-            android:fontFamily="sans-serif-condensed"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            android:layout_marginTop="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
             android:layout_width="319dp"
@@ -113,7 +125,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/email"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="8dp"
+            app:layout_constraintHorizontal_bias="0.526" />
 
     <EditText
             android:layout_width="315dp"
