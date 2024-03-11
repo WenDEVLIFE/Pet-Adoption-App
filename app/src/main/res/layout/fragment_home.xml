@@ -16,86 +16,129 @@
             tools:layout_editor_absoluteX="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="349dp"
-                android:layout_height="456dp"
+                android:layout_width="385dp"
+                android:layout_height="346dp"
                 android:background="@drawable/panes"
                 android:id="@+id/constraintLayout"
-                tools:layout_editor_absoluteY="159dp"
-                tools:layout_editor_absoluteX="11dp">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="284dp">
 
             <ImageButton
                     android:src="@drawable/file"
                     android:layout_width="63dp"
                     android:layout_height="62dp"
-                    android:background="transparent"
-                    android:id="@+id/imageButton"
-                    tools:layout_editor_absoluteY="53dp"
-                    tools:layout_editor_absoluteX="270dp" />
+                    android:id="@+id/imageButton_pending"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/textView44"
+                    android:layout_marginEnd="56dp"
+                    app:layout_constraintVertical_bias="0.723" />
+
+            <ImageButton
+                    android:src="@drawable/missing"
+                    android:layout_width="63dp"
+                    android:layout_height="62dp"
+                    android:id="@+id/missing_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/donatebutton"
+                    app:layout_constraintBottom_toTopOf="@+id/textView4"
+                    app:layout_constraintHorizontal_bias="0.494"
+                    android:layout_marginBottom="16dp" />
+
+            <ImageButton
+                    android:src="@drawable/donation"
+                    android:layout_width="63dp"
+                    android:layout_height="62dp"
+                    android:id="@+id/donatebutton"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView41"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="172dp" />
 
             <ImageButton
                     android:src="@drawable/footprint"
                     android:layout_width="63dp"
                     android:layout_height="62dp"
-                    android:background="transparent"
-                    android:id="@+id/imageButton"
-                    tools:layout_editor_absoluteY="175dp"
-                    tools:layout_editor_absoluteX="48dp" />
-
-            <ImageButton
-                    android:src="@drawable/footprint"
-                    android:layout_width="63dp"
-                    android:layout_height="62dp"
-                    android:background="transparent"
-                    android:id="@+id/imageButton"
-                    tools:layout_editor_absoluteY="53dp"
-                    tools:layout_editor_absoluteX="45dp" />
+                    android:id="@+id/buttonadopt"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="44dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView4"
+                    app:layout_constraintVertical_bias="0.235"
+                    app:layout_constraintEnd_toStartOf="@+id/button_adopt_pet"
+                    app:layout_constraintHorizontal_bias="0.0" />
 
             <ImageButton
                     android:src="@drawable/pawprint"
                     android:layout_width="63dp"
                     android:layout_height="62dp"
-                    android:background="transparent"
-                    android:id="@+id/imageButton"
-                    tools:layout_editor_absoluteY="53dp"
-                    tools:layout_editor_absoluteX="156dp" />
+                    android:id="@+id/button_adopt_pet"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/textView43"
+                    app:layout_constraintEnd_toStartOf="@+id/imageButton_pending"
+                    android:layout_marginEnd="48dp"
+                    app:layout_constraintVertical_bias="0.765" />
 
             <TextView
-                    android:text="Your pets"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:text="Your adoption pets"
+                    android:layout_width="81dp"
+                    android:layout_height="37dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:id="@+id/textView45"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textView43"
+                    app:layout_constraintBottom_toTopOf="@+id/missing_button"
+                    app:layout_constraintHorizontal_bias="0.523"
+                    android:layout_marginBottom="24dp" />
+
+            <TextView
+                    android:text="Your missing pet"
+                    android:layout_width="72dp"
+                    android:layout_height="40dp"
                     android:fontFamily="sans-serif-condensed"
 
                     android:id="@+id/textView4"
-                    tools:layout_editor_absoluteY="130dp"
-                    tools:layout_editor_absoluteX="56dp" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textView41"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.483"
+                    android:layout_marginBottom="48dp" />
 
             <TextView
-                    android:text="Your pets"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:text="Donate "
+                    android:layout_width="60dp"
+                    android:layout_height="29dp"
                     android:fontFamily="sans-serif-condensed"
 
-                    android:id="@+id/textView4"
-                    tools:layout_editor_absoluteY="273dp"
-                    tools:layout_editor_absoluteX="48dp" />
+                    android:id="@+id/textView41"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="172dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="56dp" />
 
             <TextView
                     android:text="Adopted pets"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
-                    android:id="@+id/textView4"
-                    tools:layout_editor_absoluteY="130dp"
-                    tools:layout_editor_absoluteX="156dp" />
+                    android:id="@+id/textView43"
+                    app:layout_constraintEnd_toStartOf="@+id/textView44"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintBottom_toTopOf="@+id/donatebutton"
+                    android:layout_marginBottom="40dp" />
 
             <TextView
-                    android:text="Pending"
-                    android:layout_width="74dp"
-                    android:layout_height="21dp"
+                    android:text="Pending adoptions"
+                    android:layout_width="73dp"
+                    android:layout_height="38dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:id="@+id/textView4"
-                    tools:layout_editor_absoluteY="131dp"
-                    tools:layout_editor_absoluteX="270dp" />
+                    android:id="@+id/textView44"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="56dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="180dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -106,8 +149,12 @@
                 android:layout_gravity="center"
                 android:textSize="@dimen/_20sdp"
                 android:id="@+id/textView3"
-                tools:layout_editor_absoluteY="22dp"
-                tools:layout_editor_absoluteX="92dp" />
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintVertical_bias="0.714" />
 
         <ImageView
                 android:src="@drawable/pet"
