@@ -83,7 +83,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/confirmpassword"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="8dp"
+            app:layout_constraintHorizontal_bias="0.51" />
 
     <CheckBox
             android:text="Check to see the password"
@@ -141,8 +142,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/name"
-            app:layout_constraintHorizontal_bias="0.494"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="8dp" />
 
     <EditText
             android:layout_width="315dp"
@@ -157,5 +157,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/password"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="12dp"
+            app:layout_constraintHorizontal_bias="0.531" />
 </androidx.constraintlayout.widget.ConstraintLayout>

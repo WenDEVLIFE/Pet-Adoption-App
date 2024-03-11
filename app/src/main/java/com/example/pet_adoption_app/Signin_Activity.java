@@ -3,6 +3,8 @@ package com.example.pet_adoption_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -14,6 +16,10 @@ import androidx.core.view.WindowInsetsCompat;
 public class Signin_Activity extends AppCompatActivity {
 
      Button Register , Back;
+
+     CheckBox see_the_password;
+
+     EditText username, email, name, password, confirm_password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +50,27 @@ public class Signin_Activity extends AppCompatActivity {
                 finish();
             });
 
+            // our edit text fields
+            username = findViewById(R.id.username);
+            email = findViewById(R.id.email);
+            name = findViewById(R.id.name);
+            password = findViewById(R.id.password);
+            confirm_password = findViewById(R.id.confirmpassword);
+
+            // find the checkbox
+            see_the_password = findViewById(R.id.checkBox);
+            see_the_password.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if(isChecked){
+                    //show password
+                    password.setInputType(0);
+                    confirm_password.setInputType(0);
+
+                }else{
+                    //hide password
+                    password.setInputType(129);
+                    confirm_password.setInputType(129);
+                }
+            });
 
 
     }
