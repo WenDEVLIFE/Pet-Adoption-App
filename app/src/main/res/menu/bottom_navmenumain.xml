@@ -16,4 +16,13 @@
             android:icon="@drawable/baseline_notifications_active_24"
             android:id="@+id/notifications"
             />
+
+    <item android:title="Report lost pets"
+            android:icon="@drawable/baseline_notifications_active_24"
+            android:id="@+id/lostpet"
+            />
+    <item android:title="Ask Donations"
+            android:icon="@drawable/baseline_notifications_active_24"
+            android:id="@+id/ask_donation"
+            />
 </menu>
