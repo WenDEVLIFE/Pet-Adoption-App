@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -7,14 +8,56 @@
         android:background="@drawable/background_gradient"
         >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-            android:layout_width="263dp"
-            android:layout_height="180dp"
-            android:textColor="@color/white"
-            android:id="@+id/textView"
-            android:text="Notification Fragment"
-            android:layout_gravity="center"
-            android:textSize="@dimen/_40sdp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+        <TextView
+                android:layout_width="281dp"
+                android:layout_height="119dp"
+                android:textColor="@color/white"
+                android:id="@+id/textView"
+                android:text="Notification Fragment hehehe"
+                android:textSize="@dimen/_40sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.661"
+                android:layout_marginBottom="164dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="403dp"
+                android:layout_height="86dp"
+                android:background="@drawable/panes2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/constraintLayout3">
+
+            <TextView
+                    android:layout_width="305dp"
+                    android:layout_height="55dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/textVie1"
+                    android:text="Adopt a pet"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="@dimen/_30sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintHorizontal_bias="0.612" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.SearchView
+                android:layout_width="402dp"
+                android:layout_height="80dp"
+                android:id="@+id/searchView"
+                android:hint="Search..."
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+                android:layout_marginTop="4dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
