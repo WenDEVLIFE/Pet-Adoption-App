@@ -252,20 +252,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="28dp"
-                android:layout_marginEnd="64dp"
+                android:layout_marginEnd="24dp"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.022" />
 
         <ImageView
-                android:src="@drawable/pet"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_45sdp"
+                android:src="@drawable/petlogo"
+                android:layout_width="96dp"
+                android:layout_height="86dp"
                 android:id="@+id/imageView2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView3"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="16dp"
-                app:layout_constraintHorizontal_bias="0.47" />
+                android:layout_marginTop="4dp"
+                app:layout_constraintHorizontal_bias="0.421" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
