@@ -110,6 +110,22 @@ public class HomeFragment extends Fragment {
             builder.show();
         });
 
+        ButtonAdoptRequest.setOnClickListener(v -> {
+            // Handle button pending click
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Pending");
+            builder.setMessage("Pending Fragment");
+            builder.show();
+        });
+
+        Transaction_History.setOnClickListener(v -> {
+            // Handle button pending click
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Pending");
+            builder.setMessage("Pending Fragment");
+            builder.show();
+        });
+
         return rootView;
     }
 }
