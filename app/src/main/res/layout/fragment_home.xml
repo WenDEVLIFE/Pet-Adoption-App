@@ -41,6 +41,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView5"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         android:layout_gravity="bottom" />
 
@@ -77,7 +78,8 @@
                         app:tint="#273B09" />
 
                 <TextView
-                        android:text="    Your pets"
+                        android:text="      Your pets"
+                        android:textColor="@color/black"
                         android:fontFamily="sans-serif-condensed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -101,6 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView6"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         android:layout_gravity="bottom" />
 
@@ -131,6 +134,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView89"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         android:layout_gravity="bottom" />
 
@@ -160,6 +164,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView51"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         android:layout_gravity="bottom" />
 
@@ -189,6 +194,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView7"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         android:layout_gravity="bottom" />
 
@@ -218,6 +224,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView8"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         android:layout_gravity="bottom" />
 

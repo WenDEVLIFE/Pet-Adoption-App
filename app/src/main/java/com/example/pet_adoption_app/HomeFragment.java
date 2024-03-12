@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // our code here with image buttons
         ImageButton buttonPending = rootView.findViewById(R.id.imageButton_pending);
         ImageButton buttonMissing = rootView.findViewById(R.id.missingbutton);
         ImageButton buttonDonate = rootView.findViewById(R.id.donatebutton);
@@ -70,6 +71,8 @@ public class HomeFragment extends Fragment {
         ImageButton buttonAdoptPet = rootView.findViewById(R.id.button_adopt_pet);
         ImageButton ButtonAdoptRequest = rootView.findViewById(R.id.adopt_request);
         ImageButton Transaction_History = rootView.findViewById(R.id.transaction_history);
+
+
         buttonPending.setOnClickListener(v -> {
             // Handle button pending click
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
