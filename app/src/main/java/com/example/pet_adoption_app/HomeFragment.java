@@ -64,10 +64,12 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         ImageButton buttonPending = rootView.findViewById(R.id.imageButton_pending);
-        ImageButton buttonMissing = rootView.findViewById(R.id.missing_button);
+        ImageButton buttonMissing = rootView.findViewById(R.id.missingbutton);
         ImageButton buttonDonate = rootView.findViewById(R.id.donatebutton);
         ImageButton buttonAdopt = rootView.findViewById(R.id.buttonadopt);
         ImageButton buttonAdoptPet = rootView.findViewById(R.id.button_adopt_pet);
+        ImageButton ButtonAdoptRequest = rootView.findViewById(R.id.adopt_request);
+        ImageButton Transaction_History = rootView.findViewById(R.id.transaction_history);
         buttonPending.setOnClickListener(v -> {
             // Handle button pending click
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
