@@ -48,7 +48,6 @@ public class FragementController extends AppCompatActivity {
 
             // This will go to Notification Fragements
             else if(item.getItemId() == R.id.notifications){
-                replaceFragement(new AdoptionFragments());
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Notifications");
                 builder.setMessage("Notifications Fragment");

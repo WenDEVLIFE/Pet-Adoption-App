@@ -31,6 +31,7 @@ public class Signin_Activity extends AppCompatActivity {
             return insets;
         });
 
+        // This is register button
          Register = findViewById(R.id.button);
          Register.setOnClickListener(v-> {
              AlertDialog alertDialog = new AlertDialog.Builder(Signin_Activity.this).create();
@@ -43,6 +44,8 @@ public class Signin_Activity extends AppCompatActivity {
 
         });
 
+
+         // This will go back to login
             Back = findViewById(R.id.buttonback);
             Back.setOnClickListener(v -> {
                 Intent intent = new Intent(Signin_Activity.this, MainActivity.class);

@@ -26,9 +26,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // our edit text fields
         usernamefield = findViewById(R.id.username);
         passwordfield = findViewById(R.id.password);
 
+        // Sign in button
         Sign_in = findViewById(R.id.sigin);
         Sign_in.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, Signin_Activity.class);
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
+        // Sign up button
         Sign_up = findViewById(R.id.button);
         Sign_up.setOnClickListener(v ->{
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -50,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        CheckBox checkBox = findViewById(R.id.checkBox);
+        // This is our checkbox for the password
+        checkBox = findViewById(R.id.checkBox);
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 passwordfield.setInputType(0);
