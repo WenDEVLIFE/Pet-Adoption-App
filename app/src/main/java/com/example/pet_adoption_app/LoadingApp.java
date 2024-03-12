@@ -33,7 +33,7 @@ public class LoadingApp extends AppCompatActivity {
         // This will load the value of the progress bar
         thread = new Thread(() -> {
             try {
-                for (int i = 0; i < 100; i++) {
+                for (int i = 0; i < 100; i+=5) {
                     // Set the progress bar value
                     loading.setProgress(i);
                     Thread.sleep(50);
