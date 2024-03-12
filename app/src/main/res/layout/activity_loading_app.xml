@@ -25,21 +25,21 @@
 
     <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="359dp"
-            android:layout_height="69dp"
+            android:layout_width="@dimen/_300sdp"
+            android:layout_height="@dimen/_59sdp"
             android:id="@+id/progressBar"
             android:progressDrawable="@drawable/custom_progressbar"
             android:progressBackgroundTint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            android:layout_marginTop="48dp"
-            app:layout_constraintHorizontal_bias="0.591" />
+            android:layout_marginTop="64dp"
+            app:layout_constraintHorizontal_bias="0.692" />
 
     <ImageView
-            android:layout_width="153dp"
-            android:layout_height="138dp"
-            app:srcCompat="@drawable/paws"
+            android:layout_width="@dimen/_249sdp"
+            android:layout_height="@dimen/_249sdp"
+            app:srcCompat="@drawable/petlogo"
             android:id="@+id/imageView3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
