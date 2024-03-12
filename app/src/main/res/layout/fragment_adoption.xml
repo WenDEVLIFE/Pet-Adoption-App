@@ -12,6 +12,7 @@
             android:layout_width="263dp"
             android:layout_height="180dp"
             android:textColor="@color/white"
+            android:id="@+id/textView"
             android:text="Notification Fragment"
             android:layout_gravity="center"
             android:textSize="@dimen/_40sdp" />

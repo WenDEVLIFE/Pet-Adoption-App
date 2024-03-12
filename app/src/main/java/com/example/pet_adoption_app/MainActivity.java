@@ -33,8 +33,12 @@ public class MainActivity extends AppCompatActivity {
         // Sign in button
         Sign_in = findViewById(R.id.sigin);
         Sign_in.setOnClickListener(v -> {
+
+            // The start the intent
             Intent intent = new Intent(MainActivity.this, Signin_Activity.class);
             startActivity(intent);
+
+            // close the current intent
             finish();
         });
 
@@ -48,8 +52,12 @@ public class MainActivity extends AppCompatActivity {
                     (dialog, which) -> dialog.dismiss());
             alertDialog.show();
 
+            // The start the intent
             Intent intent = new Intent(MainActivity.this, FragementController.class);
             startActivity(intent);
+
+            // close the current intent
+            finish();
 
         });
 
@@ -57,8 +65,12 @@ public class MainActivity extends AppCompatActivity {
         checkBox = findViewById(R.id.checkBox);
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
+
+                // Set to show the password
                 passwordfield.setInputType(0);
             } else {
+
+                // Set to hide the password
                 passwordfield.setInputType(129);
             }
         });

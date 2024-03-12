@@ -1,5 +1,6 @@
 package com.example.pet_adoption_app;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -34,13 +35,11 @@ public class FragementController extends AppCompatActivity {
 
         // This will call the home fragment
         replaceFragement(new HomeFragment());
+
         // Get the NavigationView reference using findViewById
         NavigationView navView = findViewById(R.id.navView);
         usernametext = navView.getHeaderView(0).findViewById(R.id.username);
         Name = navView.getHeaderView(0).findViewById(R.id.name);
-
-        usernametext.setText("Null");
-        Name.setText("Null");
         ColorStateList csl = ContextCompat.getColorStateList(this, R.color.white);
         navView.setItemIconTintList(csl);
         navView.setNavigationItemSelectedListener(item -> {
@@ -83,8 +82,47 @@ public class FragementController extends AppCompatActivity {
                 builder.setMessage("Adopt Pet Fragment");
                 builder.show();
             }
+
+            else if(item.getItemId() == R.id.lostpet){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Lost Pet");
+                builder.setMessage("Lost Pet Fragment");
+                builder.show();
+
+            }
+
+            else if(item.getItemId() == R.id.ask_donation){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Ask Donation");
+                builder.setMessage("Ask Donation Fragment");
+                builder.show();
+
+
+            }
+            // This will go to logout
+            else if(item.getItemId() == R.id.logout){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder .setTitle("Logout");
+                builder.setMessage("Are you sure you want to logout?");
+                builder.setPositiveButton("Yes", (dialog, which) -> {
+                            // Logout
+                            finish();
+                            Intent intent = new Intent(this, MainActivity.class);
+                            startActivity(intent);
+                        })
+                        .setNegativeButton("No", (dialog, which) -> {
+                            // Do nothing
+                        })
+                        .show();
+
+            }
             return true;
         });
+
+        // set the username and name
+        usernametext.setText("Null");
+        Name.setText("Null");
+
     }
 
     // This will call the fragments
@@ -96,4 +134,6 @@ public class FragementController extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
+
+
 }

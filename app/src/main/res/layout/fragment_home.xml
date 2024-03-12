@@ -16,8 +16,8 @@
             tools:layout_editor_absoluteX="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="376dp"
-                android:layout_height="401dp"
+                android:layout_width="@dimen/_300sdp"
+                android:layout_height="@dimen/_320sdp"
                 android:background="@drawable/panes"
                 android:id="@+id/constraintLayout"
                 app:layout_constraintStart_toStartOf="parent"

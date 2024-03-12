@@ -21,8 +21,13 @@
             android:icon="@drawable/baseline_notifications_active_24"
             android:id="@+id/lostpet"
             />
+    }
     <item android:title="Ask Donations"
             android:icon="@drawable/baseline_notifications_active_24"
             android:id="@+id/ask_donation"
+            />
+    <item android:title="Log-out"
+            android:icon="@drawable/logout"
+            android:id="@+id/logout"
             />
 </menu>
