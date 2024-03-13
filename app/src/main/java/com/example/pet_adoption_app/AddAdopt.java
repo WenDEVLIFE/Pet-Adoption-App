@@ -75,23 +75,15 @@ public class AddAdopt extends Fragment {
 
 
         ImageButton back = rootView.findViewById(R.id.buttonnback);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replaceFragement(new AdoptionFragments());
-            }
-        });
+        back.setOnClickListener(v -> replaceFragement(new AdoptionFragments()));
 
         Button Adopt = rootView.findViewById(R.id.AddAdopt);
-        Adopt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-                alertDialog.setTitle("Adopt");
-                alertDialog.setMessage("Adopted");
-                alertDialog.show();
+        Adopt.setOnClickListener(v -> {
+            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+            alertDialog.setTitle("Adopt");
+            alertDialog.setMessage("Adopted");
+            alertDialog.show();
 
-            }
         });
 
     return  rootView;

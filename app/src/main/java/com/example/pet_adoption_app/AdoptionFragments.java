@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.view.ViewTreeObserver;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -104,7 +105,12 @@ public class AdoptionFragments extends Fragment {
 
            replaceFragement(addAdopt);
         });
+
+        ImageButton back = rootView.findViewById(R.id.buttonnback);
+        back.setOnClickListener(v -> replaceFragement(new HomeFragment()));
+
         return rootView;
+
     }
     private void replaceFragement(Fragment fragment) {
 
