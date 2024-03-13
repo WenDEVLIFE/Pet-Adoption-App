@@ -69,10 +69,10 @@ public class AdoptionFragments extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_adoption, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_adopt, container, false);
 
-        usernametext = rootView.findViewById(R.id.textView);
-        usernametext.setText(username);
+        usernametext = rootView.findViewById(R.id.textVie1);
+
 
         return rootView;
     }

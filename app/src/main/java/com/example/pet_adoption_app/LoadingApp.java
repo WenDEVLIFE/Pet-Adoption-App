@@ -41,6 +41,7 @@ public class LoadingApp extends AppCompatActivity {
                 // This will start and go to next page
                 Intent intent = new Intent(LoadingApp.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

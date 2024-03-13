@@ -12,19 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <TextView
-                android:layout_width="281dp"
-                android:layout_height="119dp"
-                android:textColor="@color/white"
-                android:id="@+id/textView"
-                android:text="Notification Fragment hehehe"
-                android:textSize="@dimen/_40sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.638"
-                android:layout_marginBottom="304dp" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="403dp"
                 android:layout_height="86dp"
@@ -50,15 +37,25 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.SearchView
-                android:layout_width="405dp"
-                android:layout_height="65dp"
+                android:layout_width="@dimen/_310sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:id="@+id/searchView"
                 android:hint="@string/search"
-                android:background="@color/white"
+                android:textColor="@color/black"
+                android:background="@drawable/searchedit"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-                android:layout_marginTop="4dp" />
+                android:layout_marginTop="4dp"
+                app:layout_constraintHorizontal_bias="0.0" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="409dp"
+                android:layout_height="574dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="2dp"
+                app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:src="@drawable/plus"
@@ -66,22 +63,11 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:id="@+id/floatingActionButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:background="#8B2635"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                android:layout_marginBottom="4dp"
-                android:contentDescription="TODO"
-                android:focusable="true" />
+                app:layout_constraintHorizontal_bias="0.954"
+                android:layout_marginBottom="16dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="412dp"
-                android:layout_height="574dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="2dp"
-                app:layout_constraintTop_toBottomOf="@+id/searchView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
