@@ -1,12 +1,19 @@
 package com.example.pet_adoption_app;
 
+import android.media.Image;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,8 +68,41 @@ public class AddAdopt extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_add_adopt, container, false);
 
+        EditText dogname = rootView.findViewById(R.id.editTextText);
+        EditText dogage = rootView.findViewById(R.id.dogage);
+        EditText dogbreed = rootView.findViewById(R.id.dogBreed);
+        EditText dogOwner = rootView.findViewById(R.id.dog_owner);
 
+
+        ImageButton back = rootView.findViewById(R.id.buttonnback);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragement(new AdoptionFragments());
+            }
+        });
+
+        Button Adopt = rootView.findViewById(R.id.AddAdopt);
+        Adopt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Adopt");
+                alertDialog.setMessage("Adopted");
+                alertDialog.show();
+
+            }
+        });
 
     return  rootView;
+    }
+
+    private void replaceFragement(Fragment fragment) {
+
+        // Call the fragment manager and begin the transaction to replace the fragment
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 }

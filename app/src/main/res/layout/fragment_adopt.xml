@@ -21,6 +21,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:id="@+id/constraintLayout3">
 
+            <ImageButton
+                    android:src="?attr/homeAsUpIndicator"
+                    android:layout_width="60dp"
+                    android:layout_height="56dp"
+                    android:id="@+id/buttonnback"
+                    app:tint="@drawable/buttontint"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toStartOf="@+id/textVie1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.432"
+                    app:layout_constraintVertical_bias="0.516" />
+
             <TextView
                     android:layout_width="305dp"
                     android:layout_height="55dp"
@@ -29,11 +43,11 @@
                     android:text="Adopt a pet"
                     android:fontFamily="sans-serif-condensed"
                     android:textSize="@dimen/_30sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintHorizontal_bias="0.612" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintVertical_bias="0.548"
+                    android:layout_marginEnd="16dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.SearchView
