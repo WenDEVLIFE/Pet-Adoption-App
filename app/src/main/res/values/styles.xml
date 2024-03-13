@@ -6,4 +6,16 @@
     <style name="parent"></style>
 
     <style name="loginParent"></style>
+
+
+    <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Background for the search query section -->
+        <item name="queryBackground">@drawable/searchview_design</item>
+        <!-- Text color for the search query -->
+        <item name="android:textColor">@color/black</item>
+        <!-- Hint color for the search query -->
+        <item name="android:textColorHint">@color/black</item>
+        <!-- Icon for the search button  <item name="searchIcon">@color/black</item> -->
+
+    </style>
 </resources>

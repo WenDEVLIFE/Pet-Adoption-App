@@ -72,7 +72,7 @@ public class AdoptionFragments extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_adopt, container, false);
 
         usernametext = rootView.findViewById(R.id.textVie1);
-
+        usernametext.setText(username);
 
         return rootView;
     }
