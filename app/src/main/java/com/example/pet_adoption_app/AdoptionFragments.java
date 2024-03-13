@@ -1,12 +1,21 @@
 package com.example.pet_adoption_app;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.appcompat.widget.SearchView;
+
+import android.view.ViewTreeObserver;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -73,6 +82,25 @@ public class AdoptionFragments extends Fragment {
 
         usernametext = rootView.findViewById(R.id.textVie1);
         usernametext.setText(username);
+
+
+        SearchView searchView = rootView.findViewById(R.id.searchView);
+        ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_button);
+        Drawable drawable = searchIcon.getDrawable();
+        int color = ContextCompat.getColor(getContext(), R.color.black);
+        drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        searchIcon.setImageDrawable(drawable);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+        });
 
         return rootView;
     }

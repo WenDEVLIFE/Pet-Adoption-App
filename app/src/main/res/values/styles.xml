@@ -9,13 +9,23 @@
 
 
     <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
-        <!-- Background for the search query section -->
-        <item name="queryBackground">@drawable/searchview_design</item>
-        <!-- Text color for the search query -->
+        <!-- Change text color here -->
         <item name="android:textColor">@color/black</item>
-        <!-- Hint color for the search query -->
+        <!-- Change hint text color here -->
         <item name="android:textColorHint">@color/black</item>
-        <!-- Icon for the search button  <item name="searchIcon">@color/black</item> -->
+        <!-- Change the color of the search underline here -->
+        <item name="android:colorControlNormal">@color/black</item>
+        <!-- Change the color of the search underline when activated -->
+        <item name="android:colorControlActivated">@color/black</item>
 
     </style>
+
+    <style name="ThemeOverlay.SearchView" parent="">
+        <!-- Text color -->
+        <item name="android:editTextColor">@color/black</item>
+        <!-- Hint text color -->
+        <item name="android:textColorHint">@color/black</item>
+    </style>
+
+
 </resources>
