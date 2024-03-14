@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,10 +101,8 @@ public class HomeFragment extends Fragment {
 
         buttonAdopt.setOnClickListener(v -> {
             // Handle button pending click
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Pending");
-            builder.setMessage("Pending Fragment");
-            builder.show();
+            // This will go to your pet fragments
+            replaceFragement(new YourPet_Fragement());
         });
 
         buttonAdoptPet.setOnClickListener(v -> {
@@ -130,5 +130,14 @@ public class HomeFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    private void replaceFragement(Fragment fragment) {
+
+        // Call the fragment manager and begin the transaction to replace the fragment
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 }
