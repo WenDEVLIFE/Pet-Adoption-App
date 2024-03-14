@@ -17,16 +17,16 @@
             android:id="@+id/notifications"
             />
 
-    <item android:title="Report lost pets"
-            android:icon="@drawable/baseline_notifications_active_24"
+    <item android:title="@string/report_lost_pets"
+            android:icon="@drawable/megaphone"
             android:id="@+id/lostpet"
             />
     }
-    <item android:title="Ask Donations"
-            android:icon="@drawable/megaphone"
+    <item android:title="@string/ask_donations"
+            android:icon="@drawable/heart"
             android:id="@+id/ask_donation"
             />
-    <item android:title="Log-out"
+    <item android:title="@string/log_out"
             android:icon="@drawable/logout"
             android:id="@+id/logout"
             />
