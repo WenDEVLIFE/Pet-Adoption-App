@@ -13,8 +13,8 @@
             android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="403dp"
-                android:layout_height="86dp"
+                android:layout_width="@dimen/_310sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:background="@drawable/panes2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,13 +69,13 @@
 
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="@dimen/_310sdp"
-                android:layout_height="@dimen/_440sdp"
+                android:layout_height="@dimen/_460sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="2dp"
                 app:layout_constraintTop_toBottomOf="@+id/searchView"
                 android:layout_marginStart="4dp"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="1.0" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:src="@drawable/plus"
