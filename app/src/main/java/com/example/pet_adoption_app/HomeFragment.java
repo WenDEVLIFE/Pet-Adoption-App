@@ -83,10 +83,8 @@ public class HomeFragment extends Fragment {
 
         buttonMissing.setOnClickListener(v -> {
             // Handle button pending click
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Pending");
-            builder.setMessage("Pending Fragment");
-            builder.show();
+            // This will go to lost pets fragments
+            replaceFragement(new Fragment_Lost_Pets());
         });
 
         buttonDonate.setOnClickListener(v -> {
@@ -105,6 +103,7 @@ public class HomeFragment extends Fragment {
 
         buttonAdoptPet.setOnClickListener(v -> {
             // Handle button pending click
+            // Go to fragment adopted pets
             replaceFragement(new Fragment_Adopted_pets());
         });
 

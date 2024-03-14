@@ -23,7 +23,7 @@
             />
     }
     <item android:title="Ask Donations"
-            android:icon="@drawable/baseline_notifications_active_24"
+            android:icon="@drawable/megaphone"
             android:id="@+id/ask_donation"
             />
     <item android:title="Log-out"
