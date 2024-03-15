@@ -89,8 +89,6 @@ public class YourPet_Fragement extends Fragment {
         });
 
 
-
-
         return rootView;
     }
 

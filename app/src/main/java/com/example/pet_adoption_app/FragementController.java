@@ -56,7 +56,11 @@ public class FragementController extends AppCompatActivity {
 
             // This will go to Notification Fragements
             else if(item.getItemId() == R.id.notifications){
+
+                // This will go to notifications
                 Notifications fragment = new Notifications();
+
+                // we will send the username to the notifications
                 Bundle bundle = new Bundle();
                 bundle.putString("username", usernametext.getText().toString());
                 fragment.setArguments(bundle);
@@ -85,11 +89,9 @@ public class FragementController extends AppCompatActivity {
             }
 
             else if(item.getItemId() == R.id.lostpet){
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Lost Pet");
-                builder.setMessage("Lost Pet Fragment");
-                builder.show();
-
+              // This will go to Lost Pet Fragements
+                Fragment_Lost_Pets fragment = new Fragment_Lost_Pets();
+                replaceFragement(fragment);
             }
 
             else if(item.getItemId() == R.id.ask_donation){
@@ -102,6 +104,8 @@ public class FragementController extends AppCompatActivity {
             }
             // This will go to logout
             else if(item.getItemId() == R.id.logout){
+
+                // This will go to logut and go back to login
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder .setTitle("Logout");
                 builder.setMessage("Are you sure you want to logout?");
