@@ -2,7 +2,6 @@ package com.example.pet_adoption_app;
 
 import android.os.Bundle;
 
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,14 +9,15 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Fragment_Adopt_request#newInstance} factory method to
+ * Use the {@link Fragments_Lost_Pets#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Adopt_request extends Fragment {
+public class Fragments_Lost_Pets extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +28,7 @@ public class Fragment_Adopt_request extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Fragment_Adopt_request() {
+    public Fragments_Lost_Pets() {
         // Required empty public constructor
     }
 
@@ -38,11 +38,11 @@ public class Fragment_Adopt_request extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_Adopt_request.
+     * @return A new instance of fragment Fragments_Lost_Pets.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment_Adopt_request newInstance(String param1, String param2) {
-        Fragment_Adopt_request fragment = new Fragment_Adopt_request();
+    public static Fragments_Lost_Pets newInstance(String param1, String param2) {
+        Fragments_Lost_Pets fragment = new Fragments_Lost_Pets();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,30 +63,21 @@ public class Fragment_Adopt_request extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment__adopt_request, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_fragments__lost__pets, container, false);
 
-        // Our search view
-        SearchView searchView = rootView.findViewById(R.id.searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+        // our floating button
+        FloatingActionButton fab = rootview.findViewById(R.id.addlostpets);
+        fab.setOnClickListener(view -> {
+            // This will go to the Add Lost Pet Fragements
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return true;
-            }
         });
 
 
-        // This is our button back to home
-        ImageButton btnback = rootView.findViewById(R.id.buttonnback);
-        btnback.setOnClickListener(v -> replaceFragement(new HomeFragment()));
-
-        return rootView;
+    return rootview;
     }
 
+
+    // This will call the fragments
     private void replaceFragement(Fragment fragment) {
 
         // Call the fragment manager and begin the transaction to replace the fragment

@@ -2,6 +2,7 @@ package com.example.pet_adoption_app;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -63,6 +64,21 @@ public class Fragment_Your_Donations extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment__your__donations, container, false);
+
+        // Our search view
+        SearchView searchView = rootview.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+        });
+
 
         // This is our button back to home
         ImageButton btnback = rootview.findViewById(R.id.buttonnback);

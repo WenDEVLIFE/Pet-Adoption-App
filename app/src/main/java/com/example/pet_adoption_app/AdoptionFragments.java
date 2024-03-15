@@ -99,6 +99,7 @@ public class AdoptionFragments extends Fragment {
             }
         });
 
+        // our floating button
         FloatingActionButton fab = rootView.findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(v -> {
             AddAdopt addAdopt = new AddAdopt();
@@ -106,6 +107,8 @@ public class AdoptionFragments extends Fragment {
            replaceFragement(addAdopt);
         });
 
+
+        // our back button image
         ImageButton back = rootView.findViewById(R.id.buttonnback);
         back.setOnClickListener(v -> replaceFragement(new HomeFragment()));
 

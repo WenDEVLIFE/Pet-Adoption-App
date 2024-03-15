@@ -4,41 +4,13 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Fragment_Lost_Pets"
-        android:background="@drawable/background_gradient">
-
-    <!-- TODO: Update blank fragment layout -->
+        tools:context=".AdoptionFragments"
+        android:background="@drawable/background_gradient"
+        >
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="@dimen/_310sdp"
-                android:layout_height="@dimen/_460sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="2dp"
-                app:layout_constraintTop_toBottomOf="@+id/searchView"
-                android:layout_marginStart="4dp"
-                app:layout_constraintVertical_bias="1.0" />
-
-        <androidx.appcompat.widget.SearchView
-                android:layout_width="@dimen/_310sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:id="@+id/searchView"
-                android:hint="@string/search"
-                app:searchHintIcon="@drawable/search"
-                app:searchIcon="@drawable/search"
-                app:closeIcon="@drawable/close"
-                android:background="@drawable/searchview_design"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-                android:layout_marginTop="4dp"
-                app:queryHint="Search Here...."
-                app:iconifiedByDefault="false"
-                android:theme="@style/ThemeOverlay.SearchView" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="@dimen/_310sdp"
@@ -68,7 +40,7 @@
                     android:layout_height="55dp"
                     android:textColor="@color/white"
                     android:id="@+id/textVie1"
-                    android:text="Your Lost Pets"
+                    android:text="Lost pets"
                     android:fontFamily="sans-serif-condensed"
                     android:textSize="@dimen/_30sdp"
                     app:layout_constraintTop_toTopOf="parent"
@@ -77,5 +49,45 @@
                     app:layout_constraintVertical_bias="0.548"
                     android:layout_marginEnd="16dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.SearchView
+                android:layout_width="@dimen/_310sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:id="@+id/searchView"
+                android:hint="@string/search"
+                app:searchHintIcon="@drawable/search"
+                app:searchIcon="@drawable/search"
+                app:closeIcon="@drawable/close"
+                android:background="@drawable/searchview_design"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+                android:layout_marginTop="4dp"
+                app:queryHint="Search Here...."
+                app:iconifiedByDefault="false"
+                android:theme="@style/ThemeOverlay.SearchView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="@dimen/_310sdp"
+                android:layout_height="@dimen/_460sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="2dp"
+                app:layout_constraintTop_toBottomOf="@+id/searchView"
+                android:layout_marginStart="4dp"
+                app:layout_constraintVertical_bias="1.0" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:src="@drawable/plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:id="@+id/addlostpets"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.954"
+                android:layout_marginBottom="16dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

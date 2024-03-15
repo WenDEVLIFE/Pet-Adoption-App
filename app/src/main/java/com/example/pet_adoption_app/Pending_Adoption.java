@@ -2,6 +2,7 @@ package com.example.pet_adoption_app;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -63,6 +64,7 @@ public class Pending_Adoption extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview= inflater.inflate(R.layout.fragment_pending__adoption, container, false);
+
 
         // ImageButton of the back button
         ImageButton Buttoback = rootview.findViewById(R.id.buttonnback);

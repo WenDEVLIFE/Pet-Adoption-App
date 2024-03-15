@@ -2,6 +2,7 @@ package com.example.pet_adoption_app;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,9 +67,26 @@ public class Fragment_Adopted_pets extends Fragment {
         // Inflate the layout for this fragment
        View rootView = inflater.inflate(R.layout.fragment__adopted_pets, container, false);
 
+
+        // Our search view
+        SearchView searchView = rootView.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+        });
+
+
        // ImageButton of the back button
        ImageButton btn_back = rootView.findViewById(R.id.buttonnback);
        btn_back.setOnClickListener(v -> replaceFragement(new HomeFragment()));
+
 
 
 

@@ -65,6 +65,22 @@ public class YourPet_Fragement extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_your_pet__fragement, container, false);
 
+
+        // Our search view
+        SearchView searchView = rootView.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+        });
+
+
         ImageButton backBtn = rootView.findViewById(R.id.buttonnback);
         backBtn.setOnClickListener(v -> {
 
