@@ -3,10 +3,13 @@ package com.example.pet_adoption_app;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +62,19 @@ public class Fragment_Your_Donations extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment__your__donations, container, false);
+        View rootview = inflater.inflate(R.layout.fragment__your__donations, container, false);
+    ImageButton btnback = rootview.findViewById(R.id.buttonnback);
+    btnback.setOnClickListener(v -> replaceFragement(new HomeFragment()));
+
+    return rootview;
+    }
+
+    private void replaceFragement(Fragment fragment) {
+
+        // Call the fragment manager and begin the transaction to replace the fragment
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 }
