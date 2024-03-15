@@ -89,6 +89,7 @@ public class HomeFragment extends Fragment {
 
         buttonDonate.setOnClickListener(v -> {
             // Handle button pending click
+            // This will go to your adoptions fragments
             replaceFragement(new Fragment_Your_Donations());
         });
 
@@ -106,11 +107,13 @@ public class HomeFragment extends Fragment {
 
         ButtonAdoptRequest.setOnClickListener(v -> {
             // Handle button pending click
+            // This will go to adopt request
             replaceFragement(new Fragment_Adopt_request());
         });
 
         Transaction_History.setOnClickListener(v -> {
             // Handle button pending click
+            // This will go to transaction history
             replaceFragement(new Transaction_History());
         });
 
