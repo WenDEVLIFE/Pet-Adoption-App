@@ -13,10 +13,10 @@ import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Fragment_Your_Donations#newInstance} factory method to
+ * Use the {@link Fragment_Adopt_request#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Your_Donations extends Fragment {
+public class Fragment_Adopt_request extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +27,7 @@ public class Fragment_Your_Donations extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Fragment_Your_Donations() {
+    public Fragment_Adopt_request() {
         // Required empty public constructor
     }
 
@@ -37,11 +37,11 @@ public class Fragment_Your_Donations extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_Your_Donations.
+     * @return A new instance of fragment Fragment_Adopt_request.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment_Your_Donations newInstance(String param1, String param2) {
-        Fragment_Your_Donations fragment = new Fragment_Your_Donations();
+    public static Fragment_Adopt_request newInstance(String param1, String param2) {
+        Fragment_Adopt_request fragment = new Fragment_Adopt_request();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,13 +62,14 @@ public class Fragment_Your_Donations extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview = inflater.inflate(R.layout.fragment__your__donations, container, false);
+        View rootView = inflater.inflate(R.layout.fragment__adopt_request, container, false);
+
 
         // This is our button back to home
-        ImageButton btnback = rootview.findViewById(R.id.buttonnback);
+        ImageButton btnback = rootView.findViewById(R.id.buttonnback);
         btnback.setOnClickListener(v -> replaceFragement(new HomeFragment()));
 
-    return rootview;
+        return rootView;
     }
 
     private void replaceFragement(Fragment fragment) {
