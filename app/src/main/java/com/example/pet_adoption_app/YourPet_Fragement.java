@@ -88,20 +88,6 @@ public class YourPet_Fragement extends Fragment {
             replaceFragement(new HomeFragment());
         });
 
-        // Our search view
-        SearchView searchView = rootView.findViewById(R.id.searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return true;
-            }
-        });
-
 
 
 
