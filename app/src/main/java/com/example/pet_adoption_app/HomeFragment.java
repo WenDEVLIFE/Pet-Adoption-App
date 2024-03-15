@@ -89,10 +89,7 @@ public class HomeFragment extends Fragment {
 
         buttonDonate.setOnClickListener(v -> {
             // Handle button pending click
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Pending");
-            builder.setMessage("Pending Fragment");
-            builder.show();
+            replaceFragement(new Fragment_Your_Donations());
         });
 
         buttonAdopt.setOnClickListener(v -> {
@@ -109,18 +106,12 @@ public class HomeFragment extends Fragment {
 
         ButtonAdoptRequest.setOnClickListener(v -> {
             // Handle button pending click
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Pending");
-            builder.setMessage("Pending Fragment");
-            builder.show();
+            replaceFragement(new Fragment_Adopt_request());
         });
 
         Transaction_History.setOnClickListener(v -> {
             // Handle button pending click
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Pending");
-            builder.setMessage("Pending Fragment");
-            builder.show();
+            replaceFragement(new Transaction_History());
         });
 
         return rootView;
