@@ -25,6 +25,12 @@
             android:icon="@drawable/heart"
             android:id="@+id/ask_donation"
             />
+
+    <item android:title="User preferences"
+            android:icon="@drawable/user_icon"
+            android:id="@+id/user_pref"
+            />
+
     <item android:title="@string/log_out"
             android:icon="@drawable/logout"
             android:id="@+id/logout"

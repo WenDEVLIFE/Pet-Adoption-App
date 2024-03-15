@@ -56,10 +56,11 @@ public class FragementController extends AppCompatActivity {
 
             // This will go to Notification Fragements
             else if(item.getItemId() == R.id.notifications){
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Notifications");
-                builder.setMessage("Notifications Fragment");
-                builder.show();
+                Notifications fragment = new Notifications();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", usernametext.getText().toString());
+                fragment.setArguments(bundle);
+                replaceFragement(fragment);
             }
 
             // This will go to Adopt Pet Fragements
