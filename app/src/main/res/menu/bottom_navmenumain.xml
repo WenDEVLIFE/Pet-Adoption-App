@@ -21,7 +21,6 @@
             android:icon="@drawable/megaphone"
             android:id="@+id/lostpet"
             />
-    }
     <item android:title="@string/ask_donations"
             android:icon="@drawable/heart"
             android:id="@+id/ask_donation"
