@@ -73,17 +73,27 @@ public class Fragment_Add_Lost_Pets extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment__add__lost__pets, container, false);
 
+        // Get the back button and set the on click listener
         ImageButton btnback = rootview.findViewById(R.id.buttonnback);
         btnback.setOnClickListener(v->{
+
+            // Call the replaceFragment method
             replaceFragement(new Fragment_Lost_Pets());
         });
 
+        // Get the image view and the import button
         imageView = rootview.findViewById(R.id.imageView4);
+
+        // Set the on click listener for the import button
         Button ImportButton = rootview.findViewById(R.id.importimage);
         ImportButton.setOnClickListener(v->{
+
+            // call the openFileChooser method
             openFileChooser();
-            Toast.makeText(getActivity(), "Image Imported", Toast.LENGTH_SHORT).show();
+
         });
+
+        // Get the add button and set the on click listener
         Button btnadd = rootview.findViewById(R.id.AddButton);
         btnadd.setOnClickListener(v->{
             Toast.makeText(getActivity(), "Lost Pet Added", Toast.LENGTH_SHORT).show();
@@ -94,6 +104,8 @@ public class Fragment_Add_Lost_Pets extends Fragment {
     }
 
     private void openFileChooser() {
+
+        // Create an intent to open the file chooser and set the type to image files
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -103,10 +115,16 @@ public class Fragment_Add_Lost_Pets extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // Check if the request code is the same as the PICK_IMAGE_REQUEST
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
+
+            // Get the image uri
             Uri imageUri = data.getData();
+
+            // Set the image uri to the image view
             imageView.setImageURI(imageUri);
+            Toast.makeText(getActivity(), "Image Imported", Toast.LENGTH_SHORT).show();
         }
     }
     private void replaceFragement(Fragment fragment) {
