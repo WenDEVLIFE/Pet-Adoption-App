@@ -17,8 +17,8 @@
                 android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="403dp"
-                    android:layout_height="86dp"
+                    android:layout_width="@dimen/_310sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:background="@drawable/panes2"
                     android:id="@+id/constraintLayout3"
                     app:layout_constraintStart_toStartOf="parent"

@@ -23,14 +23,15 @@
                     android:id="@+id/constraintLayout3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="4dp">
 
                 <TextView
                         android:layout_width="305dp"
                         android:layout_height="55dp"
                         android:textColor="@color/white"
                         android:id="@+id/textVie1"
-                        android:text="Add lost pets"
+                        android:text="Add adopt pets"
                         android:fontFamily="sans-serif-condensed"
                         android:textSize="@dimen/_30sdp"
                         app:layout_constraintTop_toTopOf="parent"
@@ -59,7 +60,7 @@
                     android:layout_height="@dimen/_55sdp"
                     android:inputType="text"
                     android:ems="10"
-                    android:hint="Dog Name"
+                    android:hint="Donated Owner"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:background="@drawable/textfield"
@@ -67,40 +68,24 @@
                     app:layout_constraintTop_toBottomOf="@+id/dogage"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintHorizontal_bias="0.425" />
+                    android:layout_marginTop="40dp"
+                    app:layout_constraintHorizontal_bias="0.446" />
 
             <EditText
                     android:layout_width="@dimen/_280sdp"
                     android:layout_height="@dimen/_55sdp"
                     android:inputType="text"
                     android:ems="10"
-                    android:hint="Dog Breed"
+                    android:hint="Donations Name"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:background="@drawable/textfield"
                     android:id="@+id/dogage"
-                    app:layout_constraintTop_toBottomOf="@+id/importimage"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintHorizontal_bias="0.468" />
-
-            <EditText
-                    android:layout_width="@dimen/_280sdp"
-                    android:layout_height="@dimen/_55sdp"
-                    android:inputType="text"
-                    android:ems="10"
-                    android:hint="Dog Owner Name"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:background="@drawable/textfield"
-                    android:id="@+id/dogBreed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextText"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintHorizontal_bias="0.382" />
+                    app:layout_constraintHorizontal_bias="0.446"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+                    android:layout_marginTop="76dp" />
 
             <EditText
                     android:layout_width="@dimen/_280sdp"
@@ -117,12 +102,12 @@
                     android:id="@+id/dog_owner"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dogBreed"
-                    app:layout_constraintHorizontal_bias="0.375"
-                    android:layout_marginTop="16dp" />
+                    app:layout_constraintHorizontal_bias="0.446"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextText"
+                    android:layout_marginTop="40dp" />
 
             <Button
-                    android:text="Add to lost pet"
+                    android:text="Add Donations"
                     android:background="@drawable/button"
                     android:layout_width="227dp"
                     android:layout_height="79dp"
@@ -132,55 +117,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="28dp"
-                    app:layout_constraintBottom_toBottomOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
-            <Button
-                    android:text="Import Image"
-                    android:background="@drawable/button"
-                    android:layout_width="205dp"
-                    android:layout_height="54dp"
-                    android:textColor="@color/white"
-                    android:id="@+id/importimage"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="16dp" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="123dp"
-                    android:layout_height="123dp"
-                    android:background="@drawable/panes"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-                    android:id="@+id/constraintLayout4"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintHorizontal_bias="0.496">
-
-                <ImageView
-                        android:layout_width="@dimen/_120sdp"
-                        android:layout_height="@dimen/_80sdp"
-                        tools:src="@tools:sample/avatars"
-                        android:id="@+id/imageView4"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.515"
-                        app:layout_constraintVertical_bias="0.315" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                    android:text="Dog Image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView9"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_20sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
