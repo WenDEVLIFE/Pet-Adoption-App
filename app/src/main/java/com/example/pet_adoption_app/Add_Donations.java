@@ -81,6 +81,7 @@ public class Add_Donations extends Fragment {
         return rootview;
 
     }
+
     // This will call the fragments
     private void replaceFragement(Fragment fragment) {
 
