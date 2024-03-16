@@ -3,10 +3,15 @@ package com.example.pet_adoption_app;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +66,29 @@ public class Ask_Donations extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_ask__donations, container, false);
 
+        // our image button code here
+        ImageButton btnback = rootview.findViewById(R.id.buttonnback);
+        btnback.setOnClickListener(v->{
+            // This will go back to home fragments
+            replaceFragement(new HomeFragment());
+        });
+
+        FloatingActionButton btnaskdonation = rootview.findViewById(R.id.floatingActionButton);
+        btnaskdonation.setOnClickListener(v->{
+            // This will go to ask donation form
+
+        });
+
     return rootview;
+    }
+
+    private void replaceFragement(Fragment fragment) {
+
+        // Call the fragment manager and begin the transaction to replace the fragment
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 
 }

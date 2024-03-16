@@ -95,10 +95,9 @@ public class FragementController extends AppCompatActivity {
             }
 
             else if(item.getItemId() == R.id.ask_donation){
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Ask Donation");
-                builder.setMessage("Ask Donation Fragment");
-                builder.show();
+                // This will go to Ask Donation Fragements
+                Ask_Donations fragment = new Ask_Donations();
+                replaceFragement(fragment);
 
 
             }
