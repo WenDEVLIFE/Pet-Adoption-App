@@ -63,12 +63,13 @@ public class Fragments_Lost_Pets extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview = inflater.inflate(R.layout.fragment_fragments__lost__pets, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_lost_pets, container, false);
 
         // our floating button
-        FloatingActionButton fab = rootview.findViewById(R.id.addlostpets);
+        FloatingActionButton fab = rootview.findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(view -> {
             // This will go to the Add Lost Pet Fragements
+            replaceFragement(new Fragment_Add_Lost_Pets());
 
         });
 

@@ -1,12 +1,22 @@
 package com.example.pet_adoption_app;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +29,8 @@ public class Fragment_Add_Lost_Pets extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final int PICK_IMAGE_REQUEST = 1;
+   ImageView imageView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -59,6 +71,52 @@ public class Fragment_Add_Lost_Pets extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment__add__lost__pets, container, false);
+        View rootview = inflater.inflate(R.layout.fragment__add__lost__pets, container, false);
+
+        ImageButton btnback = rootview.findViewById(R.id.buttonnback);
+        btnback.setOnClickListener(v->{
+            replaceFragement(new Fragment_Lost_Pets());
+        });
+
+        imageView = rootview.findViewById(R.id.imageView4);
+        Button ImportButton = rootview.findViewById(R.id.importimage);
+        ImportButton.setOnClickListener(v->{
+            openFileChooser();
+            Toast.makeText(getActivity(), "Image Imported", Toast.LENGTH_SHORT).show();
+        });
+        Button btnadd = rootview.findViewById(R.id.AddButton);
+        btnadd.setOnClickListener(v->{
+            Toast.makeText(getActivity(), "Lost Pet Added", Toast.LENGTH_SHORT).show();
+        });
+
+
+    return rootview;
     }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            Uri imageUri = data.getData();
+            imageView.setImageURI(imageUri);
+        }
+    }
+    private void replaceFragement(Fragment fragment) {
+
+        // Call the fragment manager and begin the transaction to replace the fragment
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+    }
+
+
 }

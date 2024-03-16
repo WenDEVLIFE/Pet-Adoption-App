@@ -126,7 +126,7 @@
                     android:background="@drawable/button"
                     android:layout_width="227dp"
                     android:layout_height="79dp"
-                    android:id="@+id/AddAdopt"
+                    android:id="@+id/AddButton"
                     android:textColor="@color/white"
                     app:layout_constraintTop_toBottomOf="@+id/dog_owner"
                     app:layout_constraintStart_toStartOf="parent"
