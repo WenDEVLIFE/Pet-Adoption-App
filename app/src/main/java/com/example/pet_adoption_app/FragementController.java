@@ -102,6 +102,11 @@ public class FragementController extends AppCompatActivity {
 
             }
             // This will go to logout
+            else if(item.getItemId() == R.id.user_pref){
+                // This will go to User Preferences Fragements
+                UserPreferences fragment = new UserPreferences();
+                replaceFragement(fragment);
+            }
             else if(item.getItemId() == R.id.logout){
 
                 // This will go to logut and go back to login
