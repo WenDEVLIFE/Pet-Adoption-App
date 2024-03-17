@@ -13,8 +13,8 @@
             android:layout_height="match_parent">
 
         <TextView
-                android:layout_width="86dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:textColor="@color/white"
                 android:id="@+id/textView31"
                 android:text="Name"
@@ -23,12 +23,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/Name_display"
                 app:layout_constraintBottom_toTopOf="@+id/textView312"
-                app:layout_constraintHorizontal_bias="0.59"
-                android:layout_marginBottom="36dp" />
+                app:layout_constraintHorizontal_bias="0.808"
+                android:layout_marginBottom="12dp" />
 
         <TextView
-                android:layout_width="129dp"
-                android:layout_height="39dp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:textColor="@color/white"
                 android:id="@+id/textView312"
                 android:text="Username"
@@ -37,12 +37,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/username_display"
                 app:layout_constraintBottom_toTopOf="@+id/change_userbutton"
-                app:layout_constraintHorizontal_bias="0.727"
+                app:layout_constraintHorizontal_bias="0.588"
                 android:layout_marginBottom="36dp" />
 
         <TextView
-                android:layout_width="244dp"
-                android:layout_height="47dp"
+                android:layout_width="@dimen/_175sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:textColor="@color/white"
                 android:id="@+id/Name_display"
                 android:text="Name"
@@ -51,20 +51,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/username_display"
-                android:layout_marginBottom="36dp" />
+                android:layout_marginBottom="20dp" />
 
         <TextView
-                android:layout_width="244dp"
-                android:layout_height="47dp"
+                android:layout_width="@dimen/_175sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:textColor="@color/white"
                 android:id="@+id/username_display"
                 android:text="Name"
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="@dimen/_20sdp"
                 app:layout_constraintBottom_toTopOf="@+id/change_userbutton"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="36dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp" />
+                android:layout_marginEnd="20dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="@dimen/_310sdp"
@@ -105,8 +105,8 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="189dp"
-                android:layout_height="195dp"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_155sdp"
                 android:background="@drawable/profile_circle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -114,18 +114,21 @@
                 android:layout_marginTop="40dp">
 
             <ImageView
-                    android:layout_width="153dp"
-                    android:layout_height="145dp"
+                    android:layout_width="@dimen/_140sdp"
+                    android:layout_height="@dimen/_130sdp"
                     tools:src="@drawable/user_icon"
                     android:id="@+id/imageView5"
-                    tools:layout_editor_absoluteY="16dp"
-                    tools:layout_editor_absoluteX="16dp" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.444" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
                 android:text="Change Username"
-                android:layout_width="175dp"
-                android:layout_height="58dp"
+                android:layout_width="@dimen/_175sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:textColor="@color/white"
                 android:id="@+id/change_userbutton"
                 android:background="@drawable/button"
@@ -137,8 +140,8 @@
 
         <Button
                 android:text="Change Password"
-                android:layout_width="175dp"
-                android:layout_height="58dp"
+                android:layout_width="@dimen/_175sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:id="@+id/change_password_button"
                 android:textColor="@color/white"
                 android:background="@drawable/button"
@@ -150,8 +153,8 @@
 
         <Button
                 android:text="Change Email"
-                android:layout_width="175dp"
-                android:layout_height="58dp"
+                android:layout_width="@dimen/_175sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:id="@+id/change_emailbutton"
                 android:textColor="@color/white"
                 android:background="@drawable/button"
