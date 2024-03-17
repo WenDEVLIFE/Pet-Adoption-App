@@ -12,6 +12,60 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+        <TextView
+                android:layout_width="86dp"
+                android:layout_height="48dp"
+                android:textColor="@color/white"
+                android:id="@+id/textView31"
+                android:text="Name"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="@dimen/_25sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/Name_display"
+                app:layout_constraintBottom_toTopOf="@+id/textView312"
+                app:layout_constraintHorizontal_bias="0.59"
+                android:layout_marginBottom="36dp" />
+
+        <TextView
+                android:layout_width="129dp"
+                android:layout_height="39dp"
+                android:textColor="@color/white"
+                android:id="@+id/textView312"
+                android:text="Username"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="@dimen/_25sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/username_display"
+                app:layout_constraintBottom_toTopOf="@+id/change_userbutton"
+                app:layout_constraintHorizontal_bias="0.727"
+                android:layout_marginBottom="36dp" />
+
+        <TextView
+                android:layout_width="244dp"
+                android:layout_height="47dp"
+                android:textColor="@color/white"
+                android:id="@+id/Name_display"
+                android:text="Name"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/username_display"
+                android:layout_marginBottom="36dp" />
+
+        <TextView
+                android:layout_width="244dp"
+                android:layout_height="47dp"
+                android:textColor="@color/white"
+                android:id="@+id/username_display"
+                android:text="Name"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="@dimen/_20sdp"
+                app:layout_constraintBottom_toTopOf="@+id/change_userbutton"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="@dimen/_310sdp"
                 android:layout_height="@dimen/_50sdp"
@@ -49,6 +103,63 @@
                     app:layout_constraintVertical_bias="0.548"
                     android:layout_marginEnd="16dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="189dp"
+                android:layout_height="195dp"
+                android:background="@drawable/profile_circle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+                android:layout_marginTop="40dp">
+
+            <ImageView
+                    android:layout_width="153dp"
+                    android:layout_height="145dp"
+                    tools:src="@drawable/user_icon"
+                    android:id="@+id/imageView5"
+                    tools:layout_editor_absoluteY="16dp"
+                    tools:layout_editor_absoluteX="16dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+                android:text="Change Username"
+                android:layout_width="175dp"
+                android:layout_height="58dp"
+                android:textColor="@color/white"
+                android:id="@+id/change_userbutton"
+                android:background="@drawable/button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.461"
+                app:layout_constraintBottom_toTopOf="@+id/change_password_button"
+                android:layout_marginBottom="20dp" />
+
+        <Button
+                android:text="Change Password"
+                android:layout_width="175dp"
+                android:layout_height="58dp"
+                android:id="@+id/change_password_button"
+                android:textColor="@color/white"
+                android:background="@drawable/button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.457"
+                app:layout_constraintBottom_toTopOf="@+id/change_emailbutton"
+                android:layout_marginBottom="12dp" />
+
+        <Button
+                android:text="Change Email"
+                android:layout_width="175dp"
+                android:layout_height="58dp"
+                android:id="@+id/change_emailbutton"
+                android:textColor="@color/white"
+                android:background="@drawable/button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.461"
+                android:layout_marginBottom="12dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
