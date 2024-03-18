@@ -78,6 +78,21 @@ public class UserPreferences extends Fragment {
             // This will go to change user name fragment
             replaceFragement(new ChangeUserName_Fragment());
         });
+
+        Button ChangePassword = rootview.findViewById(R.id.change_passwordbutton);
+        ChangePassword.setOnClickListener(v->
+        {
+            // This will go to change password fragment
+            replaceFragement(new Change_Password());
+        });
+
+        Button ChangeEmail = rootview.findViewById(R.id.change_emailbutton);
+        ChangeEmail.setOnClickListener(v->
+        {
+            // This will go to change email fragment
+
+        });
+
         return rootview;
     }
     // This will call the fragments

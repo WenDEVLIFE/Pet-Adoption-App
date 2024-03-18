@@ -135,14 +135,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.461"
-                app:layout_constraintBottom_toTopOf="@+id/change_password_button"
+                app:layout_constraintBottom_toTopOf="@+id/change_passwordbutton"
                 android:layout_marginBottom="20dp" />
 
         <Button
                 android:text="Change Password"
                 android:layout_width="@dimen/_175sdp"
                 android:layout_height="@dimen/_45sdp"
-                android:id="@+id/change_password_button"
+                android:id="@+id/change_passwordbutton"
                 android:textColor="@color/white"
                 android:background="@drawable/button"
                 app:layout_constraintStart_toStartOf="parent"
