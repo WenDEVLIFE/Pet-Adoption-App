@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 /**
@@ -71,6 +72,12 @@ public class UserPreferences extends Fragment {
             replaceFragement(new HomeFragment());
         });
 
+        Button ChangeUser = rootview.findViewById(R.id.change_userbutton);
+        ChangeUser.setOnClickListener(v->
+        {
+            // This will go to change user name fragment
+            replaceFragement(new ChangeUserName_Fragment());
+        });
         return rootview;
     }
     // This will call the fragments
