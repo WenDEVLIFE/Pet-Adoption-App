@@ -1,14 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ChangeUserName_Fragment">
+        tools:context=".AddAdopt"
+        android:background="@drawable/background_gradient">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/constraintLayout5">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="@dimen/_310sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@drawable/panes2"
+                    android:id="@+id/constraintLayout3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                        android:layout_width="305dp"
+                        android:layout_height="55dp"
+                        android:textColor="@color/white"
+                        android:id="@+id/textVie1"
+                        android:text="Change Username"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textSize="@dimen/_30sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintVertical_bias="0.516" />
+
+                <ImageButton
+                        android:src="?attr/homeAsUpIndicator"
+                        android:layout_width="60dp"
+                        android:layout_height="56dp"
+                        android:id="@+id/buttonnback"
+                        app:tint="@drawable/buttontint"
+                        android:background="@android:color/transparent"
+                        app:layout_constraintEnd_toStartOf="@+id/textVie1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintHorizontal_bias="0.432"
+                        app:layout_constraintVertical_bias="0.516" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:inputType="text"
+                android:background="@drawable/textfield"
+                android:text="Username"
+                android:ems="10"
+                android:id="@+id/editTextText2"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="88dp"
+                app:layout_constraintHorizontal_bias="0.418" />
+
+        <EditText
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:hint="Password"
+                android:textColorHint="@color/black"
+                android:background="@drawable/textfield"
+                android:ems="10"
+                android:id="@+id/password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextText2"
+                android:layout_marginTop="52dp"
+                app:layout_constraintHorizontal_bias="0.413" />
+
+        <EditText
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:inputType="textPassword"
+                android:hint="Confirm Password"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:background="@drawable/textfield"
+                android:ems="10"
+                android:id="@+id/confirmpassword"
+                app:layout_constraintTop_toBottomOf="@+id/password"
+                android:layout_marginTop="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.418" />
+
+        <CheckBox
+                android:text="Check to see the password"
+                android:layout_width="@dimen/_180sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:textColor="@color/white"
+                android:id="@+id/checkBox"
+                android:buttonTint="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/confirmpassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="36dp"
+                app:layout_constraintHorizontal_bias="0.203" />
+
+        <Button
+                android:text="Change Username"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:id="@+id/button"
+                android:textColor="@color/white"
+                android:background="@drawable/button"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </FrameLayout>
