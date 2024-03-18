@@ -13,6 +13,10 @@
             android:theme="@style/Theme.Pet_Adoption_App"
             tools:targetApi="31">
         <activity
+                android:name=".Change_Email"
+                android:exported="false"
+                android:theme="@style/Theme.Pet_Adoption_App" />
+        <activity
                 android:name=".FragementController"
                 android:exported="false"
                 android:label="@string/title_activity_home"
@@ -32,7 +36,7 @@
                 android:theme="@style/Theme.Pet_Adoption_App" />
         <activity
                 android:name=".MainActivity"
-                android:exported="true"></activity>
+                android:exported="true" />
     </application>
 
 </manifest>
