@@ -19,24 +19,24 @@
             android:id="@+id/constraintLayout2">
 
         <ImageView
-                android:layout_width="87dp"
-                android:layout_height="83dp"
-                app:srcCompat="@drawable/shiba"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_100sdp"
+                app:srcCompat="@drawable/petlogo"
                 android:id="@+id/imageView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="4dp"
-                app:layout_constraintHorizontal_bias="0.501" />
+                app:layout_constraintHorizontal_bias="0.502" />
 
         <TextView
                 android:text="Sign up, to adopt our precious pets"
-                android:layout_width="259dp"
-                android:textFontWeight="@integer/material_motion_duration_long_1"
-                android:layout_height="69dp"
+                android:textAlignment="center"
+                android:layout_width="@dimen/_290sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:id="@+id/textView"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_20sdp"
+                android:textSize="@dimen/_25sdp"
                 android:fontFamily="sans-serif-condensed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,6 +75,7 @@
             android:layout_height="58dp"
             android:inputType="textPassword"
             android:textColor="@color/black"
+            android:padding="@dimen/_10sdp"
             android:hint="Password"
             android:textColorHint="@color/black"
             android:background="@drawable/textfield"
@@ -102,6 +103,7 @@
             android:layout_height="56dp"
             android:inputType="textPassword"
             android:hint="Confirm Password"
+            android:padding="@dimen/_10sdp"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:background="@drawable/textfield"
@@ -116,9 +118,11 @@
     <EditText
             android:layout_width="316dp"
             android:layout_height="56dp"
+            android:padding="@dimen/_10sdp"
             android:inputType="text"
             android:textColor="@color/black"
             android:hint="Username"
+
             android:textColorHint="@color/black"
             android:background="@drawable/textfield"
             android:ems="10"
@@ -134,6 +138,7 @@
             android:layout_height="52dp"
             android:inputType="text"
             android:hint="Email"
+            android:padding="@dimen/_10sdp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:background="@drawable/textfield"
@@ -150,6 +155,7 @@
             android:inputType="text"
             android:textColor="@color/black"
             android:hint="Name"
+            android:padding="@dimen/_10sdp"
             android:textColorHint="@color/black"
             android:background="@drawable/textfield"
             android:ems="10"

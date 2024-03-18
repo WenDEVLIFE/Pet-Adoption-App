@@ -26,7 +26,7 @@
                 app:layout_constraintHorizontal_bias="0.83"
                 android:layout_marginBottom="12dp"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
-                app:layout_constraintVertical_bias="0.548" />
+                app:layout_constraintVertical_bias="0.629" />
 
         <TextView
                 android:layout_width="@dimen/_100sdp"
@@ -43,23 +43,23 @@
                 android:layout_marginBottom="52dp" />
 
         <TextView
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="193dp"
+                android:layout_height="34dp"
                 android:textColor="@color/white"
                 android:id="@+id/Name_display"
                 android:text="Name"
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="@dimen/_20sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="28dp"
                 app:layout_constraintBottom_toTopOf="@+id/username_display"
                 android:layout_marginBottom="20dp"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
-                app:layout_constraintVertical_bias="0.625" />
+                app:layout_constraintVertical_bias="0.666" />
 
         <TextView
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="194dp"
+                android:layout_height="32dp"
                 android:textColor="@color/white"
                 android:id="@+id/username_display"
                 android:text="Name"
@@ -68,7 +68,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/change_userbutton"
                 android:layout_marginBottom="52dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="20dp" />
+                android:layout_marginEnd="28dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="@dimen/_310sdp"
@@ -119,8 +119,8 @@
                 android:id="@+id/constraintLayout6">
 
             <ImageView
-                    android:layout_width="@dimen/_140sdp"
-                    android:layout_height="@dimen/_130sdp"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
                     android:background="@drawable/user_icon"
                     android:id="@+id/imageView5"
                     app:layout_constraintStart_toStartOf="parent"
