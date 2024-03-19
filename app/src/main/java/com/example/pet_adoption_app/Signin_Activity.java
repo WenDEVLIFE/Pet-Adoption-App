@@ -5,26 +5,19 @@ import static android.content.ContentValues.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -38,7 +31,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class Signin_Activity extends AppCompatActivity {
 
@@ -99,31 +91,32 @@ public class Signin_Activity extends AppCompatActivity {
                  // This will check if password and confirm password is equal
                  if (Password.equals(Confirm_Password)) {
 
+                     // Regex pattern for basic email validation
+                     String emailPattern = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}";
                      // Then this will check if email containt with @ and .
-                     if(Email.contains("@") && Email.contains(".")){
-
+                     if (Email.matches(emailPattern)) {
+                         // Email is valid
                          // This will check if password has a special character and an uppercase letter
                          Boolean hasSpecialCharacter = hasSpecialCharacters(Password);
                          Boolean hasUpperCase = HasUpperCase(Password);
 
                          // Then if the password has special characters and has upper case
                             if (hasSpecialCharacter && hasUpperCase) {
-
+                                String code = generateCode();
                             try{
                                 // Then call the sign up method to add the user to the database
-                                String code = generateCode();
-                                sendEmail(Email,code);
-                                Intent intent = new Intent(Signin_Activity.this, Email_Verification_SignUp.class);
-                                intent.putExtra("UserName", UserName);
-                                intent.putExtra("Email", Email);
-                                intent.putExtra("Name", Name);
-                                intent.putExtra("Password", Password);
-                                startActivity(intent);
+                                SendMail(Email, code);
+                                DoneLoading(UserName, Email, Name, Password, code);
+
+
+
 
 
                             }catch (Exception e) {
                                 e.printStackTrace();
                             }
+
+
 
                             } else {
 
@@ -162,7 +155,7 @@ public class Signin_Activity extends AppCompatActivity {
             Back.setOnClickListener(v -> {
                 Intent intent = new Intent(Signin_Activity.this, MainActivity.class);
                 startActivity(intent);
-                finish();
+
             });
 
 
@@ -200,30 +193,7 @@ public class Signin_Activity extends AppCompatActivity {
         return  hasUppercase;
     }
 
-    private void sendEmail(String email, String code) throws MessagingException {
-        String fromEmail = "newbie_gwapo@yahoo.com"; // replace with your email
-        String appPassword = "nnfjxmfoyjpfqlyy"; // replace with your app password
 
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.mail.yahoo.com");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(fromEmail, appPassword);
-            }
-        });
-
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(fromEmail));
-        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-        message.setSubject("Your verification code");
-        message.setText("Your verification code is: " + code);
-
-        Transport.send(message);
-    }
 
     private String generateCode() {
         // Implement code generation logic here
@@ -233,5 +203,21 @@ public class Signin_Activity extends AppCompatActivity {
     }
 
 
+    private void SendMail(String Email, String code){
+        JavaMailAPI mailAPI = new JavaMailAPI(Signin_Activity.this, Email, "The Verification Code", "The verification code is:" + code, code);
+        mailAPI.execute();
+
+
+    }
+
+    private void DoneLoading( String UserName, String Email, String Name, String Password, String code){
+        Intent intent = new Intent(Signin_Activity.this, Email_Verification_SignUp.class);
+        intent.putExtra("UserName", UserName);
+        intent.putExtra("Email", Email);
+        intent.putExtra("Name", Name);
+        intent.putExtra("Password", Password);
+        intent.putExtra("code"  , code);
+        startActivity(intent);
+    }
 
 }
