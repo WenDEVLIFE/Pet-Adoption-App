@@ -73,6 +73,7 @@ public class Ask_Donations extends Fragment {
             replaceFragement(new HomeFragment());
         });
 
+        // This is for floating action button add donation
         FloatingActionButton btnaskdonation = rootview.findViewById(R.id.floatingActionButton);
         btnaskdonation.setOnClickListener(v->{
             // This will go to ask donation form

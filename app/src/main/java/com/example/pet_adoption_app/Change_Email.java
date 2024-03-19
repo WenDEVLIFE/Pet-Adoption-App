@@ -79,6 +79,7 @@ public class Change_Email extends Fragment {
 
         });
 
+        // This button will change the email
         Button changeEmail = rootview.findViewById(R.id.changeEmail);
         changeEmail.setOnClickListener(v->
         {
