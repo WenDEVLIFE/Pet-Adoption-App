@@ -42,6 +42,8 @@ public class Email_Verification_SignUp extends AppCompatActivity {
     TextView Timer;
 
     Button sendcode;
+
+    String CodeReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +59,15 @@ public class Email_Verification_SignUp extends AppCompatActivity {
         // Start the countdown timer
         startCountdownTimer();
 
+
+        // We will receive the intent
         Intent intent = getIntent();
         String UserName = intent.getStringExtra("Username");
         String Password = intent.getStringExtra("Password");
         String Email = intent.getStringExtra("Email");
         String Name = intent.getStringExtra("Name");
         String code = intent.getStringExtra("Code");
+        CodeReceiver = code;
 
         EditText editText = findViewById(R.id.idcode);
         EditText editText1 = findViewById(R.id.Email);
@@ -76,6 +81,7 @@ public class Email_Verification_SignUp extends AppCompatActivity {
                if(sendcode.isEnabled()){
                    // Send the code to the user's email
                    String codes = generateCode();
+                   CodeReceiver = codes;
                    sendEmail(Email, codes);
                }
                 else{
@@ -95,7 +101,7 @@ public class Email_Verification_SignUp extends AppCompatActivity {
         button.setOnClickListener(v -> {
             String codeEntered = editText.getText().toString();
 
-            if (codeEntered.equals(code)) {
+            if (codeEntered.equals(CodeReceiver)) {
                 SignUpToDatabase(UserName, Password, Email, Name);
             } else {
                 Toast.makeText(Email_Verification_SignUp.this, "Invalid code", Toast.LENGTH_SHORT).show();
@@ -168,28 +174,16 @@ public class Email_Verification_SignUp extends AppCompatActivity {
 
 
     private void sendEmail(String email, String code) throws MessagingException {
-        String fromEmail = "newbie_gwapo@yahoo.com"; // replace with your email
-        String appPassword = "nnfjxmfoyjpfqlyy"; // replace with your app password
 
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.mail.yahoo.com");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
+        JavaMailAPI mailAPI = new JavaMailAPI(Email_Verification_SignUp.this, email, "The Verification Code", "The verification code is:" + code, code);
+        Toast.makeText(this, " Email Sended", Toast.LENGTH_SHORT).show();
+        mailAPI.execute();
 
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(fromEmail, appPassword);
-            }
-        });
 
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(fromEmail));
-        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-        message.setSubject("Your verification code");
-        message.setText("Your verification code is: " + code);
+        // Start the countdown timer
+        startCountdownTimer();
 
-        Transport.send(message);
+
     }
 
     private String generateCode() {
@@ -198,6 +192,7 @@ public class Email_Verification_SignUp extends AppCompatActivity {
         int code = random.nextInt(900000) + 100000; // This will generate a random 6-digit number
         return String.valueOf(code);
     }
+
 
 
 
