@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Email_Verification_SignUp"
+        android:background="#7B904B">
+
+    <TextView
+            android:text="Time:00:00"
+            android:textSize="@dimen/_15sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView10"
+            tools:layout_editor_absoluteX="140dp"
+            tools:layout_editor_absoluteY="505dp" />
+
+    <Button
+            android:text="Send Code"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:id="@+id/sendcode"
+            android:textColor="@color/white"
+            android:background="@drawable/button"
+            tools:layout_editor_absoluteX="328dp"
+            tools:layout_editor_absoluteY="322dp" />
+
+    <Button
+            android:text="Confirm"
+            android:layout_width="192dp"
+            android:layout_height="59dp"
+            android:id="@+id/button"
+            android:textColor="@color/white"
+            android:background="@drawable/button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.429"
+            android:layout_marginBottom="128dp" />
+
+    <ImageView
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_100sdp"
+            app:srcCompat="@drawable/petlogo"
+            android:id="@+id/imageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp" />
+
+    <TextView
+            android:text="Your Email Code has been sent on your email"
+            android:textAlignment="center"
+            android:layout_width="@dimen/_290sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:id="@+id/textView"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_25sdp"
+            android:fontFamily="sans-serif-condensed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:layout_marginTop="44dp" />
+
+    <EditText
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:inputType="text"
+            android:hint="Code"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:background="@drawable/textfield"
+            android:ems="10"
+            android:id="@+id/email"
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="423dp" />
+
+    <EditText
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:inputType="text"
+            android:hint="Email"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:background="@drawable/textfield"
+            android:ems="10"
+            android:id="@+id/Email"
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="322dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

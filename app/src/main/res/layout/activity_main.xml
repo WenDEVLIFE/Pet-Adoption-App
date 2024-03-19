@@ -21,7 +21,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-            android:layout_marginTop="28dp" />
+            android:layout_marginTop="28dp"
+            app:layout_constraintHorizontal_bias="0.51" />
 
     <EditText
             android:layout_width="@dimen/_239sdp"

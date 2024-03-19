@@ -58,8 +58,8 @@
                 android:layout_marginTop="36dp" />
 
         <EditText
-                android:layout_width="316dp"
-                android:layout_height="62dp"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:inputType="text"
                 android:background="@drawable/textfield"
                 android:text="Code"
