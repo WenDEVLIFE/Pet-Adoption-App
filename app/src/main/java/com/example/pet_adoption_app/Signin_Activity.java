@@ -25,8 +25,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
@@ -99,13 +109,21 @@ public class Signin_Activity extends AppCompatActivity {
                          // Then if the password has special characters and has upper case
                             if (hasSpecialCharacter && hasUpperCase) {
 
+                            try{
                                 // Then call the sign up method to add the user to the database
+                                String code = generateCode();
+                                sendEmail(Email,code);
                                 Intent intent = new Intent(Signin_Activity.this, Email_Verification_SignUp.class);
                                 intent.putExtra("UserName", UserName);
                                 intent.putExtra("Email", Email);
                                 intent.putExtra("Name", Name);
                                 intent.putExtra("Password", Password);
                                 startActivity(intent);
+
+
+                            }catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
                             } else {
 
@@ -180,6 +198,38 @@ public class Signin_Activity extends AppCompatActivity {
         boolean hasUppercase = uppercaseMatcher.find();
 
         return  hasUppercase;
+    }
+
+    private void sendEmail(String email, String code) throws MessagingException {
+        String fromEmail = "newbie_gwapo@yahoo.com"; // replace with your email
+        String appPassword = "nnfjxmfoyjpfqlyy"; // replace with your app password
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.mail.yahoo.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, appPassword);
+            }
+        });
+
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(fromEmail));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+        message.setSubject("Your verification code");
+        message.setText("Your verification code is: " + code);
+
+        Transport.send(message);
+    }
+
+    private String generateCode() {
+        // Implement code generation logic here
+        Random random = new Random();
+        int code = random.nextInt(900000) + 100000; // This will generate a random 6-digit number
+        return String.valueOf(code);
     }
 
 
