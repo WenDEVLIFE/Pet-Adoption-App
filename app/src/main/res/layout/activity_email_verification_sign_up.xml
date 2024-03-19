@@ -15,8 +15,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView10"
-            tools:layout_editor_absoluteX="140dp"
-            tools:layout_editor_absoluteY="505dp" />
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/idcode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.429" />
 
     <Button
             android:text="Send Code"
@@ -25,21 +28,27 @@
             android:id="@+id/sendcode"
             android:textColor="@color/white"
             android:background="@drawable/button"
-            tools:layout_editor_absoluteX="328dp"
-            tools:layout_editor_absoluteY="322dp" />
+            app:layout_constraintBottom_toTopOf="@+id/idcode"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintVertical_bias="0.43" />
 
     <Button
             android:text="Confirm"
-            android:layout_width="192dp"
-            android:layout_height="59dp"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_59sdp"
             android:id="@+id/button"
             android:textColor="@color/white"
             android:background="@drawable/button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.429"
-            android:layout_marginBottom="128dp" />
+            app:layout_constraintHorizontal_bias="0.415"
+            android:layout_marginBottom="128dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
             android:layout_width="@dimen/_150sdp"
@@ -76,9 +85,12 @@
             android:textColorHint="@color/black"
             android:background="@drawable/textfield"
             android:ems="10"
-            android:id="@+id/email"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="423dp" />
+            android:id="@+id/idcode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Email"
+            android:layout_marginTop="40dp"
+            app:layout_constraintHorizontal_bias="0.034" />
 
     <EditText
             android:layout_width="@dimen/_250sdp"
@@ -91,6 +103,9 @@
             android:background="@drawable/textfield"
             android:ems="10"
             android:id="@+id/Email"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="322dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sendcode"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:layout_marginTop="32dp"
+            app:layout_constraintHorizontal_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

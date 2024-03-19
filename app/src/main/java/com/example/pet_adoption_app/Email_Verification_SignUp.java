@@ -5,6 +5,8 @@ import static android.content.ContentValues.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -33,11 +35,26 @@ public class Email_Verification_SignUp extends AppCompatActivity {
             return insets;
         });
 
+
         Intent intent = getIntent();
         String UserName = intent.getStringExtra("username");
         String Password = intent.getStringExtra("password");
         String Email = intent.getStringExtra("email");
         String Name = intent.getStringExtra("name");
+
+        String code = intent.getStringExtra("code");
+
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(v -> {
+            EditText editText = findViewById(R.id.idcode);
+            String codeEntered = editText.getText().toString();
+
+            if (codeEntered.equals(code)) {
+                SignUpToDatabase(UserName, Password, Email, Name);
+            } else {
+                Toast.makeText(Email_Verification_SignUp.this, "Invalid code", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
