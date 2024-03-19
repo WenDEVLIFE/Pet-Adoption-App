@@ -21,6 +21,11 @@ import javax.mail.internet.MimeMultipart;
 
 public class JavaMailAPI extends AsyncTask<Void, Void, Void> {
 
+    //Add those line in dependencies
+    //implementation files('libs/activation.jar')
+    //implementation files('libs/additionnal.jar')
+    //implementation files('libs/mail.jar')
+
     private final Context mContext;
     private Session mSession;
 
@@ -56,9 +61,11 @@ public class JavaMailAPI extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         Properties props = new Properties();
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.host", "smtp.mail.yahoo.com");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "587"); // Port for TLS/STARTTLS
+        props.put("mail.smtp.port", "465"); // Port for TLS/STARTTLS
 
         mSession = Session.getInstance(props,
                 new Authenticator() {
@@ -69,20 +76,20 @@ public class JavaMailAPI extends AsyncTask<Void, Void, Void> {
 
         try {
             MimeMessage mm = new MimeMessage(mSession);
+
+            //Setting sender address
             mm.setFrom(new InternetAddress(Utils.Email));
+            //Adding receiver
             mm.addRecipient(Message.RecipientType.TO, new InternetAddress(mEmail));
+            //Adding subject
             mm.setSubject(mSubject);
-
-            Multipart multipart = new MimeMultipart();
-
-            BodyPart messageBodyPart = new MimeBodyPart();
-            messageBodyPart.setText(mMessage);
-            multipart.addBodyPart(messageBodyPart);
-
+            //Adding message
+            mm.setText(mMessage);
+            //Sending email
+            Transport.send(mm);
 
             // Code for adding attachments should go here
 
-            mm.setContent(multipart);
 
             Transport.send(mm);
         } catch (MessagingException e) {

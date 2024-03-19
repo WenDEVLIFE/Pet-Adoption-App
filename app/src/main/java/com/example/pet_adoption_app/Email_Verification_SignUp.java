@@ -58,12 +58,11 @@ public class Email_Verification_SignUp extends AppCompatActivity {
         startCountdownTimer();
 
         Intent intent = getIntent();
-        String UserName = intent.getStringExtra("username");
-        String Password = intent.getStringExtra("password");
-        String Email = intent.getStringExtra("email");
-        String Name = intent.getStringExtra("name");
-
-        String code = intent.getStringExtra("code");
+        String UserName = intent.getStringExtra("Username");
+        String Password = intent.getStringExtra("Password");
+        String Email = intent.getStringExtra("Email");
+        String Name = intent.getStringExtra("Name");
+        String code = intent.getStringExtra("Code");
 
         EditText editText = findViewById(R.id.idcode);
         EditText editText1 = findViewById(R.id.Email);
@@ -111,10 +110,10 @@ public class Email_Verification_SignUp extends AppCompatActivity {
         String bcryptPassHashing = BCrypt.withDefaults().hashToString(12, Password.toCharArray());
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
-        user.put("name", Name);
-        user.put("username", UserName);
-        user.put("password", bcryptPassHashing);
-        user.put("email", Email);
+        user.put("Name", Name);
+        user.put("Username", UserName);
+        user.put("Password", bcryptPassHashing);
+        user.put("Email", Email);
 
         // Add a new document with a generated ID
         db.collection("users")

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools"
+        package="com.example.pet_adoption_app">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -15,10 +16,6 @@
         <activity
             android:name=".Email_Verification_SignUp"
             android:exported="false" />
-        <activity
-            android:name=".Change_Email"
-            android:exported="false"
-            android:theme="@style/Theme.Pet_Adoption_App" />
         <activity
             android:name=".FragementController"
             android:exported="false"

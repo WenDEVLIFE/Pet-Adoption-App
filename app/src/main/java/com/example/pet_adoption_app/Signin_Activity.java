@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -93,6 +94,7 @@ public class Signin_Activity extends AppCompatActivity {
 
                      // Regex pattern for basic email validation
                      String emailPattern = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}";
+
                      // Then this will check if email containt with @ and .
                      if (Email.matches(emailPattern)) {
                          // Email is valid
@@ -107,10 +109,6 @@ public class Signin_Activity extends AppCompatActivity {
                                 // Then call the sign up method to add the user to the database
                                 SendMail(Email, code);
                                 DoneLoading(UserName, Email, Name, Password, code);
-
-
-
-
 
                             }catch (Exception e) {
                                 e.printStackTrace();
@@ -205,6 +203,7 @@ public class Signin_Activity extends AppCompatActivity {
 
     private void SendMail(String Email, String code){
         JavaMailAPI mailAPI = new JavaMailAPI(Signin_Activity.this, Email, "The Verification Code", "The verification code is:" + code, code);
+        Toast.makeText(this, " Email Sended", Toast.LENGTH_SHORT).show();
         mailAPI.execute();
 
 
@@ -212,11 +211,11 @@ public class Signin_Activity extends AppCompatActivity {
 
     private void DoneLoading( String UserName, String Email, String Name, String Password, String code){
         Intent intent = new Intent(Signin_Activity.this, Email_Verification_SignUp.class);
-        intent.putExtra("UserName", UserName);
+        intent.putExtra("Username", UserName);
         intent.putExtra("Email", Email);
         intent.putExtra("Name", Name);
         intent.putExtra("Password", Password);
-        intent.putExtra("code"  , code);
+        intent.putExtra("Code"  , code);
         startActivity(intent);
     }
 
