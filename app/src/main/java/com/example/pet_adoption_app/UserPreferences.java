@@ -86,10 +86,12 @@ public class UserPreferences extends Fragment {
             replaceFragement(new Change_Password());
         });
 
+
         Button ChangeEmail = rootview.findViewById(R.id.change_emailbutton);
         ChangeEmail.setOnClickListener(v->
         {
             // This will go to change email fragment
+            replaceFragement(new Change_Email());
 
         });
 

@@ -3,10 +3,14 @@ package com.example.pet_adoption_app;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +63,42 @@ public class Change_Email extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_change__email, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_change__email, container, false);
+
+        // our image button code here
+        ImageButton btnback = rootview.findViewById(R.id.buttonnback);
+        btnback.setOnClickListener(v->{
+            // This will go back to user preferences fragments
+            replaceFragement(new UserPreferences());
+        });
+
+        // This button will send code to the user email
+        Button sendcode = rootview.findViewById(R.id.sendcode);
+        sendcode.setOnClickListener(v->{
+            // This will go to change email code fragments
+
+        });
+
+        Button changeEmail = rootview.findViewById(R.id.changeEmail);
+        changeEmail.setOnClickListener(v->
+        {
+            // This will go to change email fragment
+
+        });
+
+
+
+        return rootview;
     }
+
+    // This will call the fragments
+    private void replaceFragement(Fragment fragment) {
+
+        // Call the fragment manager and begin the transaction to replace the fragment
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+    }
+
 }
