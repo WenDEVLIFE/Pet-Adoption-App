@@ -23,6 +23,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     TextView Sign_in;
 
     CheckBox checkBox;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +50,24 @@ public class MainActivity extends AppCompatActivity {
         Sign_in = findViewById(R.id.sigin);
         Sign_in.setOnClickListener(v -> {
 
-            // The start the intent
-            Intent intent = new Intent(MainActivity.this, Signin_Activity.class);
-            startActivity(intent);
+            String username = usernamefield.getText().toString();
+            String password = passwordfield.getText().toString();
 
-            // close the current intent
-            finish();
+            // Check if the username and password fields are empty
+            if (username.isEmpty() || password.isEmpty()) {
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                alertDialog.setTitle("Alert");
+                alertDialog.setMessage("Please fill in all the fields");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        (dialog, which) -> dialog.dismiss());
+                alertDialog.show();
+            } else {
+                // Check if the username and password fields are not empty
+
+                LoginVerification(username, password);
+            }
+
+
         });
 
         // Sign up button
@@ -94,4 +109,54 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void LoginVerification(String username, String password){
+
+        DocumentReference docRef = db.collection("users").document(username);
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                String hashedPassword = documentSnapshot.getString("Password");
+                BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
+                if (result.verified) {
+                    // Retrieve the username and name
+                    String retrievedUsername = documentSnapshot.getString("Username");
+                    String name = documentSnapshot.getString("Name");
+
+                    // The start the intent
+                    Intent intent = new Intent(MainActivity.this, Signin_Activity.class);
+                    intent.putExtra("username", retrievedUsername);
+                    intent.putExtra("name", name);
+                    startActivity(intent);
+
+                    // close the current intent
+                    finish();
+
+                    // This will alert the login success
+                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Sign in successful");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            (dialog, which) -> dialog.dismiss());
+                    alertDialog.show();
+
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Invalid username or password");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            (dialog, which) -> dialog.dismiss());
+                    alertDialog.show();
+                }
+            } else {
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                alertDialog.setTitle("Alert");
+                alertDialog.setMessage("Invalid username or password");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        (dialog, which) -> dialog.dismiss());
+                alertDialog.show();
+            }
+        }).addOnFailureListener(e -> {
+            Log.d(TAG, "onFailure: " + e.toString());
+        });
+
+    }
 }

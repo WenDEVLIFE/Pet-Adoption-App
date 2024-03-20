@@ -33,6 +33,10 @@ public class FragementController extends AppCompatActivity {
             return insets;
         });
 
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+        String name = intent.getStringExtra("name");
+
         // This will call the home fragment
         replaceFragement(new HomeFragment());
 
@@ -40,6 +44,11 @@ public class FragementController extends AppCompatActivity {
         NavigationView navView = findViewById(R.id.navView);
         usernametext = navView.getHeaderView(0).findViewById(R.id.username);
         Name = navView.getHeaderView(0).findViewById(R.id.name);
+
+        // set the username and name
+        usernametext.setText("Username:"+ username);
+        Name.setText("Name:"+ name);
+
         ColorStateList csl = ContextCompat.getColorStateList(this, R.color.white);
         navView.setItemIconTintList(csl);
         navView.setNavigationItemSelectedListener(item -> {
@@ -116,8 +125,8 @@ public class FragementController extends AppCompatActivity {
                 builder.setPositiveButton("Yes", (dialog, which) -> {
                             // Logout
                             finish();
-                            Intent intent = new Intent(this, MainActivity.class);
-                            startActivity(intent);
+                            Intent intent1 = new Intent(this, MainActivity.class);
+                            startActivity(intent1);
                         })
                         .setNegativeButton("No", (dialog, which) -> {
                             // Do nothing
@@ -127,10 +136,6 @@ public class FragementController extends AppCompatActivity {
             }
             return true;
         });
-
-        // set the username and name
-        usernametext.setText("Null");
-        Name.setText("Null");
 
     }
 
