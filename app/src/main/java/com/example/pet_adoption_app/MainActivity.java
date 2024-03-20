@@ -14,10 +14,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -50,6 +52,17 @@ public class MainActivity extends AppCompatActivity {
         Sign_in = findViewById(R.id.sigin);
         Sign_in.setOnClickListener(v -> {
 
+            // This will start the intent
+            Intent intent = new Intent(MainActivity.this, Signin_Activity.class);
+            startActivity(intent);
+
+
+
+        });
+
+        // Sign up button
+        Sign_up = findViewById(R.id.button);
+        Sign_up.setOnClickListener(v ->{
             String username = usernamefield.getText().toString();
             String password = passwordfield.getText().toString();
 
@@ -66,26 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
                 LoginVerification(username, password);
             }
-
-
-        });
-
-        // Sign up button
-        Sign_up = findViewById(R.id.button);
-        Sign_up.setOnClickListener(v ->{
-            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-            alertDialog.setTitle("Alert");
-            alertDialog.setMessage("Sign up successful");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    (dialog, which) -> dialog.dismiss());
-            alertDialog.show();
-
-            // The start the intent
-            Intent intent = new Intent(MainActivity.this, FragementController.class);
-            startActivity(intent);
-
-            // close the current intent
-            finish();
 
 
 
@@ -111,52 +104,46 @@ public class MainActivity extends AppCompatActivity {
 
     public void LoginVerification(String username, String password){
 
+        // This is how to login call the document reference
         DocumentReference docRef = db.collection("users").document(username);
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-                String hashedPassword = documentSnapshot.getString("Password");
-                BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
-                if (result.verified) {
-                    // Retrieve the username and name
-                    String retrievedUsername = documentSnapshot.getString("Username");
-                    String name = documentSnapshot.getString("Name");
 
-                    // The start the intent
-                    Intent intent = new Intent(MainActivity.this, Signin_Activity.class);
-                    intent.putExtra("username", retrievedUsername);
-                    intent.putExtra("name", name);
-                    startActivity(intent);
+        // This will check if the username exists
+        db.collection("users").whereEqualTo("Username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (!task.getResult().isEmpty()) {
+                            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+                            String hashedPassword = documentSnapshot.getString("Password");
+                            BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
+                            if (result.verified) {
 
-                    // close the current intent
-                    finish();
+                                // Retrieve the username and name
+                                String retrievedUsername = documentSnapshot.getString("Username");
+                                String name = documentSnapshot.getString("Name");
 
-                    // This will alert the login success
-                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-                    alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("Sign in successful");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            (dialog, which) -> dialog.dismiss());
-                    alertDialog.show();
+                                // The start the intent
+                                Intent intent = new Intent(MainActivity.this, FragementController.class);
+                                intent.putExtra("username", retrievedUsername);
+                                intent.putExtra("name", name);
+                                startActivity(intent);
 
-                } else {
-                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-                    alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("Invalid username or password");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            (dialog, which) -> dialog.dismiss());
-                    alertDialog.show();
-                }
-            } else {
-                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-                alertDialog.setTitle("Alert");
-                alertDialog.setMessage("Invalid username or password");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        (dialog, which) -> dialog.dismiss());
-                alertDialog.show();
-            }
-        }).addOnFailureListener(e -> {
-            Log.d(TAG, "onFailure: " + e.toString());
-        });
+                                // close the current intent
+                                finish();
+
+                                // This will alert the login success
+                                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(this, "This User don't exist", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d(TAG, "onFailure: " + task.getException().toString());
+                    }
+                });
 
     }
 }

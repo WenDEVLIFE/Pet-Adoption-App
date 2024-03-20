@@ -27,15 +27,16 @@ public class FragementController extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+        String name = intent.getStringExtra("name");
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
-        String name = intent.getStringExtra("name");
 
         // This will call the home fragment
         replaceFragement(new HomeFragment());
