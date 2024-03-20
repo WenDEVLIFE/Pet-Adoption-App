@@ -51,6 +51,11 @@ public class AddAdopt extends Fragment {
     String username, name;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    EditText dogname;
+    EditText DogBreed;
+    EditText DogOwner;
+    EditText descriptions;
+
     public AddAdopt() {
         // Required empty public constructor
     }
@@ -90,23 +95,22 @@ public class AddAdopt extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_add_adopt, container, false);
+
+        dogname = rootView.findViewById(R.id.editTextText);
+        DogBreed = rootView.findViewById(R.id.dogage);
+        DogOwner = rootView.findViewById(R.id.dogBreed);
+        descriptions = rootView.findViewById(R.id.dog_owner);
+
         if (getArguments() != null) {
 
             // This is a test to get the value from the navbar and send it to the fragments.
             username = getArguments().getString("username");
             name = getArguments().getString("name");
+            DogOwner.setText(name);
         }
-
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_add_adopt, container, false);
-
-        EditText dogname = rootView.findViewById(R.id.editTextText);
-        EditText dogage = rootView.findViewById(R.id.dogage);
-        EditText dogbreed = rootView.findViewById(R.id.dogBreed);
-        EditText dogOwner = rootView.findViewById(R.id.dog_owner);
-        dogOwner.setText(name);
-
-
         // our back button image
         ImageButton back = rootView.findViewById(R.id.buttonnback);
         back.setOnClickListener(v ->
@@ -124,14 +128,14 @@ public class AddAdopt extends Fragment {
         Button Adopt = rootView.findViewById(R.id.AddButton);
         Adopt.setOnClickListener(v -> {
             String DogName = dogname.getText().toString();
-            String DogAge = dogage.getText().toString();
-            String DogOwner = dogbreed.getText().toString();
-            String DogDescription = dogOwner.getText().toString();
+            String DogAge = DogBreed.getText().toString();
+            String Dog_owner = DogOwner.getText().toString();
+            String DogDescription = descriptions.getText().toString();
 
-            if (DogName.isEmpty() || DogAge.isEmpty() || DogDescription.isEmpty() || DogOwner.isEmpty() || imageUri == null) {
+            if (DogName.isEmpty() || DogAge.isEmpty() || DogDescription.isEmpty() || Dog_owner.isEmpty() || imageUri == null) {
                 Toast.makeText(getActivity(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
             } else {
-                InsertToFireStore(DogName, DogAge, DogDescription, DogOwner, imageUri);
+                InsertToFireStore(DogName, DogAge, DogDescription, Dog_owner, imageUri);
             }
         });
 
@@ -214,6 +218,14 @@ public class AddAdopt extends Fragment {
                 dog.put("description", dogBreed);
                 dog.put("owner", dogOwner);
                 dog.put("image", uri.toString());
+
+                dogname.setText("");
+                DogBreed.setText("");
+                descriptions.setText("");
+                imageView.setImageResource(0);
+
+
+
 
                 // Add the document to the Firestore collection
                 db.collection("Pets").add(dog)
