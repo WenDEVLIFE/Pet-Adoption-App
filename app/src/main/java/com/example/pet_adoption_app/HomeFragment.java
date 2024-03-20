@@ -86,43 +86,80 @@ public class HomeFragment extends Fragment {
         buttonPending.setOnClickListener(v -> {
             // Handle button pending click
             // This will go to pending adopt pets
-            replaceFragement(new Pending_Adoption());
+            Pending_Adoption fragment = new Pending_Adoption();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
         });
 
         buttonMissing.setOnClickListener(v -> {
             // Handle button pending click
             // This will go to lost pets fragments
-            replaceFragement(new Fragment_Lost_Pets());
+           Fragment_Lost_Pets fragment = new Fragment_Lost_Pets();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
+
         });
 
         buttonDonate.setOnClickListener(v -> {
             // Handle button pending click
             // This will go to your adoptions fragments
-            replaceFragement(new Fragment_Your_Donations());
+            Fragment_Your_Donations fragment = new Fragment_Your_Donations();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
         });
 
         buttonAdopt.setOnClickListener(v -> {
             // Handle button pending click
             // This will go to your pet fragments
-            replaceFragement(new YourPet_Fragement());
+           YourPet_Fragement fragment = new YourPet_Fragement();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
         });
 
         buttonAdoptPet.setOnClickListener(v -> {
             // Handle button pending click
             // Go to fragment adopted pets
-            replaceFragement(new Fragment_Adopted_pets());
+            Fragment_Adopted_pets fragment = new Fragment_Adopted_pets();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
         });
 
         ButtonAdoptRequest.setOnClickListener(v -> {
             // Handle button pending click
             // This will go to adopt request
-            replaceFragement(new Fragment_Adopt_request());
+            Fragment_Adopted_pets fragment = new Fragment_Adopted_pets();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
         });
 
         Transaction_History.setOnClickListener(v -> {
             // Handle button pending click
             // This will go to transaction history
-            replaceFragement(new Transaction_History());
+            Transaction_History fragment = new Transaction_History();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
+
         });
 
         return rootView;
