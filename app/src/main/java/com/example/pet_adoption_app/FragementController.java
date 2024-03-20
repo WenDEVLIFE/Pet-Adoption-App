@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class FragementController extends AppCompatActivity {
 
+    String username , name;
     TextView usernametext, Name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +29,8 @@ public class FragementController extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
-        String name = intent.getStringExtra("name");
+        username = intent.getStringExtra("username");
+        name = intent.getStringExtra("name");
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -37,9 +38,7 @@ public class FragementController extends AppCompatActivity {
             return insets;
         });
 
-
-        // This will call the home fragment
-        replaceFragement(new HomeFragment());
+        goHomeFragmenet();
 
         // Get the NavigationView reference using findViewById
         NavigationView navView = findViewById(R.id.navView);
@@ -128,6 +127,11 @@ public class FragementController extends AppCompatActivity {
                             finish();
                             Intent intent1 = new Intent(this, MainActivity.class);
                             startActivity(intent1);
+
+                            // Clear the username and name
+                            usernametext.setText("");
+                            Name.setText("");
+
                         })
                         .setNegativeButton("No", (dialog, which) -> {
                             // Do nothing
@@ -148,6 +152,16 @@ public class FragementController extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+    }
+
+    public void goHomeFragmenet(){
+        // This will call the home fragment
+        HomeFragment fragment = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        bundle.putString("name", name);
+        fragment.setArguments(bundle);
+        replaceFragement(fragment);
     }
 
 

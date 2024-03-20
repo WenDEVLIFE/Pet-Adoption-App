@@ -28,6 +28,8 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private String username, name;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -56,6 +58,9 @@ public class HomeFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+
         }
     }
 
@@ -74,6 +79,9 @@ public class HomeFragment extends Fragment {
         ImageButton ButtonAdoptRequest = rootView.findViewById(R.id.adopt_request);
         ImageButton Transaction_History = rootView.findViewById(R.id.transaction_history);
 
+        // Get the username and name from the bundle
+        username = getArguments().getString("username");
+        name = getArguments().getString("name");
 
         buttonPending.setOnClickListener(v -> {
             // Handle button pending click

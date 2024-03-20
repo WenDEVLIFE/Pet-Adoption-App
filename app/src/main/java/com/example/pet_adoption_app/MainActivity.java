@@ -56,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Signin_Activity.class);
             startActivity(intent);
 
-
-
         });
 
         // Sign up button
         Sign_up = findViewById(R.id.button);
         Sign_up.setOnClickListener(v ->{
+
+            // This will start the intent
             String username = usernamefield.getText().toString();
             String password = passwordfield.getText().toString();
 
@@ -113,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         if (!task.getResult().isEmpty()) {
+
+                            // This will get the hashed password and compare it
+                            // with the password entered by the user
                             DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                             String hashedPassword = documentSnapshot.getString("Password");
                             BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
