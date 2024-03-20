@@ -1,19 +1,25 @@
 package com.example.pet_adoption_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.ViewTreeObserver;
 import android.widget.AutoCompleteTextView;
@@ -22,13 +28,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import adapter.PetAdapter;
+import adapter.Pets;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AdoptionFragments#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AdoptionFragments extends Fragment {
+public class AdoptionFragments extends Fragment implements PetAdapter.onAdoptListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,6 +61,14 @@ public class AdoptionFragments extends Fragment {
     private TextView usernametext;
 
     String username, name;
+
+    RecyclerView recyclerView;
+
+    private List<Pets> petList;
+
+    private PetAdapter adapter;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public AdoptionFragments() {
         // Required empty public constructor
@@ -134,6 +160,16 @@ public class AdoptionFragments extends Fragment {
             replaceFragement(homeFragment);
         });
 
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        petList = new ArrayList<>();
+        adapter = new PetAdapter(petList);
+        recyclerView.setAdapter(adapter);
+
+        // Ensure MainActivity implements OnDeleteClickListener
+        adapter.setOnAdoptListener(this);
+        LoadPets();
+
         return rootView;
 
     }
@@ -146,4 +182,53 @@ public class AdoptionFragments extends Fragment {
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void onAdopt(int position) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Adopt");
+        builder.setMessage("Are you sure you want to adopt this pet?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            // Adopt the pet
+            // Get the pet from the list
+            Pets pet = petList.get(position);
+            // Add the pet to the user's list of pets
+            db.collection("Users").document(username).collection("Pets").add(pet);
+            // Remove the pet from the list of pets
+            petList.remove(position);
+            adapter.notifyDataSetChanged();
+        })
+                .setNegativeButton("No", (dialog, which) -> {
+                    // Do nothing
+                })
+                .show();
+    }
+
+    public void LoadPets() {
+        // Retrieve the data from Firestore
+        db.collection("Pets").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                petList.clear();
+                for (QueryDocumentSnapshot doc : value) {
+                    if (doc.get("name") != null) {
+                        String name = doc.getString("name");
+                        String breed = doc.getString("breed");
+                        String description = doc.getString("description");
+                        String owner = doc.getString("owner");
+                        String image = doc.getString("image");
+                        petList.add(new Pets(name, breed, owner, description, image));
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+    }
 }

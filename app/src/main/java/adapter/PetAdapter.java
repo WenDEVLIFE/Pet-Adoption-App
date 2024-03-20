@@ -33,7 +33,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
 
 
 
-    public void setOnDeleteClickListener(onAdoptListener listener) {
+    public void setOnAdoptListener(onAdoptListener listener) {
         this.onAdoptListener = listener;
     }
 
