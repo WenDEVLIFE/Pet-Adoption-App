@@ -142,7 +142,7 @@ public class HomeFragment extends Fragment {
         ButtonAdoptRequest.setOnClickListener(v -> {
             // Handle button pending click
             // This will go to adopt request
-            Fragment_Adopted_pets fragment = new Fragment_Adopted_pets();
+             Fragment_Adopt_request fragment = new Fragment_Adopt_request();
             Bundle bundle = new Bundle();
             bundle.putString("username", username);
             bundle.putString("name", name);

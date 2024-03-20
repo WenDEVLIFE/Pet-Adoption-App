@@ -30,6 +30,8 @@ public class Fragment_Lost_Pets extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private String username, name;
+
     public Fragment_Lost_Pets() {
         // Required empty public constructor
     }
@@ -58,12 +60,19 @@ public class Fragment_Lost_Pets extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        username = getArguments().getString("username");
+        name = getArguments().getString("name");
+
+
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_lost_pets, container, false);
 

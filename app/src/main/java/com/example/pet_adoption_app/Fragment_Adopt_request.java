@@ -28,6 +28,7 @@ public class Fragment_Adopt_request extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private String username, name;
     public Fragment_Adopt_request() {
         // Required empty public constructor
     }
@@ -56,12 +57,19 @@ public class Fragment_Adopt_request extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        username = getArguments().getString("username");
+        name = getArguments().getString("name");
+
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment__adopt_request, container, false);
 
