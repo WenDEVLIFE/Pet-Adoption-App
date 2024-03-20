@@ -3,26 +3,30 @@ package com.example.pet_adoption_app;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+import java.util.HashMap;
 
-import kotlin.Suppress;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +44,12 @@ public class AddAdopt extends Fragment {
     private String mParam1;
     private String mParam2;
     private static final int PICK_IMAGE_REQUEST = 1;
+
+    private Uri imageUri; // Add this line at the top of your class
     ImageView imageView;
+
+    String username, name;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public AddAdopt() {
         // Required empty public constructor
@@ -70,12 +79,24 @@ public class AddAdopt extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
+            // This is a test to get the value from the navbar and send it to the fragments.
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if (getArguments() != null) {
+
+            // This is a test to get the value from the navbar and send it to the fragments.
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+        }
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_add_adopt, container, false);
 
@@ -83,18 +104,35 @@ public class AddAdopt extends Fragment {
         EditText dogage = rootView.findViewById(R.id.dogage);
         EditText dogbreed = rootView.findViewById(R.id.dogBreed);
         EditText dogOwner = rootView.findViewById(R.id.dog_owner);
+        dogOwner.setText(name);
 
 
+        // our back button image
         ImageButton back = rootView.findViewById(R.id.buttonnback);
-        back.setOnClickListener(v -> replaceFragement(new AdoptionFragments()));
+        back.setOnClickListener(v ->
+        {
+            // This will go to Adoption Fragments
+            AdoptionFragments Fragment = new AdoptionFragments();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            Fragment.setArguments(bundle);
+            replaceFragement(Fragment);
+        });
+
 
         Button Adopt = rootView.findViewById(R.id.AddButton);
         Adopt.setOnClickListener(v -> {
-            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-            alertDialog.setTitle("Adopt");
-            alertDialog.setMessage("Adopted");
-            alertDialog.show();
+            String DogName = dogname.getText().toString();
+            String DogAge = dogage.getText().toString();
+            String DogOwner = dogbreed.getText().toString();
+            String DogDescription = dogOwner.getText().toString();
 
+            if (DogName.isEmpty() || DogAge.isEmpty() || DogDescription.isEmpty() || DogOwner.isEmpty() || imageUri == null) {
+                Toast.makeText(getActivity(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            } else {
+                InsertToFireStore(DogName, DogAge, DogDescription, DogOwner, imageUri);
+            }
         });
 
         // This where we set the image
@@ -142,7 +180,7 @@ public class AddAdopt extends Fragment {
                 && data != null && data.getData() != null) {
 
             // Get the image uri
-            Uri imageUri = data.getData();
+            imageUri = data.getData();
 
             // Set the image uri to the image view
             imageView.setImageURI(imageUri);
@@ -156,5 +194,38 @@ public class AddAdopt extends Fragment {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+    }
+
+    public void InsertToFireStore(String dogName, String dogAge, String dogBreed, String dogOwner, Uri dogImageUri){
+        // Create a storage reference
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference("uploads");
+
+        // Create a reference to the file to be uploaded
+        StorageReference fileReference = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(dogImageUri));
+
+        // Upload the file to Firebase Storage
+        fileReference.putFile(dogImageUri).addOnSuccessListener(taskSnapshot -> {
+            // Get the download URL of the uploaded file
+            fileReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                // Create a new document for the dog
+                Map<String, Object> dog = new HashMap<>();
+                dog.put("name", dogName);
+                dog.put("breed", dogAge);
+                dog.put("description", dogBreed);
+                dog.put("owner", dogOwner);
+                dog.put("image", uri.toString());
+
+                // Add the document to the Firestore collection
+                db.collection("Pets").add(dog)
+                        .addOnSuccessListener(documentReference -> Toast.makeText(getActivity(), "Dog added", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e -> Toast.makeText(getActivity(), "Error adding dog", Toast.LENGTH_SHORT).show());
+            });
+        }).addOnFailureListener(e -> Toast.makeText(getActivity(), "Upload failed", Toast.LENGTH_SHORT).show());
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getActivity().getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 }

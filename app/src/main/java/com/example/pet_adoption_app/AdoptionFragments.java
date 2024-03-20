@@ -39,9 +39,10 @@ public class AdoptionFragments extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
     private TextView usernametext;
 
-    private String username;
+    String username, name;
 
     public AdoptionFragments() {
         // Required empty public constructor
@@ -74,6 +75,7 @@ public class AdoptionFragments extends Fragment {
 
             // This is a test to get the value from the navbar and send it to the fragments.
             username = getArguments().getString("username");
+            name = getArguments().getString("name");
 
 
         }
@@ -82,6 +84,15 @@ public class AdoptionFragments extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if (getArguments() != null) {
+
+            // This is a test to get the value from the navbar and send it to the fragments.
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+
+
+        }
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_adopt, container, false);
 
@@ -103,14 +114,25 @@ public class AdoptionFragments extends Fragment {
         FloatingActionButton fab = rootView.findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(v -> {
             AddAdopt addAdopt = new AddAdopt();
-
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
            replaceFragement(addAdopt);
         });
 
 
         // our back button image
         ImageButton back = rootView.findViewById(R.id.buttonnback);
-        back.setOnClickListener(v -> replaceFragement(new HomeFragment()));
+        back.setOnClickListener(v ->
+        {
+            // This will go to Home Fragments
+            HomeFragment homeFragment = new HomeFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            homeFragment.setArguments(bundle);
+            replaceFragement(homeFragment);
+        });
 
         return rootView;
 
