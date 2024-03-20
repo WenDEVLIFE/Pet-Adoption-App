@@ -66,8 +66,13 @@ public class Pending_Adoption extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        username = getArguments().getString("username");
-        name = getArguments().getString("name");
+
+        // Get the username and name from the bundle
+        if (getArguments() != null) {
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+
+        }
 
         // Inflate the layout for this fragment
         View rootview= inflater.inflate(R.layout.fragment_pending__adoption, container, false);

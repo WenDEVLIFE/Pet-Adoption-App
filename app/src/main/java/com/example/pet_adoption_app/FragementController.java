@@ -55,6 +55,10 @@ public class FragementController extends AppCompatActivity {
             if(item.getItemId() == R.id.home){
                 // This will go to Home Fragements
                 HomeFragment fragment = new HomeFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
                 replaceFragement(fragment);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -71,7 +75,8 @@ public class FragementController extends AppCompatActivity {
 
                 // we will send the username to the notifications
                 Bundle bundle = new Bundle();
-                bundle.putString("username", usernametext.getText().toString());
+                bundle.putString("username", username);
+                bundle.putString("name", name);
                 fragment.setArguments(bundle);
                 replaceFragement(fragment);
             }
@@ -84,7 +89,8 @@ public class FragementController extends AppCompatActivity {
                 Bundle bundle = new Bundle();
 
                 // Step 3: Put the data into the Bundle
-                bundle.putString("username", usernametext.getText().toString());
+                bundle.putString("username", username);
+                bundle.putString("name", name);
 
                 // Step 4: Set the arguments for the fragment with the Bundle
                 fragment.setArguments(bundle);
@@ -100,12 +106,20 @@ public class FragementController extends AppCompatActivity {
             else if(item.getItemId() == R.id.lostpet){
               // This will go to Lost Pet Fragements
                 Fragment_Lost_Pets fragment = new Fragment_Lost_Pets();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
                 replaceFragement(fragment);
             }
 
             else if(item.getItemId() == R.id.ask_donation){
                 // This will go to Ask Donation Fragements
                 Ask_Donations fragment = new Ask_Donations();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
                 replaceFragement(fragment);
 
 
@@ -114,6 +128,10 @@ public class FragementController extends AppCompatActivity {
             else if(item.getItemId() == R.id.user_pref){
                 // This will go to User Preferences Fragements
                 UserPreferences fragment = new UserPreferences();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
                 replaceFragement(fragment);
             }
             else if(item.getItemId() == R.id.logout){
