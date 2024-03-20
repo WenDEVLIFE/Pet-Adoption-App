@@ -74,12 +74,10 @@ public class Pending_Adoption extends Fragment {
 
 
         // ImageButton of the back button
-        ImageButton Buttoback = rootview.findViewById(R.id.buttonnback);
-        Buttoback.setOnClickListener(v->{
+        ImageButton btnback = rootview.findViewById(R.id.buttonnback);
+        btnback.setOnClickListener(v ->
+                goHomeFragmenet());
 
-            // This will go back to the home fragment
-            replaceFragement(new HomeFragment());
-        });
         return rootview;
 
     }
@@ -91,6 +89,15 @@ public class Pending_Adoption extends Fragment {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+    }
+    public void goHomeFragmenet(){
+        // This will call the home fragment
+        HomeFragment fragment = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        bundle.putString("name", name);
+        fragment.setArguments(bundle);
+        replaceFragement(fragment);
     }
 
 }

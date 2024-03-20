@@ -28,7 +28,7 @@ public class YourPet_Fragement extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private String username, name;
+     String username, name;
 
     public YourPet_Fragement() {
         // Required empty public constructor
@@ -68,8 +68,10 @@ public class YourPet_Fragement extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        username = getArguments().getString("username");
-        name = getArguments().getString("name");
+        if (getArguments() != null) {
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+        }
 
 
         // Inflate the layout for this fragment
@@ -91,12 +93,9 @@ public class YourPet_Fragement extends Fragment {
         });
 
 
-        ImageButton backBtn = rootView.findViewById(R.id.buttonnback);
-        backBtn.setOnClickListener(v -> {
-
-            // Go to Home Fragment
-            replaceFragement(new HomeFragment());
-        });
+        ImageButton btnback = rootView.findViewById(R.id.buttonnback);
+        btnback.setOnClickListener(v ->
+                goHomeFragmenet());
 
 
         return rootView;
@@ -110,5 +109,13 @@ public class YourPet_Fragement extends Fragment {
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
-
+    public void goHomeFragmenet(){
+        // This will call the home fragment
+        HomeFragment fragment = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        bundle.putString("name", name);
+        fragment.setArguments(bundle);
+        replaceFragement(fragment);
+    }
 }

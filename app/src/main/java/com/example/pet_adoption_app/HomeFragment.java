@@ -67,102 +67,108 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // our code here with image buttons
-        ImageButton buttonPending = rootView.findViewById(R.id.imageButton_pending);
-        ImageButton buttonMissing = rootView.findViewById(R.id.missingbutton);
-        ImageButton buttonDonate = rootView.findViewById(R.id.donatebutton);
-        ImageButton buttonAdopt = rootView.findViewById(R.id.buttonadopt);
-        ImageButton buttonAdoptPet = rootView.findViewById(R.id.button_adopt_pet);
-        ImageButton ButtonAdoptRequest = rootView.findViewById(R.id.adopt_request);
-        ImageButton Transaction_History = rootView.findViewById(R.id.transaction_history);
+        if (getArguments() != null) {
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+            // our code here with image buttons
+            ImageButton buttonPending = rootView.findViewById(R.id.imageButton_pending);
+            ImageButton buttonMissing = rootView.findViewById(R.id.missingbutton);
+            ImageButton buttonDonate = rootView.findViewById(R.id.donatebutton);
+            ImageButton buttonAdopt = rootView.findViewById(R.id.buttonadopt);
+            ImageButton buttonAdoptPet = rootView.findViewById(R.id.button_adopt_pet);
+            ImageButton ButtonAdoptRequest = rootView.findViewById(R.id.adopt_request);
+            ImageButton Transaction_History = rootView.findViewById(R.id.transaction_history);
 
-        // Get the username and name from the bundle
-        username = getArguments().getString("username");
-        name = getArguments().getString("name");
+            // Get the username and name from the bundle
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
 
-        buttonPending.setOnClickListener(v -> {
-            // Handle button pending click
-            // This will go to pending adopt pets
-            Pending_Adoption fragment = new Pending_Adoption();
-            Bundle bundle = new Bundle();
-            bundle.putString("username", username);
-            bundle.putString("name", name);
-            fragment.setArguments(bundle);
-            replaceFragement(fragment);
-        });
+            buttonPending.setOnClickListener(v -> {
+                // Handle button pending click
+                // This will go to pending adopt pets
+                Pending_Adoption fragment = new Pending_Adoption();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
+                replaceFragement(fragment);
+            });
 
-        buttonMissing.setOnClickListener(v -> {
-            // Handle button pending click
-            // This will go to lost pets fragments
-           Fragment_Lost_Pets fragment = new Fragment_Lost_Pets();
-            Bundle bundle = new Bundle();
-            bundle.putString("username", username);
-            bundle.putString("name", name);
-            fragment.setArguments(bundle);
-            replaceFragement(fragment);
+            buttonMissing.setOnClickListener(v -> {
+                // Handle button pending click
+                // This will go to lost pets fragments
+                Fragment_Lost_Pets fragment = new Fragment_Lost_Pets();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
+                replaceFragement(fragment);
 
-        });
+            });
 
-        buttonDonate.setOnClickListener(v -> {
-            // Handle button pending click
-            // This will go to your adoptions fragments
-            Fragment_Your_Donations fragment = new Fragment_Your_Donations();
-            Bundle bundle = new Bundle();
-            bundle.putString("username", username);
-            bundle.putString("name", name);
-            fragment.setArguments(bundle);
-            replaceFragement(fragment);
-        });
+            buttonDonate.setOnClickListener(v -> {
+                // Handle button pending click
+                // This will go to your adoptions fragments
+                Fragment_Your_Donations fragment = new Fragment_Your_Donations();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
+                replaceFragement(fragment);
+            });
 
-        buttonAdopt.setOnClickListener(v -> {
-            // Handle button pending click
-            // This will go to your pet fragments
-           YourPet_Fragement fragment = new YourPet_Fragement();
-            Bundle bundle = new Bundle();
-            bundle.putString("username", username);
-            bundle.putString("name", name);
-            fragment.setArguments(bundle);
-            replaceFragement(fragment);
-        });
+            buttonAdopt.setOnClickListener(v -> {
+                // Handle button pending click
+                // This will go to your pet fragments
+                YourPet_Fragement fragment = new YourPet_Fragement();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
+                replaceFragement(fragment);
+            });
 
-        buttonAdoptPet.setOnClickListener(v -> {
-            // Handle button pending click
-            // Go to fragment adopted pets
-            Fragment_Adopted_pets fragment = new Fragment_Adopted_pets();
-            Bundle bundle = new Bundle();
-            bundle.putString("username", username);
-            bundle.putString("name", name);
-            fragment.setArguments(bundle);
-            replaceFragement(fragment);
-        });
+            buttonAdoptPet.setOnClickListener(v -> {
+                // Handle button pending click
+                // Go to fragment adopted pets
+                Fragment_Adopted_pets fragment = new Fragment_Adopted_pets();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
+                replaceFragement(fragment);
+            });
 
-        ButtonAdoptRequest.setOnClickListener(v -> {
-            // Handle button pending click
-            // This will go to adopt request
-             Fragment_Adopt_request fragment = new Fragment_Adopt_request();
-            Bundle bundle = new Bundle();
-            bundle.putString("username", username);
-            bundle.putString("name", name);
-            fragment.setArguments(bundle);
-            replaceFragement(fragment);
-        });
+            ButtonAdoptRequest.setOnClickListener(v -> {
+                // Handle button pending click
+                // This will go to adopt request
+                Fragment_Adopt_request fragment = new Fragment_Adopt_request();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
+                replaceFragement(fragment);
+            });
 
-        Transaction_History.setOnClickListener(v -> {
-            // Handle button pending click
-            // This will go to transaction history
-            Transaction_History fragment = new Transaction_History();
-            Bundle bundle = new Bundle();
-            bundle.putString("username", username);
-            bundle.putString("name", name);
-            fragment.setArguments(bundle);
-            replaceFragement(fragment);
+            Transaction_History.setOnClickListener(v -> {
+                // Handle button pending click
+                // This will go to transaction history
+                Transaction_History fragment = new Transaction_History();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
+                replaceFragement(fragment);
 
-        });
+            });
+        }
 
-        return rootView;
+            return rootView;
+
     }
 
     private void replaceFragement(Fragment fragment) {
@@ -173,4 +179,5 @@ public class HomeFragment extends Fragment {
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
+
 }

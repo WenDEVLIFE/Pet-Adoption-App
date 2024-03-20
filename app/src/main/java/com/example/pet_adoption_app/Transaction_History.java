@@ -26,8 +26,7 @@ public class Transaction_History extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    private String username, name;
+     String username, name;
 
     public Transaction_History() {
         // Required empty public constructor
@@ -66,15 +65,19 @@ public class Transaction_History extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        username = getArguments().getString("username");
-        name = getArguments().getString("name");
+
+        if (getArguments() != null) {
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+        }
 
         // Inflate the layout for this fragment
          View rootview = inflater.inflate(R.layout.fragment_transaction__history, container, false);
 
-// This is our button back to home
+        // This is our button back to home
         ImageButton btnback = rootview.findViewById(R.id.buttonnback);
-        btnback.setOnClickListener(v -> replaceFragement(new HomeFragment()));
+        btnback.setOnClickListener(v ->
+                goHomeFragmenet());
 
          return rootview;
     }
@@ -86,5 +89,15 @@ public class Transaction_History extends Fragment {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+    }
+
+    public void goHomeFragmenet(){
+        // This will call the home fragment
+        HomeFragment fragment = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        bundle.putString("name", name);
+        fragment.setArguments(bundle);
+        replaceFragement(fragment);
     }
 }
