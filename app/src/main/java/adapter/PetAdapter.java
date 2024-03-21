@@ -27,6 +27,11 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
         this.petList = petList;
     }
 
+    public void searchPets(List<Pets> newList) {
+        petList = newList;
+        notifyDataSetChanged();
+    }
+
     public interface onAdoptListener {
         void onAdopt(int position);
     }
