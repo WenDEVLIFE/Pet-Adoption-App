@@ -1,23 +1,44 @@
 package com.example.pet_adoption_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import adapter.PendingPetsAdapter;
+import adapter.PetAdapter;
+import adapter.Pets;
+import adapter.PetsPending;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Fragment_Adopt_request#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Adopt_request extends Fragment {
+public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapter.onAdoptListener, PendingPetsAdapter.onCancelListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +50,14 @@ public class Fragment_Adopt_request extends Fragment {
     private String mParam2;
 
     String username, name;
+
+    RecyclerView recyclerView;
+
+    private List<PetsPending> petList;
+
+    private PendingPetsAdapter adapter;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     public Fragment_Adopt_request() {
         // Required empty public constructor
     }
@@ -66,10 +95,15 @@ public class Fragment_Adopt_request extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
         if (getArguments() != null) {
+
+            // Get the username and name from the bundle
             username = getArguments().getString("username");
             name = getArguments().getString("name");
         }
+
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment__adopt_request, container, false);
@@ -94,6 +128,18 @@ public class Fragment_Adopt_request extends Fragment {
         btnback.setOnClickListener(v ->
                 goHomeFragmenet());
 
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        petList = new ArrayList<>();
+        adapter = new PendingPetsAdapter(petList);
+        recyclerView.setAdapter(adapter);
+
+        // Ensure MainActivity implements OnDeleteClickListener
+        adapter.setOnAdoptListener(this);
+        adapter.setOnCancelListener(this);
+        LoadPendingPets();
+
+
         return rootView;
     }
 
@@ -114,5 +160,67 @@ public class Fragment_Adopt_request extends Fragment {
         bundle.putString("name", name);
         fragment.setArguments(bundle);
         replaceFragement(fragment);
+    }
+
+    @Override
+    public void onAdopt(int position) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Adopt Request");
+        builder.setMessage("Are you sure you want to adopt this pet?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            PetsPending pet = petList.get(position);
+            db.collection("PendingAdoption").document(pet.getName()).delete();
+            db.collection("AdoptedPets").document(pet.getName()).set(pet);
+            petList.remove(position);
+            adapter.notifyDataSetChanged();
+        }).setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+        builder.show();
+
+    }
+
+    @Override
+    public void onCancel(int position) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Cancel Request");
+        builder.setMessage("Are you sure you want to cancel this request?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            PetsPending pet = petList.get(position);
+            db.collection("PendingAdoption").document(pet.getName()).delete();
+            petList.remove(position);
+            adapter.notifyDataSetChanged();
+        }).setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+        builder.show();
+
+
+    }
+
+    public void LoadPendingPets(){
+        db.collection("PendingAdoption").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                petList.clear();
+                for (QueryDocumentSnapshot doc : value) {
+                    String owner = doc.getString("owner");
+                    if (owner != null && owner.equals(name)) {
+                        String name = doc.getString("name");
+                        String breed = doc.getString("breed");
+                        String description = doc.getString("description");
+                        String image = doc.getString("image");
+                        String adoptRequest = doc.getString("Adopted request");
+                        PetsPending pet = new PetsPending(name, breed, description, owner, image, adoptRequest);
+                        petList.add(pet);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }
