@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -27,6 +28,8 @@ public class Fragments_Lost_Pets extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    String username,name;
 
     public Fragments_Lost_Pets() {
         // Required empty public constructor
@@ -56,21 +59,34 @@ public class Fragments_Lost_Pets extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if (getArguments() != null) {
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+        }
+
         // Inflate the layout for this fragment
-        View rootview = inflater.inflate(R.layout.fragment_lost_pets, container, false);
+        View rootview = inflater.inflate(R.layout.activity_your_lost_pets, container, false);
 
-        // our floating button
-        FloatingActionButton fab = rootview.findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(view -> {
-            // This will go to the Add Lost Pet Fragements
-            replaceFragement(new Fragment_Add_Lost_Pets());
-
+        // our back button image
+        ImageButton back = rootview.findViewById(R.id.buttonnback);
+        back.setOnClickListener(v ->
+        {
+            // This will go to Home Fragments
+            HomeFragment homeFragment = new HomeFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            homeFragment.setArguments(bundle);
+            replaceFragement(homeFragment);
         });
 
 

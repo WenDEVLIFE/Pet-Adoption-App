@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment {
             buttonMissing.setOnClickListener(v -> {
                 // Handle button pending click
                 // This will go to lost pets fragments
-                Fragment_Lost_Pets fragment = new Fragment_Lost_Pets();
+                Fragments_Lost_Pets fragment = new Fragments_Lost_Pets();
                 Bundle bundle = new Bundle();
                 bundle.putString("username", username);
                 bundle.putString("name", name);
