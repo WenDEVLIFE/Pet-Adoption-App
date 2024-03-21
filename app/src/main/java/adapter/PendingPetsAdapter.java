@@ -92,6 +92,7 @@ public class PendingPetsAdapter extends RecyclerView.Adapter<PendingPetsAdapter.
             dogbreed = itemView.findViewById(R.id.dogbreed);
             dogowner = itemView.findViewById(R.id.dogowner);
             description = itemView.findViewById(R.id.description);
+            description.setEnabled(false);
             Adoptrequest = itemView.findViewById(R.id.adoptowner);
             ADOPTButton = itemView.findViewById(R.id.acceptbutton);
             dogImage = itemView.findViewById(R.id.dogimage); // Add this line

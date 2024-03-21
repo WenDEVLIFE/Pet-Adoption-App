@@ -203,7 +203,7 @@ public class AdoptionFragments extends Fragment implements PetAdapter.onAdoptLis
                     data.put("description", pet.getDescription());
                     data.put("owner", pet.getOwner());
                     data.put("image", pet.getImageUrl());
-                    data.put("Adopted request", name);
+                    data.put("adoption request", name);
 
                     db.collection("PendingAdoption").document().set(data);
 

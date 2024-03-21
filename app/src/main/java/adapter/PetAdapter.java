@@ -78,6 +78,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
             dogbreed = itemView.findViewById(R.id.dogbreed);
             dogowner = itemView.findViewById(R.id.dogowner);
             description = itemView.findViewById(R.id.description);
+            description.setEnabled(false);
             ADOPTButton = itemView.findViewById(R.id.button2);
             dogImage = itemView.findViewById(R.id.dogimage); // Add this line
 
