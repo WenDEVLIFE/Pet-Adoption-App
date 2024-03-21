@@ -215,7 +215,7 @@ public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapt
                         String description = doc.getString("description");
                         String image = doc.getString("image");
                         String adoptRequest = doc.getString("Adopted request");
-                        PetsPending pet = new PetsPending(name, breed, description, owner, image, adoptRequest);
+                        PetsPending pet = new PetsPending(name, breed, owner, description, image, adoptRequest);
                         petList.add(pet);
                     }
                 }
