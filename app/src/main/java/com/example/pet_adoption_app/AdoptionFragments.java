@@ -36,6 +36,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import adapter.PetAdapter;
@@ -194,10 +195,27 @@ public class AdoptionFragments extends Fragment implements PetAdapter.onAdoptLis
             // Get the pet from the list
             Pets pet = petList.get(position);
             // Add the pet to the user's list of pets
-            db.collection("Users").document(username).collection("Pets").add(pet);
-            // Remove the pet from the list of pets
-            petList.remove(position);
-            adapter.notifyDataSetChanged();
+
+
+                    HashMap<String, Object> data = new HashMap<>();
+                    data.put("name", pet.getName());
+                    data.put("breed", pet.getBreed());
+                    data.put("description", pet.getDescription());
+                    data.put("owner", pet.getOwner());
+                    data.put("image", pet.getImageUrl());
+                    data.put("Adopted request", name);
+
+                    db.collection("PendingAdoption").document().set(data);
+
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                    builder1.setTitle("Adopt");
+                    builder1.setMessage("You have successfully requested to adopt " + pet.getName());
+                    builder1.setPositiveButton("Ok", (dialog1, which1) -> {
+                        // Do nothing
+                    })
+                            .show();
+
+
         })
                 .setNegativeButton("No", (dialog, which) -> {
                     // Do nothing
