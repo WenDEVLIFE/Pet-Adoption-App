@@ -102,6 +102,7 @@ public class AddAdopt extends Fragment {
         dogname = rootView.findViewById(R.id.editTextText);
         DogBreed = rootView.findViewById(R.id.dogage);
         DogOwner = rootView.findViewById(R.id.dogBreed);
+        DogOwner.setEnabled(false);
         descriptions = rootView.findViewById(R.id.dog_owner);
 
         if (getArguments() != null) {

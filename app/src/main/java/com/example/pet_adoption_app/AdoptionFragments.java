@@ -143,6 +143,7 @@ public class AdoptionFragments extends Fragment implements PetAdapter.onAdoptLis
             Bundle bundle = new Bundle();
             bundle.putString("username", username);
             bundle.putString("name", name);
+            addAdopt.setArguments(bundle);
            replaceFragement(addAdopt);
         });
 
