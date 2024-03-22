@@ -247,6 +247,10 @@ public class AdoptionFragments extends Fragment implements PetAdapter.onAdoptLis
 
                     db.collection("PendingAdoption").document().set(data);
 
+                    HashMap <String, Object> Notifications = new HashMap<>();
+                    Notifications.put("Notifications details", "The person has pending request " + pet.getName());
+                    Notifications.put("name", pet.getOwner());
+                    db.collection("Notifications").document().set(Notifications);
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
                     builder1.setTitle("Adopt");
                     builder1.setMessage("You have successfully requested to adopt " + pet.getName());

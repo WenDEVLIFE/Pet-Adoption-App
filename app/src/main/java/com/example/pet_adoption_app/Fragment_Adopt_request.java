@@ -267,6 +267,11 @@ public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapt
             PetsPending pet = petList.get(position);
             db.collection("PendingAdoption").document(pet.getName()).delete();
             petList.remove(position);
+            HashMap <String, Object> Notifications = new HashMap<>();
+            Notifications.put("Notifications details", "The adoption request for " + pet.getName() + " has been cancelled");
+            Notifications.put("name", pet.getAdopt_requets());
+            db.collection("Notifications").document().set(Notifications);
+
             adapter.notifyDataSetChanged();
         }).setNegativeButton("No", (dialog, which) -> dialog.dismiss());
         builder.show();
