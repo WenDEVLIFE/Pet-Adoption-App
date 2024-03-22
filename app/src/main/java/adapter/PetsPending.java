@@ -84,4 +84,7 @@ public class PetsPending {
         this.adopt_requets = adopt_requets;
     }
 
+    public String getAdoptRequest() {
+        return adopt_requets;
+    }
 }

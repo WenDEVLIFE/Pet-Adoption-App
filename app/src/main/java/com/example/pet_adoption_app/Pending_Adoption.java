@@ -1,18 +1,37 @@
 package com.example.pet_adoption_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import adapter.Pending_PetsAdapter;
+import adapter.PetAdapter;
+import adapter.Pets;
+import adapter.PetsPending;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +50,14 @@ public class Pending_Adoption extends Fragment implements Pending_PetsAdapter.on
     private String mParam2;
 
     private String username, name;
+
+    RecyclerView recyclerView;
+
+    private List<PetsPending> petList;
+
+    private Pending_PetsAdapter adapter;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     public Pending_Adoption() {
         // Required empty public constructor
     }
@@ -85,6 +112,16 @@ public class Pending_Adoption extends Fragment implements Pending_PetsAdapter.on
         btnback.setOnClickListener(v ->
                 goHomeFragmenet());
 
+        recyclerView = rootview.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        petList = new ArrayList<>();
+        adapter = new Pending_PetsAdapter(petList);
+        recyclerView.setAdapter(adapter);
+
+        // Ensure MainActivity implements OnDeleteClickListener
+        adapter.setOnCancelListener(this);
+        LoadPending();
+
         return rootview;
 
     }
@@ -110,5 +147,46 @@ public class Pending_Adoption extends Fragment implements Pending_PetsAdapter.on
     @Override
     public void onCancel(int position) {
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Cancel Adoption Request");
+        builder.setMessage("Are you sure you want to cancel this adoption request?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            PetsPending pet = petList.get(position);
+            db.collection("PendingAdoption").document(pet.getAdoptRequest()).delete();
+            LoadPending();
+        });
+        builder.setNegativeButton("No", (dialog, which) -> {
+            // Do nothing
+        });
+
+    }
+
+    public void LoadPending(){
+        db.collection("PendingAdoption").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                petList.clear();
+                for (QueryDocumentSnapshot doc : value) {
+                    String adoptRequest = doc.getString("adoption request");
+
+                    if (adoptRequest != null && adoptRequest.equals(name)) {
+                        String owner = doc.getString("owner");
+                        String name = doc.getString("name");
+                        String breed = doc.getString("breed");
+                        String description = doc.getString("description");
+                        String image = doc.getString("image");
+                        PetsPending pet = new PetsPending(name, breed, owner, description, image, adoptRequest);
+                        petList.add(pet);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }
