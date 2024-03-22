@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import adapter.PendingPetsAdapter;
@@ -204,19 +205,56 @@ public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapt
 
     @Override
     public void onAdopt(int position) {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Adopt Request");
         builder.setMessage("Are you sure you want to adopt this pet?");
         builder.setPositiveButton("Yes", (dialog, which) -> {
             PetsPending pet = petList.get(position);
-            db.collection("PendingAdoption").document(pet.getName()).delete();
-            db.collection("AdoptedPets").document(pet.getName()).set(pet);
+
+            // Delete document from "PendingAdoption" collection
+            db.collection("PendingAdoption")
+                    .whereEqualTo("name", pet.getName())
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            documentSnapshot.getReference().delete();
+                        }
+                    });
+
+            // Delete document from "Pets" collection
+            db.collection("Pets")
+                    .whereEqualTo("name", pet.getName())
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            documentSnapshot.getReference().delete();
+                        }
+                    });
+
+            // Move pet details to "AdoptedPets" collection
+            HashMap<String, Object> petMap = new HashMap<>();
+            petMap.put("name", pet.getName());
+            petMap.put("breed", pet.getBreed());
+            petMap.put("previous owner", pet.getOwner());
+            petMap.put("description", pet.getDescription());
+            petMap.put("image", pet.getImageUrl());
+            petMap.put("new owner", pet.getAdopt_requets());
+            db.collection("AdoptedPets").document(pet.getName()).set(petMap);
+
+            // Remove pet from the list
             petList.remove(position);
+
+            // Show success message
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+            builder1.setTitle("Adopt Request");
+            builder1.setMessage("You have successfully  approved to adopted this pet!");
+            builder1.setPositiveButton("Ok", (dialog1, which1) -> dialog1.dismiss());
+            builder1.show();
+
+            // Notify adapter about the change in data set
             adapter.notifyDataSetChanged();
         }).setNegativeButton("No", (dialog, which) -> dialog.dismiss());
         builder.show();
-
     }
 
     @Override
