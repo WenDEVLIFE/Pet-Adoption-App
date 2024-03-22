@@ -19,6 +19,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -44,6 +47,7 @@ public class Signin_Activity extends AppCompatActivity {
      EditText username, email, name, password, confirm_password;
 
      // FireStore Instance
+     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,14 +111,13 @@ public class Signin_Activity extends AppCompatActivity {
                                 String code = generateCode();
                             try{
                                 // Then call the sign up method to add the user to the database
-                                SendMail(Email, code);
-                                DoneLoading(UserName, Email, Name, Password, code);
 
                             }catch (Exception e) {
                                 e.printStackTrace();
                             }
 
 
+                            CheckUser(Email, UserName, Name, Password, code);
 
                             } else {
 
@@ -217,6 +220,26 @@ public class Signin_Activity extends AppCompatActivity {
         intent.putExtra("Password", Password);
         intent.putExtra("Code"  , code);
         startActivity(intent);
+    }
+
+    public void CheckUser(String Email, String UserName, String Name, String Password, String code){
+      db.collection("users").whereEqualTo("Username" ,  UserName).get().addOnSuccessListener(queryDocumentSnapshots -> {
+          if(queryDocumentSnapshots.isEmpty()){
+              SendMail(Email, code);
+              DoneLoading(UserName, Email, Name, Password, code);
+
+          }
+          else{
+              // Alert Errors
+              AlertDialog alertDialog = new AlertDialog.Builder(Signin_Activity.this).create();
+              alertDialog.setTitle("Alert");
+              alertDialog.setMessage("Username already exists");
+              alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                      (dialog, which) -> dialog.dismiss());
+              alertDialog.show();
+          }
+      });
+
     }
 
 }
