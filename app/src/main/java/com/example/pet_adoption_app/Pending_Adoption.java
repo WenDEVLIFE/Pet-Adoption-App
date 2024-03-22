@@ -12,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import adapter.Pending_PetsAdapter;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Pending_Adoption#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Pending_Adoption extends Fragment {
+public class Pending_Adoption extends Fragment implements Pending_PetsAdapter.onCancelListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -105,4 +107,8 @@ public class Pending_Adoption extends Fragment {
         replaceFragement(fragment);
     }
 
+    @Override
+    public void onCancel(int position) {
+
+    }
 }
