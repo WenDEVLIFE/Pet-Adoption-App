@@ -113,11 +113,51 @@ public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapt
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
+                // This will search the pet by name
+                String userInput = query.toLowerCase();
+
+                // filtered the value
+                List <PetsPending > newList = new ArrayList<>();
+
+                // For pet and petList
+                for (PetsPending pet : petList) {
+
+                    // then if the pet name contains the user input
+                    if (pet.getName().toLowerCase().contains(userInput)) {
+
+                        // then add the pet to the new list
+                        newList.add(pet);
+                    }
+                }
+
+                // then search the pet
+                adapter.searchPets(newList);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
+                // This will search the pet by name
+                String userInput = newText.toLowerCase();
+
+                // filtered the value
+                List <PetsPending > newList = new ArrayList<>();
+
+                // For pet and petList
+                for (PetsPending pet : petList) {
+
+                    // then if the pet name contains the user input
+                    if (pet.getName().toLowerCase().contains(userInput)) {
+
+                        // then add the pet to the new list
+                        newList.add(pet);
+                    }
+                }
+
+                // then search the pet
+                adapter.searchPets(newList);
                 return true;
             }
         });

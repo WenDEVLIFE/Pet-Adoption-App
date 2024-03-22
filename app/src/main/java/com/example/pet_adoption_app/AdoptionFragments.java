@@ -128,26 +128,50 @@ public class AdoptionFragments extends Fragment implements PetAdapter.onAdoptLis
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
+                // This will search the pet by name
                 String userInput = query.toLowerCase();
+
+                // filtered the value
                 List<Pets> newList = new ArrayList<>();
+
+                // This will search the pet by name
                 for (Pets pet : petList) {
+
+                    // then if the pet name contains the user input
                     if (pet.getName().toLowerCase().contains(userInput)) {
+
+                        // then add the pet to the new list
                         newList.add(pet);
                     }
                 }
+
+                // then search the pet
                 adapter.searchPets(newList);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
+                // This will search the pet by name
                 String userInput = newText.toLowerCase();
+
+                // filtered the value
                 List<Pets> newList = new ArrayList<>();
+
+                // This will search the pet by name
                 for (Pets pet : petList) {
+
+                    // then if the pet name contains the user input
                     if (pet.getName().toLowerCase().contains(userInput)) {
+
+                        // then add the pet to the new list
                         newList.add(pet);
                     }
                 }
+
+                // then search the pet
                 adapter.searchPets(newList);
                 return  true;
             }

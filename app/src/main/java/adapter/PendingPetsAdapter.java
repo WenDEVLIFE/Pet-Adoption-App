@@ -29,6 +29,11 @@ public class PendingPetsAdapter extends RecyclerView.Adapter<PendingPetsAdapter.
         this.petList = petList;
     }
 
+    public void searchPets(List<PetsPending> newList) {
+        petList = newList;
+        notifyDataSetChanged();
+    }
+
     public interface onAdoptListener {
         void onAdopt(int position);
     }
