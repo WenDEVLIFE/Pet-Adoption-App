@@ -8,7 +8,7 @@
         android:background="@drawable/background_gradient">
 
     <TextView
-            android:text="TextView"
+            android:text="  "
             android:layout_width="405dp"
             android:layout_height="730dp"
             android:id="@+id/textView14"
@@ -87,7 +87,7 @@
         <TextView
                 android:text="New Owner:"
                 android:textColor="@color/black"
-                android:layout_width="@dimen/_130sdp"
+                android:layout_width="@dimen/_90sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:textSize="@dimen/_17sdp"
                 android:textStyle="bold"
@@ -110,8 +110,8 @@
                 app:layout_constraintStart_toEndOf="@+id/adoptreq"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description"
-                android:layout_marginTop="8dp"
-                app:layout_constraintHorizontal_bias="0.319" />
+                android:layout_marginTop="12dp"
+                app:layout_constraintHorizontal_bias="0.0" />
 
         <TextView
                 android:text="Pet Breed:
@@ -182,7 +182,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/dogowner"
-                android:layout_marginEnd="16dp" />
+                android:layout_marginEnd="36dp" />
 
         <Button
                 android:text="Delete"
@@ -190,7 +190,7 @@
                 android:textColor="@color/white"
                 android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:id="@+id/cancelbutton"
+                android:id="@+id/deletebutton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adoptowner"

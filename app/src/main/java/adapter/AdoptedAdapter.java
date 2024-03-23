@@ -48,7 +48,7 @@ public class AdoptedAdapter extends RecyclerView.Adapter<AdoptedAdapter.PetViewH
     @NonNull
     @Override
     public PetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adoptedlist, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adoptlist, parent, false);
         return new PetViewHolder(view);
     }
 
@@ -90,13 +90,12 @@ public class AdoptedAdapter extends RecyclerView.Adapter<AdoptedAdapter.PetViewH
             description.setEnabled(false);
             Adoptrequest = itemView.findViewById(R.id.adoptowner);
             dogImage = itemView.findViewById(R.id.dogimage); // Add this line
-            Cancel = itemView.findViewById(R.id.cancelbutton);
+            Cancel = itemView.findViewById(R.id.deletebutton);
 
 
 
 
             // Set click listener for cancel button
-
             Cancel.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION && onCancelListener != null) {
