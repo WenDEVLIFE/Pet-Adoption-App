@@ -25,6 +25,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,16 +178,38 @@ public class Fragment_Adopted_pets extends Fragment implements AdoptedAdapter.on
                             .get()
                             .addOnSuccessListener(queryDocumentSnapshots -> {
                                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    // Get the image URL from the document
+                                    String imageUrl = documentSnapshot.getString("image");
+
+                                    // Create a storage reference from our app
+                                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                                    StorageReference storageRef = storage.getReferenceFromUrl(imageUrl);
+
+                                    // Delete the file
+                                    storageRef.delete().addOnSuccessListener(aVoid -> {
+                                        // File deleted successfully
+                                        Log.d(TAG, "onSuccess: deleted file");
+                                    }).addOnFailureListener(exception -> {
+                                        // Uh-oh, an error occurred!
+                                        Log.d(TAG, "onFailure: did not delete file");
+                                    });
+
                                     documentSnapshot.getReference().delete();
                                     petList.remove(position);
                                     adapter.notifyDataSetChanged();
+
+                                    AlertDialog dialog1 = new AlertDialog.Builder(getContext())
+                                            .setTitle("Adoption Deleted")
+                                            .setMessage("Adoption has been deleted successfully")
+                                            .setPositiveButton("Ok", null)
+                                            .create();
+                                    dialog1.show();
                                 }
                             });
                 })
                 .setNegativeButton("No", null)
                 .create();
         dialog.show();
-
     }
 
     private void LoadYourPets() {

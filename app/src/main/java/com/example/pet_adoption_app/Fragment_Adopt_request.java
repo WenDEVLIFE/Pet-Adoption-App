@@ -239,7 +239,7 @@ public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapt
             petMap.put("description", pet.getDescription());
             petMap.put("image", pet.getImageUrl());
             petMap.put("new owner", pet.getAdopt_requets());
-            db.collection("AdoptedPets").document(pet.getName()).set(petMap);
+            db.collection("AdoptedPets").document().set(petMap);
 
             // Remove pet from the list
             petList.remove(position);
