@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -275,10 +276,14 @@ public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapt
             petList.remove(position);
 
             // Notify adapter about the change in data set
-            HashMap <String, Object> Notifications = new HashMap<>();
-            Notifications.put("Notifications details", "The adoption request for " + pet.getName() + " has been cancelled");
-            Notifications.put("name", pet.getAdopt_requets());
-            db.collection("Notifications").document().set(Notifications);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                LocalDate date = LocalDate.now();
+                HashMap <String, Object> Notifications = new HashMap<>();
+                Notifications.put("Notifications details", "The adoption request for " + pet.getName() + " has been cancelled");
+                Notifications.put("name", pet.getAdopt_requets());
+                Notifications.put("date", date);
+                db.collection("Notifications").document().set(Notifications);
+            }
 
             adapter.notifyDataSetChanged();
         }).setNegativeButton("No", (dialog, which) -> dialog.dismiss());

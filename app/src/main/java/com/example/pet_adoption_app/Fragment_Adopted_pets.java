@@ -28,6 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -246,10 +247,16 @@ public class Fragment_Adopted_pets extends Fragment implements AdoptedAdapter.on
                                             .create();
                                     dialog1.show();
 
-                                    HashMap<String, Object> transaction = new HashMap<>();
-                                    transaction.put("Transaction", "The adoption request for " + pet.getName() + " has been cancelled");
-                                    transaction.put("name", pet.getOwner());
-                                    db.collection("Transaction").document().set(transaction);
+
+                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                        HashMap<String, Object> transaction = new HashMap<>();
+                                        transaction.put("Transaction", "The adoption request for " + pet.getName() + " has been cancelled");
+                                        LocalDate date = LocalDate.now();
+                                        transaction.put("name", pet.getOwner());
+                                        transaction.put("date", date.toString());
+                                        db.collection("Transaction").document().set(transaction);
+                                    }
+
                                 }
                             });
                 })

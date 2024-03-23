@@ -35,6 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -247,10 +248,14 @@ public class AdoptionFragments extends Fragment implements PetAdapter.onAdoptLis
 
                     db.collection("PendingAdoption").document().set(data);
 
-                    HashMap <String, Object> Notifications = new HashMap<>();
-                    Notifications.put("Notifications details", "The person has pending request " + pet.getName());
-                    Notifications.put("name", pet.getOwner());
-                    db.collection("Notifications").document().set(Notifications);
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        LocalDate date = LocalDate.now();
+                        HashMap <String, Object> Notifications = new HashMap<>();
+                        Notifications.put("Notifications details", "The person has pending request " + pet.getName());
+                        Notifications.put("name", pet.getOwner());
+                        Notifications.put("date", date.toString());
+                        db.collection("Notifications").document().set(Notifications);
+                    }
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
                     builder1.setTitle("Adopt");
                     builder1.setMessage("You have successfully requested to adopt " + pet.getName());
