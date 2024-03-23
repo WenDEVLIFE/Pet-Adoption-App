@@ -48,7 +48,7 @@ public class AdoptedAdapter extends RecyclerView.Adapter<AdoptedAdapter.PetViewH
     @NonNull
     @Override
     public PetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pendinglist, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adoptedlist, parent, false);
         return new PetViewHolder(view);
     }
 
