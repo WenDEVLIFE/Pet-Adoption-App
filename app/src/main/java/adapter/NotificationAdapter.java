@@ -18,13 +18,13 @@ import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.Notification_ViewHolder> {
 
-    private List<NotificationsInfo> petList;
+    private List<NotificationsInfo> notflist;
 
     private onCancelListener onCancelListener;
 
 
-    public NotificationAdapter(List<NotificationsInfo> petList) {
-        this.petList = petList;
+    public NotificationAdapter(List<NotificationsInfo> notflist) {
+        this.notflist = notflist;
     }
 
 
@@ -46,13 +46,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull Notification_ViewHolder holder, int position) {
-        NotificationsInfo info = petList.get(position);
+        NotificationsInfo info = notflist.get(position);
         holder.bind(info);
     }
 
     @Override
     public int getItemCount() {
-        return petList.size();
+        return notflist.size();
     }
 
     // ViewHolder class

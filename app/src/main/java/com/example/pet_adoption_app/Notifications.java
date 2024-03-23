@@ -1,15 +1,36 @@
 package com.example.pet_adoption_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import adapter.NotificationAdapter;
+import adapter.NotificationsInfo;
+import adapter.PetAdapter;
+import adapter.Pets;
+import adapter.PetsPending;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +47,16 @@ public class Notifications extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    RecyclerView recyclerView;
+
+    private List<NotificationsInfo> notflist;
+
+    private NotificationAdapter adapter;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    String username, name;
 
     public Notifications() {
         // Required empty public constructor
@@ -55,12 +86,22 @@ public class Notifications extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if (getArguments() != null) {
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+
+        }
+
         // Inflate the layout for this fragment
         View rootview =   inflater.inflate(R.layout.fragment_notifications, container, false);
 
@@ -70,7 +111,53 @@ public class Notifications extends Fragment {
             // This will go back to home fragments
             replaceFragement(new HomeFragment());
         });
+
+        // our recycler view code here
+        recyclerView = rootview.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        notflist = new ArrayList<>();
+        adapter = new NotificationAdapter(notflist);
+        recyclerView.setAdapter(adapter);
+
+        LoadNotifications();
+
+
     return  rootview;
+    }
+
+    private void LoadNotifications() {
+
+        db.collection("Notifications").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                notflist.clear();
+                for (QueryDocumentSnapshot doc : value) {
+
+                    // Get the pet name
+                    String nofname = doc.getString("name");
+
+                    // Check if the pet name is equal to the pet name in the database
+                    if (nofname != null && nofname.equals(name)) {
+
+                        // Get the notification details
+                        String nofitifcation = doc.getString("Notifications details");
+                        NotificationsInfo info = new NotificationsInfo(nofitifcation);
+                        notflist.add(info);
+
+                    }
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+        });
+
+
     }
 
     private void replaceFragement(Fragment fragment) {
@@ -81,4 +168,5 @@ public class Notifications extends Fragment {
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
+
 }

@@ -9,7 +9,7 @@
 
     <TextView
             android:text="  "
-            android:layout_width="407dp"
+            android:layout_width="404dp"
             android:layout_height="117dp"
             android:id="@+id/textView14"
             app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +23,8 @@
             app:layout_constraintEnd_toEndOf="@+id/textView14"
             app:layout_constraintStart_toStartOf="@+id/textView14"
             app:layout_constraintTop_toTopOf="@+id/textView14"
-            android:layout_marginTop="4dp"
-            app:layout_constraintHorizontal_bias="0.47">
+            android:layout_marginTop="12dp"
+            app:layout_constraintHorizontal_bias="0.466">
 
         <EditText
                 android:layout_width="@dimen/_190sdp"
