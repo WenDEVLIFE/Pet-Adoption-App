@@ -29,6 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import adapter.AdoptedAdapter;
@@ -204,6 +205,11 @@ public class Fragment_Adopted_pets extends Fragment implements AdoptedAdapter.on
                                             .setPositiveButton("Ok", null)
                                             .create();
                                     dialog1.show();
+
+                                    HashMap<String, Object> transaction = new HashMap<>();
+                                    transaction.put("Transaction", "The adoption request for " + pet.getName() + " has been cancelled");
+                                    transaction.put("name", pet.getOwner());
+                                    db.collection("Transaction").document().set(transaction);
                                 }
                             });
                 })

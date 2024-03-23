@@ -251,6 +251,12 @@ public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapt
             builder1.setPositiveButton("Ok", (dialog1, which1) -> dialog1.dismiss());
             builder1.show();
 
+            // This will notify the user that the adoption request has been approved
+            HashMap <String, Object> Notifications = new HashMap<>();
+            Notifications.put("Notifications details", "The adoption request for " + pet.getName() + " has been approved");
+            Notifications.put("name", pet.getAdopt_requets());
+            db.collection("Notifications").document().set(Notifications);
+
             // Notify adapter about the change in data set
             adapter.notifyDataSetChanged();
         }).setNegativeButton("No", (dialog, which) -> dialog.dismiss());
@@ -267,6 +273,8 @@ public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapt
             PetsPending pet = petList.get(position);
             db.collection("PendingAdoption").document(pet.getName()).delete();
             petList.remove(position);
+
+            // Notify adapter about the change in data set
             HashMap <String, Object> Notifications = new HashMap<>();
             Notifications.put("Notifications details", "The adoption request for " + pet.getName() + " has been cancelled");
             Notifications.put("name", pet.getAdopt_requets());
