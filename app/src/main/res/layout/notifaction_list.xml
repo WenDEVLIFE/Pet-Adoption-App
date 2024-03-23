@@ -9,22 +9,49 @@
 
     <TextView
             android:text="  "
-            android:layout_width="416dp"
-            android:layout_height="188dp"
+            android:layout_width="407dp"
+            android:layout_height="117dp"
             android:id="@+id/textView14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="399dp"
-            android:layout_height="129dp"
+            android:layout_width="@dimen/_300sdp"
+            android:layout_height="@dimen/_75sdp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/textView14"
             app:layout_constraintStart_toStartOf="@+id/textView14"
             app:layout_constraintTop_toTopOf="@+id/textView14"
             android:layout_marginTop="4dp"
             app:layout_constraintHorizontal_bias="0.47">
+
+        <EditText
+                android:layout_width="@dimen/_190sdp"
+                android:layout_height="@dimen/_71sdp"
+                android:inputType="textMultiLine"
+                android:background="@color/white"
+                android:text="test"
+                android:ems="10"
+                android:textColor="@color/black"
+                android:id="@+id/description"
+                android:fontFamily="sans-serif-condensed"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="7dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintVertical_bias="0.518" />
+
+        <ImageView
+                android:layout_width="@dimen/_96sdp"
+                android:layout_height="@dimen/_70sdp"
+                app:srcCompat="@drawable/petlogo"
+                android:id="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
