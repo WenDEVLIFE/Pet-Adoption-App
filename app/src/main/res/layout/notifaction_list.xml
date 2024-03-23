@@ -34,7 +34,7 @@
                 android:text="test"
                 android:ems="10"
                 android:textColor="@color/black"
-                android:id="@+id/description"
+                android:id="@+id/notification"
                 android:fontFamily="sans-serif-condensed"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="7dp"
