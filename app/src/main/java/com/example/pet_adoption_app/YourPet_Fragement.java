@@ -6,18 +6,28 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import adapter.PetAdapter;
+import adapter.Pets;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link YourPet_Fragement#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class YourPet_Fragement extends Fragment {
+public class YourPet_Fragement extends Fragment implements PetAdapter.OnAdoptListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +39,14 @@ public class YourPet_Fragement extends Fragment {
     private String mParam2;
 
      String username, name;
+
+    RecyclerView recyclerView;
+
+    private List<Pets> petList;
+
+    private PetAdapter adapter;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public YourPet_Fragement() {
         // Required empty public constructor
@@ -97,6 +115,15 @@ public class YourPet_Fragement extends Fragment {
         btnback.setOnClickListener(v ->
                 goHomeFragmenet());
 
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        petList = new ArrayList<>();
+        adapter = new PetAdapter(petList);
+        recyclerView.setAdapter(adapter);
+
+        // Ensure MainActivity implements OnDeleteClickListener
+        adapter.setOnAdoptListener(this);
+        LoadPets();
 
         return rootView;
     }
