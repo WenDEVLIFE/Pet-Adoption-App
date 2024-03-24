@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -23,12 +24,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import adapter.PetAdapter;
 import adapter.Pets;
+import adapter.PetsPending;
 import adapter.YourPetAdapter;
 
 /**
@@ -228,6 +234,56 @@ public class YourPet_Fragement extends Fragment implements YourPetAdapter.onCanc
     // Implement onCancel method
     @Override
     public void onCancel(int position) {
+     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete Pet");
+        builder.setMessage("Are you sure you want to delete this pet?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+
+            // Get the pet at the position
+            Pets pet = petList.get(position);
+            db.collection("Pets")
+                    .whereEqualTo("name", pet.getName())
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+
+                        // Loop through the documents
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            // Get the image URL from the document
+                            String imageUrl = documentSnapshot.getString("image");
+
+                            // Create a storage reference from our app
+                            FirebaseStorage storage = FirebaseStorage.getInstance();
+                            StorageReference storageRef = storage.getReferenceFromUrl(imageUrl);
+
+                            // Delete the file
+                            storageRef.delete().addOnSuccessListener(aVoid -> {
+                                // File deleted successfully
+                                Log.d(TAG, "onSuccess: deleted file");
+                            }).addOnFailureListener(exception -> {
+                                // Uh-oh, an error occurred!
+                                Log.d(TAG, "onFailure: did not delete file");
+                            });
+
+                            documentSnapshot.getReference().delete();
+                            petList.remove(position);
+                            adapter.notifyDataSetChanged();
+
+                            AlertDialog dialog1 = new AlertDialog.Builder(getContext())
+                                    .setTitle("Adoption Deleted")
+                                    .setMessage("Adoption has been deleted successfully")
+                                    .setPositiveButton("Ok", null)
+                                    .create();
+                            dialog1.show();
+
+
+
+                        }
+                    });
+        });
+        builder.setNegativeButton("No", (dialog, which) -> {
+            // Do nothing
+        });
+        builder.show();
 
     }
 }
