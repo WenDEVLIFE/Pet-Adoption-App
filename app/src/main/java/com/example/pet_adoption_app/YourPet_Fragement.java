@@ -1,5 +1,7 @@
 package com.example.pet_adoption_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
@@ -9,25 +11,32 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import adapter.PetAdapter;
 import adapter.Pets;
+import adapter.YourPetAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link YourPet_Fragement#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class YourPet_Fragement extends Fragment implements PetAdapter.OnAdoptListener {
+public class YourPet_Fragement extends Fragment implements YourPetAdapter.onCancelListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,7 +53,7 @@ public class YourPet_Fragement extends Fragment implements PetAdapter.OnAdoptLis
 
     private List<Pets> petList;
 
-    private PetAdapter adapter;
+    private YourPetAdapter adapter;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -118,11 +127,11 @@ public class YourPet_Fragement extends Fragment implements PetAdapter.OnAdoptLis
         recyclerView = rootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         petList = new ArrayList<>();
-        adapter = new PetAdapter(petList);
+        adapter = new YourPetAdapter(petList);
         recyclerView.setAdapter(adapter);
 
         // Ensure MainActivity implements OnDeleteClickListener
-        adapter.setOnAdoptListener(this);
+        adapter.setOnCancelListener(this);
         LoadPets();
 
         return rootView;
@@ -144,5 +153,45 @@ public class YourPet_Fragement extends Fragment implements PetAdapter.OnAdoptLis
         bundle.putString("name", name);
         fragment.setArguments(bundle);
         replaceFragement(fragment);
+    }
+
+    // Load pets from Firestore
+    public void LoadPets() {
+        // Retrieve the data from Firestore
+        db.collection("Pets").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                petList.clear();
+                for (QueryDocumentSnapshot doc : value) {
+
+                    // Check if the owner is the same as the current user
+                    String owner = doc.getString("owner");
+
+                    // If the owner is the same as the current user
+                    if (owner.equals(name)) {
+
+                        // Get the data from Firestore
+                        String name = doc.getString("name");
+                        String breed = doc.getString("breed");
+                        String description = doc.getString("description");
+                        String image = doc.getString("image");
+                        petList.add(new Pets(name, breed, owner, description, image));
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    // Implement onCancel method
+    @Override
+    public void onCancel(int position) {
+
     }
 }
