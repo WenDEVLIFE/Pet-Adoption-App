@@ -110,11 +110,47 @@ public class YourPet_Fragement extends Fragment implements YourPetAdapter.onCanc
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
+                // Convert the user input to lowercase
+                String userInput = query.toLowerCase();
+
+                // Create a new list
+                List<Pets> newList = new ArrayList<>();
+                for (Pets pet : petList) {
+
+                    // Check if the pet name or breed contains the user input
+                    if (pet.getName().toLowerCase().contains(userInput) || pet.getBreed().toLowerCase().contains(userInput)) {
+
+                       // Add the pet to the new list
+                        newList.add(pet);
+                    }
+                }
+
+                // Call the searchPets method
+                adapter.searchPets(newList);
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
+                // Convert the user input to lowercase
+                String userInput = newText.toLowerCase();
+
+                // Create a new list
+                List<Pets> newList = new ArrayList<>();
+
+                // Loop through the petList
+                for (Pets pet : petList) {
+                    if (pet.getName().toLowerCase().contains(userInput) || pet.getBreed().toLowerCase().contains(userInput)) {
+                        // Add the pet to the new list
+                        newList.add(pet);
+                    }
+                }
+
+                // Call the searchPets method
+                adapter.searchPets(newList);
                 return true;
             }
         });
