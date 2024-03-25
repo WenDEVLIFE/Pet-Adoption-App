@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     CheckBox checkBox;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +61,15 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Signing up...");
+
+
         // Sign up button
         Sign_up = findViewById(R.id.button);
         Sign_up.setOnClickListener(v ->{
+
 
             // This will start the intent
             String username = usernamefield.getText().toString();
@@ -74,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         (dialog, which) -> dialog.dismiss());
                 alertDialog.show();
+                progressDialog.dismiss();
             } else {
                 // Check if the username and password fields are not empty
 
@@ -133,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
 
                                 // close the current intent
                                 finish();
-
+                                // Dismiss the progress dialog
+                                progressDialog.dismiss();
                                 // This will alert the login success
                                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
 

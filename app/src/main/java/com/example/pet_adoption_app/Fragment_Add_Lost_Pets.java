@@ -137,7 +137,8 @@ public class Fragment_Add_Lost_Pets extends Fragment {
         // Get the add button and set the on click listener
         Button btnadd = rootview.findViewById(R.id.AddButton);
         btnadd.setOnClickListener(v->{
-          String DogName = dogname.getText().toString();
+
+            String DogName = dogname.getText().toString();
         String Breed = DogBreed.getText().toString();
         String Owner = DogOwner.getText().toString();
         String Description = descriptions.getText().toString();
