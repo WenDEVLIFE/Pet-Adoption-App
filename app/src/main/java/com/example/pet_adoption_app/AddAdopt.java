@@ -3,6 +3,7 @@ package com.example.pet_adoption_app;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -55,6 +56,8 @@ public class AddAdopt extends Fragment {
     EditText DogBreed;
     EditText DogOwner;
     EditText descriptions;
+
+    ProgressDialog progressDialog;
 
     public AddAdopt() {
         // Required empty public constructor
@@ -205,6 +208,9 @@ public class AddAdopt extends Fragment {
         // Create a storage reference
         StorageReference storageRef = FirebaseStorage.getInstance().getReference("uploads");
 
+        progressDialog.show();
+
+
         // Create a reference to the file to be uploaded
         StorageReference fileReference = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(dogImageUri));
 
@@ -230,10 +236,22 @@ public class AddAdopt extends Fragment {
 
                 // Add the document to the Firestore collection
                 db.collection("Pets").add(dog)
-                        .addOnSuccessListener(documentReference -> Toast.makeText(getActivity(), "Dog added", Toast.LENGTH_SHORT).show())
-                        .addOnFailureListener(e -> Toast.makeText(getActivity(), "Error adding dog", Toast.LENGTH_SHORT).show());
+                        .addOnSuccessListener(documentReference -> {
+                            Toast.makeText(getActivity(), "Dog added", Toast.LENGTH_SHORT).show();
+                            // Hide the ProgressDialog
+                            progressDialog.dismiss();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(getActivity(), "Error adding dog", Toast.LENGTH_SHORT).show();
+                            // Hide the ProgressDialog
+                            progressDialog.dismiss();
+                        });
             });
-        }).addOnFailureListener(e -> Toast.makeText(getActivity(), "Upload failed", Toast.LENGTH_SHORT).show());
+        }).addOnFailureListener(e -> {
+            Toast.makeText(getActivity(), "Upload failed", Toast.LENGTH_SHORT).show();
+            // Hide the ProgressDialog
+            progressDialog.dismiss();
+        });
     }
 
     private String getFileExtension(Uri uri) {
