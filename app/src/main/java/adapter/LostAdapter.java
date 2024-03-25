@@ -18,17 +18,17 @@ import java.util.List;
 
 public class LostAdapter extends RecyclerView.Adapter<LostAdapter.PetViewHolder> {
 
-    private List<PetsPending> petList;
+    private List<Pets> petList;
 
     private onCancelListener onCancelListener;
 
 
 
-    public LostAdapter(List<PetsPending> petList) {
+    public LostAdapter(List<Pets> petList) {
         this.petList = petList;
     }
 
-    public void searchPets(List<PetsPending> newList) {
+    public void searchPets(List<Pets> newList) {
         petList = newList;
         notifyDataSetChanged();
     }
@@ -48,13 +48,13 @@ public class LostAdapter extends RecyclerView.Adapter<LostAdapter.PetViewHolder>
     @NonNull
     @Override
     public PetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adoptlist, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lostpetslist, parent, false);
         return new PetViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PetViewHolder holder, int position) {
-        PetsPending info = petList.get(position);
+        Pets info = petList.get(position);
         holder.bind(info);
     }
 
@@ -73,9 +73,7 @@ public class LostAdapter extends RecyclerView.Adapter<LostAdapter.PetViewHolder>
 
         private final EditText description;
 
-        private final TextView Adoptrequest;
-
-        private final Button Cancel;
+        private final Button report;
 
         private final ImageView dogImage; // Add this line
 
@@ -88,15 +86,14 @@ public class LostAdapter extends RecyclerView.Adapter<LostAdapter.PetViewHolder>
             dogowner = itemView.findViewById(R.id.dogowner);
             description = itemView.findViewById(R.id.description);
             description.setEnabled(false);
-            Adoptrequest = itemView.findViewById(R.id.adoptowner);
             dogImage = itemView.findViewById(R.id.dogimage); // Add this line
-            Cancel = itemView.findViewById(R.id.deletebutton);
+            report = itemView.findViewById(R.id.reportbutton);
 
 
 
 
             // Set click listener for cancel button
-            Cancel.setOnClickListener(v -> {
+            report.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION && onCancelListener != null) {
                     onCancelListener.onCancel(position);
@@ -106,13 +103,12 @@ public class LostAdapter extends RecyclerView.Adapter<LostAdapter.PetViewHolder>
 
         }
 
-        public void bind(PetsPending info) {
+        public void bind(Pets info) {
             // Bind data to views
             dogname.setText(info.getDogname());
             dogbreed.setText(info.getBreed());
             dogowner.setText(info.getOwner());
             description.setText(info.getDescription());
-            Adoptrequest.setText(info.getAdopt_requets());
 
 
             // Use Glide to load the image from the URL into the ImageView

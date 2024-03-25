@@ -6,6 +6,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +15,21 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import adapter.LostAdapter;
+import adapter.PetAdapter;
+import adapter.Pets;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Fragment_Lost_Pets#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Lost_Pets extends Fragment {
+public class Fragment_Lost_Pets extends Fragment implements  LostAdapter.onCancelListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,6 +41,15 @@ public class Fragment_Lost_Pets extends Fragment {
     private String mParam2;
 
     String username, name;
+
+    RecyclerView recyclerView;
+
+    private List<Pets> petList;
+
+    private LostAdapter adapter;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     public Fragment_Lost_Pets() {
         // Required empty public constructor
@@ -110,6 +129,14 @@ public class Fragment_Lost_Pets extends Fragment {
         btnback.setOnClickListener(v ->
                 goHomeFragmenet());
 
+        recyclerView = rootview.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        petList = new ArrayList<>();
+        adapter = new LostAdapter(petList);
+        recyclerView.setAdapter(adapter);
+
+        // Ensure MainActivity implements OnDeleteClickListener
+        adapter.setOnCancelListener(this);
 
         return rootview;
 
@@ -131,5 +158,10 @@ public class Fragment_Lost_Pets extends Fragment {
         bundle.putString("name", name);
         fragment.setArguments(bundle);
         replaceFragement(fragment);
+    }
+
+    @Override
+    public void onCancel(int position) {
+
     }
 }
