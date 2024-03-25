@@ -255,6 +255,13 @@ public class AdoptionFragments extends Fragment implements PetAdapter.onAdoptLis
                         Notifications.put("name", pet.getOwner());
                         Notifications.put("date", date.toString());
                         db.collection("Notifications").document().set(Notifications);
+
+
+                        HashMap <String, Object> transactions = new HashMap<>();
+                        transactions.put("Transaction details", "You requested adopt a pet  " + pet.getName());
+                        transactions.put("name", name);
+                        transactions.put("date", date.toString());
+                        db.collection("Transactions").document().set(transactions);
                     }
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
                     builder1.setTitle("Adopt");
