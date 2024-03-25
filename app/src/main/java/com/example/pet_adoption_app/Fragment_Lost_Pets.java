@@ -236,5 +236,17 @@ public class Fragment_Lost_Pets extends Fragment implements  LostAdapter.onCance
     @Override
     public void onCancel(int position) {
 
+        // get the pet object from the list
+        Pets pet = petList.get(position);
+
+        // This will call the report fragment
+        ReportFragment fragment = new ReportFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        bundle.putString("name", name);
+        bundle.putString("petowner", pet.getOwner());
+        fragment.setArguments(bundle);
+        replaceFragement(fragment);
+
     }
 }

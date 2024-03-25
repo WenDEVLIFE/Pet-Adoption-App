@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
@@ -41,7 +43,7 @@ public class ReportFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    String username, name;
+    String username, name, owner;
 
     EditText email, phone, dogOwner, descriptions;
 
@@ -87,6 +89,7 @@ public class ReportFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
             username = getArguments().getString("username");
             name = getArguments().getString("name");
+            owner = getArguments().getString("petowner");
         }
     }
 
@@ -97,6 +100,7 @@ public class ReportFragment extends Fragment {
         if (getArguments() != null) {
             username = getArguments().getString("username");
             name = getArguments().getString("name");
+            owner = getArguments().getString("petowner");
         }
 
         // Inflate the layout for this fragment
@@ -121,12 +125,24 @@ public class ReportFragment extends Fragment {
         });
 
 
+        // our image button code here
+        ImageButton btnback = rootview.findViewById(R.id.buttonnback);
+        btnback.setOnClickListener(v->{
+            // This will go back to home fragments
+            HomeFragment homeFragment = new HomeFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            homeFragment.setArguments(bundle);
+        });
+
         // Get the add button and set the on click listener
         addReport = rootview.findViewById(R.id.AddButton);
         addReport.setOnClickListener(v->{
 
             // Get the values from the edit text fields
-            int phone_number = Integer.parseInt(phone.getText().toString());
+            long phone_number = Long.parseLong(phone.getText().toString());
+            String phone_number_string = Long.toString(phone_number);
             String email_address = email.getText().toString();
             String dog_owner = dogOwner.getText().toString();
             String description = descriptions.getText().toString();
@@ -138,9 +154,21 @@ public class ReportFragment extends Fragment {
             }
             else {
 
-                //  Call the InsertReport method
-                InsertReport(phone_number, email_address, dog_owner, description, imageUri);
+                // Check if the email address is valid
+             if(email_address.endsWith( "@gmail.com") || email_address.endsWith( "@yahoo.com") || email_address.endsWith( "@hotmail.com") || email_address.endsWith( "@outlook.com") || email_address.endsWith( "@aol.com") || email_address.endsWith( "@protonmail.com") || email_address.endsWith( "@zoho.com") || email_address.endsWith( "@icloud.com") || email_address.endsWith( "@yandex.com") || email_address.endsWith( "@mail.com") || email_address.endsWith( "@gmx.com") || email_address.endsWith( "@tutanota.com") || email_address.endsWith( "@mail.ru") || email_address.endsWith( "@inbox.lv") || email_address.endsWith( "@yopmail.com") || email_address.endsWith( "@mailinator.com") || email_address.endsWith( "@guerrillamail.com") || email_address.endsWith( "@10minutemail.com") || email_address.endsWith( "@temp-mail.org") || email_address.endsWith( "@maildrop.cc") || email_address.endsWith( "@mailnesia.com") || email_address.endsWith( "@mailinator2.com") || email_address.endsWith( "@mailinator.net") || email_address.endsWith( "@mailinator.org") || email_address.endsWith( "@sogetthis.com") || email_address.endsWith( "@mailinator.com") || email_address.endsWith( "@mailinator.co.uk") || email_address.endsWith( "@mailinator.co") || email_address.endsWith( "@mailinator.biz") || email_address.endsWith( "@mailinator.info") || email_address.endsWith( "@mailinator.jp") || email_address.endsWith( "@mailinator.us") || email_address.endsWith( "@mailinator.ca") || email_address.endsWith( "@mailinator.net") || email_address.endsWith( "@mailinator.org") || email_address.endsWith( "@mailinator.info") || email_address.endsWith( "@mailinator.jp") || email_address.endsWith( "@mailinator.us") || email_address.endsWith( "@mailinator.ca") || email_address.endsWith( "@mailinator.net") || email_address.endsWith( "@mailinator.org") || email_address.endsWith( "@mailinator.info") || email_address.endsWith( "@mailinator.jp") || email_address.endsWith( "@mailinator.us") || email_address.endsWith( "@mailinator.ca") || email_address.endsWith( "@mailinator.net") || email_address.endsWith( "@mailinator.org") || email_address.endsWith( "@mailinator.info") || email_address.endsWith( "@mailinator.jp") || email_address.endsWith( "@mailinator.us")) {
 
+                 // Check if the phone number is 10 digits
+                 if(phone_number_string.length() == 10) {
+
+                     // Call the insert report method
+                     InsertReport(phone_number, email_address, dog_owner, description, imageUri);
+                 }
+
+                } else{
+
+                    Toast.makeText(getContext(), "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+
+             }
 
             }
 
@@ -151,7 +179,7 @@ public class ReportFragment extends Fragment {
     return rootview;
     }
 
-    private void InsertReport(int phoneNumber, String emailAddress, String dogOwner, String description, Uri imageUri) {
+    private void InsertReport(long phoneNumber, String emailAddress, String dogOwner, String description, Uri imageUri) {
 
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Uploading...");
@@ -184,6 +212,16 @@ public class ReportFragment extends Fragment {
                     email.setText("");
                     phone.setText("");
                     descriptions.setText("");
+
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        LocalDate date = LocalDate.now();
+                        HashMap <String, Object> Notifications = new HashMap<>();
+                        Notifications.put("Notifications details", "The " + name + " has been reported as lost. Please contact the owner if found.");
+                        Notifications.put("name", owner );
+                        Notifications.put("date", date.toString());
+                        db.collection("Notifications").document().set(Notifications);
+                    }
+
                 }).addOnFailureListener(e -> {
 
                     // Dismiss the progress dialog
