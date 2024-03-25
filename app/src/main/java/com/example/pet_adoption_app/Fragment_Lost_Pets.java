@@ -1,5 +1,7 @@
 package com.example.pet_adoption_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
@@ -9,13 +11,19 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,11 +111,46 @@ public class Fragment_Lost_Pets extends Fragment implements  LostAdapter.onCance
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
+                // This will filter the list as the user types
+                String userInput = query.toLowerCase();
+
+                // Create a new list to store the filtered data
+                List<Pets> newList = new ArrayList<>();
+
+                // Loop through the list of pets and add the ones that match the search query
+                for (Pets pet : petList) {
+
+                    // Check if the pet name or breed contains the search query
+                    if (pet.getName().toLowerCase().contains(userInput) || pet.getBreed().toLowerCase().contains(userInput)) {
+                        newList.add(pet);
+                    }
+                }
+
+                // Update the adapter with the new list
+                adapter.searchPets(newList);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                // This will filter the list as the user types
+                String userInput = newText.toLowerCase();
+
+                // Create a new list to store the filtered data
+                List<Pets> newList = new ArrayList<>();
+
+                // Loop through the list of pets and add the ones that match the search query
+                for (Pets pet : petList) {
+
+                    // Check if the pet name or breed contains the search query
+                    if (pet.getName().toLowerCase().contains(userInput) || pet.getBreed().toLowerCase().contains(userInput)) {
+                        newList.add(pet);
+                    }
+                }
+
+                // Update the adapter with the new list
+                adapter.searchPets(newList);
                 return true;
             }
         });
@@ -115,6 +158,8 @@ public class Fragment_Lost_Pets extends Fragment implements  LostAdapter.onCance
         // This button serves as a floating action button to add lost pets
         FloatingActionButton buttonAdd = rootview.findViewById(R.id.floatingActionButton);
         buttonAdd.setOnClickListener(v->{
+
+            // Throw the values on the next fragment
             Fragment_Add_Lost_Pets fragment = new Fragment_Add_Lost_Pets();
             Bundle bundle = new Bundle();
             bundle.putString("username", username);
@@ -137,11 +182,39 @@ public class Fragment_Lost_Pets extends Fragment implements  LostAdapter.onCance
 
         // Ensure MainActivity implements OnDeleteClickListener
         adapter.setOnCancelListener(this);
+        LoadLostPets();
 
         return rootview;
 
     }
 
+    private void LoadLostPets() {
+        // Retrieve the data from Firestore
+        db.collection("LostPets").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                petList.clear();
+                for (QueryDocumentSnapshot doc : value) {
+                    if (doc.get("name") != null) {
+                        String name = doc.getString("name");
+                        String breed = doc.getString("breed");
+                        String description = doc.getString("description");
+                        String owner = doc.getString("owner");
+                        String image = doc.getString("image");
+                        petList.add(new Pets(name, breed, owner, description, image));
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+    }
     private void replaceFragement(Fragment fragment) {
 
         // Call the fragment manager and begin the transaction to replace the fragment
