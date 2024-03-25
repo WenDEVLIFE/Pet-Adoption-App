@@ -1,8 +1,11 @@
 package com.example.pet_adoption_app;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.os.Bundle;
+import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -61,10 +64,6 @@ public class FragementController extends AppCompatActivity {
                 fragment.setArguments(bundle);
                 replaceFragement(fragment);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Home");
-                builder.setMessage("Home Fragment");
-                builder.show();
             }
 
             // This will go to Notification Fragements
@@ -97,10 +96,6 @@ public class FragementController extends AppCompatActivity {
 
                 // Step 5: Use the FragmentManager to start the fragment
                 replaceFragement(fragment);
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Adopt Pet");
-                builder.setMessage("Adopt Pet Fragment");
-                builder.show();
             }
 
             else if(item.getItemId() == R.id.lostpet){
@@ -181,6 +176,5 @@ public class FragementController extends AppCompatActivity {
         fragment.setArguments(bundle);
         replaceFragement(fragment);
     }
-
 
 }

@@ -96,7 +96,13 @@ public class Fragment_Lost_Pets extends Fragment {
         // This button serves as a floating action button to add lost pets
         FloatingActionButton buttonAdd = rootview.findViewById(R.id.floatingActionButton);
         buttonAdd.setOnClickListener(v->{
-            replaceFragement(new Fragment_Add_Lost_Pets());
+            Fragment_Add_Lost_Pets fragment = new Fragment_Add_Lost_Pets();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
+
         });
 
         // this for button back image button
