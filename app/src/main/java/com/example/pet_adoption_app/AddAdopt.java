@@ -98,7 +98,8 @@ public class AddAdopt extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Uploading...");
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_add_adopt, container, false);
 
@@ -208,11 +209,11 @@ public class AddAdopt extends Fragment {
         // Create a storage reference
         StorageReference storageRef = FirebaseStorage.getInstance().getReference("uploads");
 
-        progressDialog.show();
-
-
         // Create a reference to the file to be uploaded
         StorageReference fileReference = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(dogImageUri));
+
+        // Show the ProgressDialog
+        progressDialog.show();
 
         // Upload the file to Firebase Storage
         fileReference.putFile(dogImageUri).addOnSuccessListener(taskSnapshot -> {
@@ -230,9 +231,6 @@ public class AddAdopt extends Fragment {
                 DogBreed.setText("");
                 descriptions.setText("");
                 imageView.setImageResource(0);
-
-
-
 
                 // Add the document to the Firestore collection
                 db.collection("Pets").add(dog)
