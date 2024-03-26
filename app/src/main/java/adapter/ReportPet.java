@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 public class ReportPet {
 
-    public String phone;
+    public Long phone;
 
     public String email;
 
@@ -14,7 +14,7 @@ public class ReportPet {
 
     private String imageUrl; // Add this line
 
-    public ReportPet(String phone, String email, String owner, String description, String imageUrl) {
+    public ReportPet(Long phone, String email, String owner, String description, String imageUrl) {
         this.phone = phone;
         this.email = email;
         this.owner = owner;
@@ -22,11 +22,11 @@ public class ReportPet {
         this.imageUrl = imageUrl;
     }
 
-    public String getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 

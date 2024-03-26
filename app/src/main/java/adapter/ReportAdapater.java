@@ -89,7 +89,7 @@ public class ReportAdapater extends RecyclerView.Adapter<ReportAdapater.PetViewH
             description.setEnabled(false);
 
             dogImage = itemView.findViewById(R.id.dogimage); // Add this line
-            Cancel = itemView.findViewById(R.id.cancelbutton);
+            Cancel = itemView.findViewById(R.id.reportbutton);
 
 
 
@@ -108,7 +108,7 @@ public class ReportAdapater extends RecyclerView.Adapter<ReportAdapater.PetViewH
 
         public void bind(ReportPet info) {
             // Bind data to views
-            phone.setText(info.getPhone());
+            phone.setText(String.valueOf(info.getPhone()));
             email.setText(info.getEmail());
             dogowner.setText(info.getOwner());
             description.setText(info.getDescription());
