@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -22,12 +23,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import adapter.PetAdapter;
 import adapter.Pets;
+import adapter.PetsPending;
 import adapter.ReportAdapater;
 import adapter.ReportPet;
 
@@ -147,30 +153,26 @@ public class YourReportFragment extends Fragment implements ReportAdapater.onCan
         // Load the report from the database
         // Add the report to the adapter
         // Notify the adapter that the data has changed
-        db.collection("Reports").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value,
-                                @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.w(TAG, "Listen failed.", e);
-                    return;
-                }
-
-                reportlist.clear();
-                for (QueryDocumentSnapshot doc : value) {
-                    if (doc.getString("dogOwner") != null && doc.getString("dogOwner").equals(name)) {
-                        // Add the report to the adapter
-                        Long phone = doc.getLong("phone");
-                        String email = doc.getString("email");
-                        String owner = doc.getString("dogOwner");
-                        String description = doc.getString("description");
-                        String imageUrl = doc.getString("image");
-                        reportlist.add(new ReportPet(phone, email, owner, description, imageUrl));
-                    }
-
-                }
-                adapter.notifyDataSetChanged();
+        db.collection("Reports").addSnapshotListener((value, e) -> {
+            if (e != null) {
+                Log.w(TAG, "Listen failed.", e);
+                return;
             }
+
+            reportlist.clear();
+            for (QueryDocumentSnapshot doc : value) {
+                if (doc.getString("dogOwner") != null && doc.getString("dogOwner").equals(name)) {
+                    // Add the report to the adapter
+                    Long phone = doc.getLong("phone");
+                    String email = doc.getString("email");
+                    String owner = doc.getString("dogOwner");
+                    String description = doc.getString("description");
+                    String imageUrl = doc.getString("image");
+                    reportlist.add(new ReportPet(phone, email, owner, description, imageUrl));
+                }
+
+            }
+            adapter.notifyDataSetChanged();
         });
     }
 
@@ -186,6 +188,59 @@ public class YourReportFragment extends Fragment implements ReportAdapater.onCan
 
     @Override
     public void onCancel(int position) {
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setTitle("Cancel Adoption")
+                .setMessage("Are you sure you want to delete this adoption?")
+                .setPositiveButton("Yes", (dialogInterface, i) -> {
+                    ReportPet pet = reportlist.get(position);
+                    db.collection("Reports")
+                            .whereEqualTo("dogOwner", pet.getOwner())
+                            .get()
+                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    // Get the image URL from the document
+                                    String imageUrl = documentSnapshot.getString("image");
+
+                                    // Create a storage reference from our app
+                                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                                    StorageReference storageRef = storage.getReferenceFromUrl(imageUrl);
+
+                                    // Delete the file
+                                    storageRef.delete().addOnSuccessListener(aVoid -> {
+                                        // File deleted successfully
+                                        Log.d(TAG, "onSuccess: deleted file");
+                                    }).addOnFailureListener(exception -> {
+                                        // Uh-oh, an error occurred!
+                                        Log.d(TAG, "onFailure: did not delete file");
+                                    });
+
+                                    documentSnapshot.getReference().delete();
+                                    reportlist.remove(position);
+                                    adapter.notifyDataSetChanged();
+
+                                    AlertDialog dialog1 = new AlertDialog.Builder(getContext())
+                                            .setTitle("Report Done")
+                                            .setMessage("Report has been done successfully")
+                                            .setPositiveButton("Ok", null)
+                                            .create();
+                                    dialog1.show();
+
+
+                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                        HashMap<String, Object> transaction = new HashMap<>();
+                                        transaction.put("Transaction", "The report request for " + pet.getOwner() + " has done successfully");
+                                        LocalDate date = LocalDate.now();
+                                        transaction.put("name", pet.getOwner());
+                                        transaction.put("date", date.toString());
+                                        db.collection("Transaction").document().set(transaction);
+                                    }
+
+                                }
+                            });
+                })
+                .setNegativeButton("No", null)
+                .create();
+        dialog.show();
 
     }
 }
