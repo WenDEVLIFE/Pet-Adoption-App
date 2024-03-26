@@ -82,6 +82,8 @@ public class HomeFragment extends Fragment {
             ImageButton buttonAdoptPet = rootView.findViewById(R.id.button_adopt_pet);
             ImageButton ButtonAdoptRequest = rootView.findViewById(R.id.adopt_request);
             ImageButton Transaction_History = rootView.findViewById(R.id.transaction_history);
+            ImageButton Report = rootView.findViewById(R.id.report);
+
 
             // Get the username and name from the bundle
             username = getArguments().getString("username");
@@ -164,6 +166,17 @@ public class HomeFragment extends Fragment {
                 fragment.setArguments(bundle);
                 replaceFragement(fragment);
 
+            });
+
+            Report.setOnClickListener(v -> {
+                // Handle button pending click
+                // This will go to report
+                YourReportFragment fragment = new YourReportFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
+                replaceFragement(fragment);
             });
         }
 

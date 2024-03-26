@@ -252,7 +252,7 @@
                     android:layout_marginEnd="136dp">
 
                 <TextView
-                        android:text="Reported pet"
+                        android:text="    Reported pet"
                         android:fontFamily="sans-serif-condensed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

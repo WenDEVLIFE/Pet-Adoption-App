@@ -1,12 +1,15 @@
 package com.example.pet_adoption_app;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,9 +23,7 @@ public class YourReportFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    String username, name;
 
     public YourReportFragment() {
         // Required empty public constructor
@@ -50,15 +51,68 @@ public class YourReportFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // TODO: Rename and change types of parameters
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // Get the username and name from the arguments
+        if (getArguments() != null) {
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+        }
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_your_report, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_your_report, container, false);
+
+        // our back button image
+        ImageButton back = rootview.findViewById(R.id.buttonnback);
+        back.setOnClickListener(v ->
+        {
+            // This will go to Home Fragments
+            HomeFragment homeFragment = new HomeFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            homeFragment.setArguments(bundle);
+            replaceFragement(homeFragment);
+        });
+
+        // Our search view
+        SearchView searchView = rootview.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return  true;
+            }
+        });
+
+
+    return  rootview;
     }
+
+
+    private void replaceFragement(Fragment fragment) {
+
+        // Call the fragment manager and begin the transaction to replace the fragment
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+    }
+
 }

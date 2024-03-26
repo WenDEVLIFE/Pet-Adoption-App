@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".YourReportFragment">
+        tools:context=".YourPet_Fragement"
+        android:background="@drawable/background_gradient">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="@dimen/_310sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@drawable/panes2"
+                android:id="@+id/constraintLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintHorizontal_bias="1.0">
+
+            <ImageButton
+                    android:src="?attr/homeAsUpIndicator"
+                    android:layout_width="60dp"
+                    android:layout_height="56dp"
+                    android:id="@+id/buttonnback"
+                    app:tint="@drawable/buttontint"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toStartOf="@+id/textVie1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.432"
+                    app:layout_constraintVertical_bias="0.516" />
+
+            <TextView
+                    android:layout_width="305dp"
+                    android:layout_height="55dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/textVie1"
+                    android:text="Reports"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="@dimen/_30sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintVertical_bias="0.548"
+                    android:layout_marginEnd="16dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.SearchView
+                android:layout_width="@dimen/_310sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:id="@+id/searchView"
+                android:hint="@string/search"
+                app:searchHintIcon="@drawable/search"
+                app:searchIcon="@drawable/search"
+                app:closeIcon="@drawable/close"
+                android:background="@drawable/searchview_design"
+                app:queryHint="Search Here...."
+                app:iconifiedByDefault="false"
+                android:theme="@style/ThemeOverlay.SearchView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+                app:layout_constraintVertical_bias="0.148" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="@dimen/_310sdp"
+                android:layout_height="@dimen/_460sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/recyclerView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
