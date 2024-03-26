@@ -1,15 +1,36 @@
 package com.example.pet_adoption_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import adapter.NotificationsInfo;
+import adapter.PetAdapter;
+import adapter.Pets;
+import adapter.TransactionAdapter;
+import adapter.Transactions;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +48,14 @@ public class Transaction_History extends Fragment {
     private String mParam1;
     private String mParam2;
      String username, name;
+
+    RecyclerView recyclerView;
+
+    private List<Transactions> translist;
+
+    private TransactionAdapter adapter;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public Transaction_History() {
         // Required empty public constructor
@@ -79,7 +108,50 @@ public class Transaction_History extends Fragment {
         btnback.setOnClickListener(v ->
                 goHomeFragmenet());
 
-         return rootview;
+        // This is our recycler view
+        recyclerView = rootview.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        translist = new ArrayList<>();
+        adapter = new TransactionAdapter(translist);
+        recyclerView.setAdapter(adapter);
+        LoadTransactions();
+
+
+        return rootview;
+    }
+
+    private void LoadTransactions() {
+        // This will load the transactions from the database
+        db.collection("Transactions").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                translist.clear();
+                for (QueryDocumentSnapshot doc : value) {
+
+                    // Get the pet name
+                    String nofname = doc.getString("name");
+
+                    // Check if the pet name is equal to the pet name in the database
+                    if (nofname != null && nofname.equals(name)) {
+
+                        // Get the transactions details
+                        String transactions = doc.getString("Transaction details");
+                        Transactions info = new Transactions(transactions);
+                        translist.add(info);
+
+
+                    }
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+        });
     }
 
     private void replaceFragement(Fragment fragment) {

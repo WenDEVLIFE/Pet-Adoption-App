@@ -67,9 +67,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             // Initialize views
             transactions = itemView.findViewById(R.id.transaction_history);
 
-
-
-
         }
 
         public void bind(Transactions info) {
