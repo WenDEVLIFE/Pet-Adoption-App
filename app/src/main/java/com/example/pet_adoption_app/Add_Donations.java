@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 /**
@@ -29,6 +30,11 @@ public class Add_Donations extends Fragment {
     private String mParam2;
 
     String username,name;
+
+
+    EditText DonationName, DonatedOwner, Descriptions;
+
+    Button AddDonations;
     public Add_Donations() {
         // Required empty public constructor
     }
@@ -84,6 +90,12 @@ public class Add_Donations extends Fragment {
             // This will go to Ask Donations fragments
 
         });
+
+        DonationName = rootview.findViewById(R.id.donationsName);
+        DonatedOwner = rootview.findViewById(R.id.donateOwner);
+        Descriptions = rootview.findViewById(R.id.donationsDescription);
+
+
 
         return rootview;
 

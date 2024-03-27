@@ -64,8 +64,8 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:background="@drawable/textfield"
-                    android:id="@+id/editTextText"
-                    app:layout_constraintTop_toBottomOf="@+id/dogage"
+                    android:id="@+id/donateOwner"
+                    app:layout_constraintTop_toBottomOf="@+id/donationsName"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="40dp"
@@ -80,12 +80,12 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:background="@drawable/textfield"
-                    android:id="@+id/dogage"
+                    android:id="@+id/donationsName"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.446"
+                    app:layout_constraintHorizontal_bias="0.425"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-                    android:layout_marginTop="76dp" />
+                    android:layout_marginTop="144dp" />
 
             <EditText
                     android:layout_width="@dimen/_280sdp"
@@ -99,11 +99,11 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:background="@drawable/textfield"
-                    android:id="@+id/dog_owner"
+                    android:id="@+id/donationsDescription"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.446"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextText"
+                    app:layout_constraintTop_toBottomOf="@+id/donateOwner"
                     android:layout_marginTop="40dp" />
 
             <Button
@@ -113,7 +113,7 @@
                     android:layout_height="79dp"
                     android:id="@+id/AddButton"
                     android:textColor="@color/white"
-                    app:layout_constraintTop_toBottomOf="@+id/dog_owner"
+                    app:layout_constraintTop_toBottomOf="@+id/donationsDescription"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="28dp"

@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,6 +32,7 @@ public class Ask_Donations extends Fragment {
     private String mParam2;
 
     String username,name;
+
 
 
     public Ask_Donations() {
@@ -103,6 +106,8 @@ public class Ask_Donations extends Fragment {
             replaceFragement(add_donations);
 
         });
+
+
 
     return rootview;
     }
