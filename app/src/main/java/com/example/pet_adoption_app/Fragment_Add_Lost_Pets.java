@@ -111,7 +111,12 @@ public class Fragment_Add_Lost_Pets extends Fragment {
         btnback.setOnClickListener(v->{
 
             // Call the replaceFragment method
-            replaceFragement(new Fragment_Lost_Pets());
+            Fragments_Lost_Pets fragment = new Fragments_Lost_Pets();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
         });
 
         // Get the image view and the import button
