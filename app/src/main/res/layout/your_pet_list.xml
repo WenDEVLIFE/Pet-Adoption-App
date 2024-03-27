@@ -149,6 +149,7 @@
                 android:ems="10"
                 android:textColor="@color/black"
                 android:id="@+id/description"
+                android:background="@android:color/transparent"
                 android:fontFamily="sans-serif-condensed"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="8dp"

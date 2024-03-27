@@ -147,6 +147,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:inputType="textMultiLine"
                 android:ems="10"
+                android:background="@android:color/transparent"
                 android:textColor="@color/black"
                 android:id="@+id/description"
                 android:fontFamily="sans-serif-condensed"

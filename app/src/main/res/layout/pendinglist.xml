@@ -177,6 +177,7 @@
                 android:inputType="textMultiLine"
                 android:ems="10"
                 android:textColor="@color/black"
+                android:background="@android:color/transparent"
                 android:id="@+id/description"
                 android:fontFamily="sans-serif-condensed"
                 app:layout_constraintEnd_toEndOf="parent"

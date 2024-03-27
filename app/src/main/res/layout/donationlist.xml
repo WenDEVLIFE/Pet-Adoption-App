@@ -34,7 +34,7 @@
                 android:text="test"
                 android:ems="10"
                 android:textColor="@color/black"
-                android:id="@+id/transaction_history"
+                android:id="@+id/donatename"
                 android:fontFamily="sans-serif-condensed"
                 tools:layout_editor_absoluteY="4dp"
                 tools:layout_editor_absoluteX="136dp" />
@@ -47,20 +47,33 @@
                 android:text="test"
                 android:ems="10"
                 android:textColor="@color/black"
-                android:id="@+id/transaction_history"
+                android:id="@+id/donaterequest"
                 android:fontFamily="sans-serif-condensed"
-                tools:layout_editor_absoluteY="59dp"
+                tools:layout_editor_absoluteY="48dp"
                 tools:layout_editor_absoluteX="136dp" />
 
         <ImageView
                 android:layout_width="@dimen/_96sdp"
                 android:layout_height="@dimen/_70sdp"
-                app:srcCompat="@drawable/petlogo"
+                app:srcCompat="@drawable/donatebox"
                 android:id="@+id/imageView6"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.355" />
+                app:layout_constraintVertical_bias="0.355"
+                app:layout_constraintEnd_toStartOf="@+id/donaterequest"
+                app:layout_constraintHorizontal_bias="0.0" />
+
+        <EditText
+                android:layout_width="@dimen/_190sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:inputType="textMultiLine"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:text="description"
+                android:id="@+id/editTextText3"
+                tools:layout_editor_absoluteY="96dp"
+                tools:layout_editor_absoluteX="136dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
