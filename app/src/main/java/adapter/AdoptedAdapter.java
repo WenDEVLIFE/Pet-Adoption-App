@@ -16,6 +16,8 @@ import com.example.pet_adoption_app.R;
 
 import java.util.List;
 
+import ClassPackage.PetsPending;
+
 public class AdoptedAdapter extends RecyclerView.Adapter<AdoptedAdapter.PetViewHolder> {
 
     private List<PetsPending> petList;

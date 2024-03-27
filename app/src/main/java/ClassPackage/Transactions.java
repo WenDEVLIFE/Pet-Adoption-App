@@ -1,4 +1,4 @@
-package adapter;
+package ClassPackage;
 
 public class Transactions {
     public String transactiondetails;

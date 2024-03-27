@@ -5,7 +5,6 @@ import static android.content.ContentValues.TAG;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -29,9 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapter.Pending_PetsAdapter;
-import adapter.PetAdapter;
-import adapter.Pets;
-import adapter.PetsPending;
+import ClassPackage.PetsPending;
 
 /**
  * A simple {@link Fragment} subclass.

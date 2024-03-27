@@ -31,9 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import adapter.PendingPetsAdapter;
-import adapter.PetAdapter;
-import adapter.Pets;
-import adapter.PetsPending;
+import ClassPackage.PetsPending;
 
 /**
  * A simple {@link Fragment} subclass.

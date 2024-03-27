@@ -26,11 +26,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapter.NotificationsInfo;
-import adapter.PetAdapter;
-import adapter.Pets;
 import adapter.TransactionAdapter;
-import adapter.Transactions;
+import ClassPackage.Transactions;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -2,13 +2,9 @@ package com.example.pet_adoption_app;
 
 import static android.content.ContentValues.TAG;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -21,10 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.ViewTreeObserver;
-import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,7 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import adapter.PetAdapter;
-import adapter.Pets;
+import ClassPackage.Pets;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -1,7 +1,6 @@
-package adapter;
+package ClassPackage;
 
-
-public class PetsPending {
+public class Pets {
 
     private String name;
     private String breed;
@@ -10,15 +9,12 @@ public class PetsPending {
 
     private String imageUrl; // Add this line
 
-    private String adopt_requets;
-
-    public PetsPending(String name, String breed, String owner, String description , String imageUrl, String adopt_requets) {
+    public Pets(String name, String breed, String owner, String description , String imageUrl) {
         this.name = name;
         this.breed = breed;
         Owner = owner;
         Description = description;
         this.imageUrl = imageUrl; // Add this line
-        this.adopt_requets = adopt_requets;
     }
 
     public String getName() {
@@ -62,29 +58,15 @@ public class PetsPending {
     }
     @Override
     public String toString() {
-      return "Pets{" +
-              "name='" + name + '\'' +
-              ", breed='" + breed + '\'' +
-              ", Owner='" + Owner + '\'' +
-              ", Description='" + Description + '\'' +
-              ", imageUrl='" + imageUrl + '\'' +
-              ", adopt_requets='" + adopt_requets + '\'' +
-              '}';
+        return "Pets{" +
+                "name='" + name + '\'' +
+                ", breed='" + breed + '\'' +
+                ", Owner='" + Owner + '\'' +
+                ", Description='" + Description + '\'' +
+                '}';
     }
 
     public String getDogname() {
         return name;
-    }
-
-    public String getAdopt_requets() {
-        return adopt_requets;
-    }
-
-    public void setAdopt_requets(String adopt_requets) {
-        this.adopt_requets = adopt_requets;
-    }
-
-    public String getAdoptRequest() {
-        return adopt_requets;
     }
 }

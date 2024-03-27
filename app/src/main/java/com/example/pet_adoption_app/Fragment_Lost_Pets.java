@@ -29,8 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapter.LostAdapter;
-import adapter.PetAdapter;
-import adapter.Pets;
+import ClassPackage.Pets;
 
 /**
  * A simple {@link Fragment} subclass.

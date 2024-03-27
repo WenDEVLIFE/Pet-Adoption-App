@@ -16,6 +16,8 @@ import com.example.pet_adoption_app.R;
 
 import java.util.List;
 
+import ClassPackage.Pets;
+
 public class YourLostPetsAdapter extends RecyclerView.Adapter<YourLostPetsAdapter.PetViewHolder> {
 
     private List<Pets> petList;

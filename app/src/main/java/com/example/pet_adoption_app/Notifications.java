@@ -27,10 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapter.NotificationAdapter;
-import adapter.NotificationsInfo;
-import adapter.PetAdapter;
-import adapter.Pets;
-import adapter.PetsPending;
+import ClassPackage.NotificationsInfo;
 
 /**
  * A simple {@link Fragment} subclass.

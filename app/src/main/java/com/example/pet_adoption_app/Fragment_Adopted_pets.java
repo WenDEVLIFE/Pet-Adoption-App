@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.annotations.Nullable;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,7 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import adapter.AdoptedAdapter;
-import adapter.PetsPending;
+import ClassPackage.PetsPending;
 
 /**
  * A simple {@link Fragment} subclass.

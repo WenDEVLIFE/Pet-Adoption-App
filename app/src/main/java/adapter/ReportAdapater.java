@@ -16,6 +16,8 @@ import com.example.pet_adoption_app.R;
 
 import java.util.List;
 
+import ClassPackage.ReportPet;
+
 public class ReportAdapater extends RecyclerView.Adapter<ReportAdapater.PetViewHolder> {
 
     private List<ReportPet> reportlist;

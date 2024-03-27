@@ -73,6 +73,7 @@ public class Ask_Donations extends Fragment {
             username = getArguments().getString("username");
             name = getArguments().getString("name");
         }
+
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_ask__donations, container, false);
 

@@ -27,14 +27,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import adapter.PetAdapter;
-import adapter.Pets;
-import adapter.PetsPending;
+import ClassPackage.Pets;
 import adapter.YourPetAdapter;
 
 /**
