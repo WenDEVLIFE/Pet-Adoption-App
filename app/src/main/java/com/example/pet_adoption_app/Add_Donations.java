@@ -2,6 +2,7 @@ package com.example.pet_adoption_app;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,6 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.time.LocalDate;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +41,8 @@ public class Add_Donations extends Fragment {
     EditText DonationName, DonatedOwner, Descriptions;
 
     Button AddDonations;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     public Add_Donations() {
         // Required empty public constructor
     }
@@ -91,13 +99,84 @@ public class Add_Donations extends Fragment {
 
         });
 
+        // This is the code to add the donations
         DonationName = rootview.findViewById(R.id.donationsName);
         DonatedOwner = rootview.findViewById(R.id.donateOwner);
+        DonatedOwner.setText(name);
         Descriptions = rootview.findViewById(R.id.donationsDescription);
+
+        // Add Donations button code
+        AddDonations = rootview.findViewById(R.id.AddButton);
+        AddDonations.setOnClickListener(v->{
+
+
+            // This is the code to add the donation
+            String donate_name = DonationName.getText().toString();
+            String donate_owner = DonatedOwner.getText().toString();
+            String donate_description = Descriptions.getText().toString();
+
+            // Check if all edittext is empty or not.
+            if(donate_name.isEmpty() || donate_description.isEmpty() || donate_owner.isEmpty()){
+                AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                        .setTitle("Error")
+                        .setMessage("Please fill all the fields")
+                        .setPositiveButton("OK", null)
+                        .show();
+                alertDialog.show();
+            }
+            else{
+
+                // Pass the value to the other method
+                InsertDatabase( donate_name, donate_owner, donate_description);
+            }
+
+
+
+        });
 
 
 
         return rootview;
+
+    }
+
+    private void InsertDatabase(String donateName, String donateOwner, String donateDescription) {
+
+        // This will insert the data to the database
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            LocalDate date = LocalDate.now();
+            HashMap <String, Object> donations = new HashMap<>();
+            donations.put("donateName", donateName);
+            donations.put("donateOwner", donateOwner);
+            donations.put("donateDescription", donateDescription);
+            donations.put("date" , date);
+
+            db.collection("Donations").document().set(donations)
+                    .addOnSuccessListener(aVoid -> {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                                .setTitle("Success")
+                                .setMessage("Donation Added")
+                                .setPositiveButton("OK", (dialog, which) -> {
+
+                                    // This will clear the EditText on the Ui
+                                    DonationName.setText("");
+                                    Descriptions.setText("");
+                                })
+                                .show();
+                        alertDialog.show();
+                    })
+                    .addOnFailureListener(e -> {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                                .setTitle("Error")
+                                .setMessage("Error: " + e.getMessage())
+                                .setPositiveButton("OK", null)
+                                .show();
+                        alertDialog.show();
+                    });
+
+
+        }
+
 
     }
 
