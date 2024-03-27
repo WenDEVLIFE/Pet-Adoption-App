@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,11 +24,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import adapter.Pets;
+import adapter.PetsPending;
 import adapter.ReportAdapater;
 import adapter.ReportPet;
 import adapter.YourLostPetsAdapter;
@@ -172,7 +178,59 @@ public class Fragments_Lost_Pets extends Fragment implements  YourLostPetsAdapte
 
     @Override
     public void onCancel(int position) {
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setTitle("Cancel Lost Pet Adoption")
+                .setMessage("Are you sure you want to delete this Lost pet?")
+                .setPositiveButton("Yes", (dialogInterface, i) -> {
+                    Pets pet = petList.get(position);
+                    db.collection("LostPets")
+                            .whereEqualTo("name", pet.getName())
+                            .get()
+                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    // Get the image URL from the document
+                                    String imageUrl = documentSnapshot.getString("image");
 
+                                    // Create a storage reference from our app
+                                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                                    StorageReference storageRef = storage.getReferenceFromUrl(imageUrl);
+
+                                    // Delete the file
+                                    storageRef.delete().addOnSuccessListener(aVoid -> {
+                                        // File deleted successfully
+                                        Log.d(TAG, "onSuccess: deleted file");
+                                    }).addOnFailureListener(exception -> {
+                                        // Uh-oh, an error occurred!
+                                        Log.d(TAG, "onFailure: did not delete file");
+                                    });
+
+                                    documentSnapshot.getReference().delete();
+                                    petList.remove(position);
+                                    adapter.notifyDataSetChanged();
+
+                                    AlertDialog dialog1 = new AlertDialog.Builder(getContext())
+                                            .setTitle("Lost Pet Deleted")
+                                            .setMessage("Adoption has been deleted successfully")
+                                            .setPositiveButton("Ok", null)
+                                            .create();
+                                    dialog1.show();
+
+
+                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                        HashMap<String, Object> transaction = new HashMap<>();
+                                        transaction.put("Transaction", "You Delete the Adoption of " + pet.getName() + " Pet from the Lost Pets List ");
+                                        LocalDate date = LocalDate.now();
+                                        transaction.put("name", pet.getOwner());
+                                        transaction.put("date", date.toString());
+                                        db.collection("Transaction").document().set(transaction);
+                                    }
+
+                                }
+                            });
+                })
+                .setNegativeButton("No", null)
+                .create();
+        dialog.show();
     }
 
 }
