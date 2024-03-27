@@ -1,24 +1,43 @@
 package com.example.pet_adoption_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import adapter.Pets;
+import adapter.ReportAdapater;
+import adapter.ReportPet;
+import adapter.YourLostPetsAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Fragments_Lost_Pets#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragments_Lost_Pets extends Fragment {
+public class Fragments_Lost_Pets extends Fragment implements  YourLostPetsAdapter.onCancelListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +49,13 @@ public class Fragments_Lost_Pets extends Fragment {
     private String mParam2;
 
     String username,name;
+
+    private List<Pets> petList;
+
+    private YourLostPetsAdapter adapter;
+
+    RecyclerView recyclerView;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public Fragments_Lost_Pets() {
         // Required empty public constructor
@@ -90,7 +116,46 @@ public class Fragments_Lost_Pets extends Fragment {
         });
 
 
+        recyclerView = rootview.findViewById(R.id.lostpetrecycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        petList = new ArrayList<>();
+        adapter = new YourLostPetsAdapter(petList);
+        recyclerView.setAdapter(adapter);
+
+        adapter.setOnCancelListener(this);
+
+        LoadPet();
+
+
+
     return rootview;
+    }
+
+    private void LoadPet() {
+        db.collection("LostPets").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                petList.clear();
+                for (QueryDocumentSnapshot doc : value) {
+                    String owner = doc.getString("owner");
+                     if (owner.equals(name)) {
+                         String name = doc.getString("name");
+                         String breed = doc.getString("breed");
+                         String description = doc.getString("description");
+                         String image = doc.getString("image");
+                         petList.add(new Pets(name, breed, owner, description, image));
+                     }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
 
@@ -103,4 +168,11 @@ public class Fragments_Lost_Pets extends Fragment {
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
+
+
+    @Override
+    public void onCancel(int position) {
+
+    }
+
 }

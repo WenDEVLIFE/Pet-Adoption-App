@@ -40,7 +40,7 @@
                     android:layout_height="55dp"
                     android:textColor="@color/white"
                     android:id="@+id/textVie1"
-                    android:text="Lost pets"
+                    android:text="Your Lost pets"
                     android:fontFamily="sans-serif-condensed"
                     android:textSize="@dimen/_30sdp"
                     app:layout_constraintTop_toTopOf="parent"
@@ -73,6 +73,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="2dp"
+                android:id="@+id/lostpetrecycler"
                 app:layout_constraintTop_toBottomOf="@+id/searchView"
                 android:layout_marginStart="4dp"
                 app:layout_constraintVertical_bias="1.0" />
