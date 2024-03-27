@@ -31,7 +31,7 @@
                         android:layout_height="55dp"
                         android:textColor="@color/white"
                         android:id="@+id/textVie1"
-                        android:text="Add adopt pets"
+                        android:text="Request donations"
                         android:fontFamily="sans-serif-condensed"
                         android:textSize="@dimen/_30sdp"
                         app:layout_constraintTop_toTopOf="parent"

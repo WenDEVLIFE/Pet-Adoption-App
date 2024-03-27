@@ -143,6 +143,8 @@ public class Fragment_Add_Lost_Pets extends Fragment {
         Button btnadd = rootview.findViewById(R.id.AddButton);
         btnadd.setOnClickListener(v->{
 
+
+            // Get the text from the edit text fields
             String DogName = dogname.getText().toString();
         String Breed = DogBreed.getText().toString();
         String Owner = DogOwner.getText().toString();

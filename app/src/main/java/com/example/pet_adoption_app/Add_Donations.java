@@ -28,6 +28,7 @@ public class Add_Donations extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    String username,name;
     public Add_Donations() {
         // Required empty public constructor
     }
@@ -68,14 +69,20 @@ public class Add_Donations extends Fragment {
         ImageButton btnback = rootview.findViewById(R.id.buttonnback);
         btnback.setOnClickListener(v->{
             // This will go back to home fragments
-            replaceFragement(new HomeFragment());
+            Ask_Donations ask_donations = new Ask_Donations();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            ask_donations.setArguments(bundle);
+            replaceFragement(ask_donations);
+
         });
 
         // This is button is used to go to Ask Donations fragments
         Button btnsubmit = rootview.findViewById(R.id.AddButton);
         btnsubmit.setOnClickListener(v->{
             // This will go to Ask Donations fragments
-            replaceFragement(new Ask_Donations());
+
         });
 
         return rootview;

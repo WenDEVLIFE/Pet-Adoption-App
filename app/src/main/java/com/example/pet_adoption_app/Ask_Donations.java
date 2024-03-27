@@ -29,6 +29,9 @@ public class Ask_Donations extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    String username,name;
+
+
     public Ask_Donations() {
         // Required empty public constructor
     }
@@ -57,12 +60,19 @@ public class Ask_Donations extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if (getArguments() != null) {
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+        }
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_ask__donations, container, false);
 
@@ -70,14 +80,26 @@ public class Ask_Donations extends Fragment {
         ImageButton btnback = rootview.findViewById(R.id.buttonnback);
         btnback.setOnClickListener(v->{
             // This will go back to home fragments
-            replaceFragement(new HomeFragment());
+            HomeFragment homeFragment = new HomeFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            homeFragment.setArguments(bundle);
+            replaceFragement(homeFragment);
+
+
         });
 
         // This is for floating action button add donation
         FloatingActionButton btnaskdonation = rootview.findViewById(R.id.floatingActionButton);
         btnaskdonation.setOnClickListener(v->{
             // This will go to ask donation form
-            replaceFragement(new Add_Donations());
+            Add_Donations add_donations = new Add_Donations();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            add_donations.setArguments(bundle);
+            replaceFragement(add_donations);
 
         });
 
