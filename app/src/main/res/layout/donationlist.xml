@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- item_complaint.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_gradient">
+
+    <TextView
+            android:text="  "
+            android:layout_width="406dp"
+            android:layout_height="175dp"
+            android:id="@+id/textView14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="@dimen/_300sdp"
+            android:layout_height="@dimen/_105sdp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/textView14"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
+            app:layout_constraintTop_toTopOf="@+id/textView14"
+            android:layout_marginTop="12dp"
+            app:layout_constraintHorizontal_bias="0.466">
+
+        <EditText
+                android:layout_width="@dimen/_190sdp"
+                android:layout_height="@dimen/_31sdp"
+                android:inputType="textMultiLine"
+                android:background="@color/white"
+                android:text="test"
+                android:ems="10"
+                android:textColor="@color/black"
+                android:id="@+id/transaction_history"
+                android:fontFamily="sans-serif-condensed"
+                tools:layout_editor_absoluteY="4dp"
+                tools:layout_editor_absoluteX="136dp" />
+
+        <EditText
+                android:layout_width="@dimen/_190sdp"
+                android:layout_height="@dimen/_31sdp"
+                android:inputType="textMultiLine"
+                android:background="@color/white"
+                android:text="test"
+                android:ems="10"
+                android:textColor="@color/black"
+                android:id="@+id/transaction_history"
+                android:fontFamily="sans-serif-condensed"
+                tools:layout_editor_absoluteY="59dp"
+                tools:layout_editor_absoluteX="136dp" />
+
+        <ImageView
+                android:layout_width="@dimen/_96sdp"
+                android:layout_height="@dimen/_70sdp"
+                app:srcCompat="@drawable/petlogo"
+                android:id="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0.355" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
