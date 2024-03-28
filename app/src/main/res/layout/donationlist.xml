@@ -9,8 +9,8 @@
 
     <TextView
             android:text="  "
-            android:layout_width="406dp"
-            android:layout_height="175dp"
+            android:layout_width="408dp"
+            android:layout_height="236dp"
             android:id="@+id/textView14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="@dimen/_300sdp"
-            android:layout_height="@dimen/_105sdp"
+            android:layout_height="@dimen/_160sdp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/textView14"
             app:layout_constraintStart_toStartOf="@+id/textView14"
@@ -36,8 +36,11 @@
                 android:textColor="@color/black"
                 android:id="@+id/donatename"
                 android:fontFamily="sans-serif-condensed"
-                tools:layout_editor_absoluteY="4dp"
-                tools:layout_editor_absoluteX="136dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.972"
+                android:layout_marginTop="4dp" />
 
         <EditText
                 android:layout_width="@dimen/_190sdp"
@@ -49,8 +52,12 @@
                 android:textColor="@color/black"
                 android:id="@+id/donaterequest"
                 android:fontFamily="sans-serif-condensed"
-                tools:layout_editor_absoluteY="48dp"
-                tools:layout_editor_absoluteX="136dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/donatename"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintHorizontal_bias="1.0" />
 
         <ImageView
                 android:layout_width="@dimen/_96sdp"
@@ -58,22 +65,38 @@
                 app:srcCompat="@drawable/donatebox"
                 android:id="@+id/imageView6"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.355"
-                app:layout_constraintEnd_toStartOf="@+id/donaterequest"
-                app:layout_constraintHorizontal_bias="0.0" />
+                app:layout_constraintBottom_toTopOf="@+id/button3"
+                android:layout_marginStart="4dp"
+                app:layout_constraintVertical_bias="0.625" />
 
         <EditText
                 android:layout_width="@dimen/_190sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:inputType="textMultiLine"
                 android:background="@android:color/transparent"
                 android:padding="10dp"
                 android:text="description"
                 android:id="@+id/editTextText3"
-                tools:layout_editor_absoluteY="96dp"
-                tools:layout_editor_absoluteX="136dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/donaterequest"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintVertical_bias="0.75" />
+
+        <Button
+                android:text="Donate"
+                android:background="@drawable/button"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editTextText3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.459"
+                android:layout_marginBottom="16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
