@@ -1,4 +1,4 @@
-package adapter;
+package com.example.pet_adoption_app;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -23,18 +23,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.pet_adoption_app.Ask_Donations;
-import com.example.pet_adoption_app.HomeFragment;
-import com.example.pet_adoption_app.R;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.Map;
-
-import ClassPackage.Donation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -212,12 +207,37 @@ public class DonateFragments extends Fragment {
                 DonatedDescription.setText("");
                 imageView.setImageResource(0);
 
+
+
                 // Add the document to the Firestore collection
                 db.collection("Donated").add(donations)
                         .addOnSuccessListener(documentReference -> {
                             Toast.makeText(getActivity(), "Donations sent successfully", Toast.LENGTH_SHORT).show();
                             // Hide the ProgressDialog
                             progressDialog.dismiss();
+
+                            // Notify adapter about the change in data set
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                LocalDate date = LocalDate.now();
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                String formattedDate = date.format(formatter);
+
+                                // Create a new document for the notification
+                                HashMap <String, Object> Notifications = new HashMap<>();
+                                Notifications.put("Notifications details","The user "+ DonatedName +" Successfully donated to " + donateTo + " on " + formattedDate + " Thank you for your donation");
+                                Notifications.put("name", donateTo);
+                                Notifications.put("date", formattedDate);
+                                db.collection("Notifications").document().set(Notifications);
+
+
+                                // Create a new transaction
+                                HashMap<String, Object> transaction = new HashMap<>();
+                                transaction.put("Transaction", "You sent a donation to " + donateTo + " on " + formattedDate + " Thank you for your donation");
+                                transaction.put("name", DonatedName);
+                                transaction.put("date", formattedDate);
+
+                                db.collection("Transaction").document().set(transaction);
+                            }
                         })
                         .addOnFailureListener(e -> {
                             Toast.makeText(getActivity(), "Error sending donations", Toast.LENGTH_SHORT).show();
