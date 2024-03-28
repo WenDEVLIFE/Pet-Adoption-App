@@ -50,7 +50,7 @@
                 android:text="test"
                 android:ems="10"
                 android:textColor="@color/black"
-                android:id="@+id/donaterequest"
+                android:id="@+id/donateowner"
                 android:fontFamily="sans-serif-condensed"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/donatename"
@@ -67,7 +67,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/button3"
+                app:layout_constraintBottom_toTopOf="@+id/donate"
                 android:layout_marginStart="4dp"
                 app:layout_constraintVertical_bias="0.625" />
 
@@ -78,12 +78,12 @@
                 android:background="@android:color/transparent"
                 android:padding="10dp"
                 android:text="description"
-                android:id="@+id/editTextText3"
+                android:id="@+id/petdescription"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/donaterequest"
+                app:layout_constraintTop_toBottomOf="@+id/donateowner"
                 android:layout_marginEnd="4dp"
-                app:layout_constraintVertical_bias="0.75" />
+                app:layout_constraintVertical_bias="0.2" />
 
         <Button
                 android:text="Donate"
@@ -91,9 +91,9 @@
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button3"
+                android:id="@+id/donate"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/editTextText3"
+                app:layout_constraintEnd_toStartOf="@+id/petdescription"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.459"
                 android:layout_marginBottom="16dp" />

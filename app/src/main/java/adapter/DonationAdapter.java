@@ -18,22 +18,23 @@ import com.example.pet_adoption_app.R;
 
 import java.util.List;
 
+import ClassPackage.Donation;
 import ClassPackage.PetsPending;
 
 public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.DonationView> {
 
-    private List<PetsPending> petList;
+    private List<Donation> donationList;
 
     private onCancelListener onCancelListener;
 
 
 
-    public DonationAdapter(List<PetsPending> petList) {
-        this.petList = petList;
+    public DonationAdapter(List<Donation> donationList) {
+        this.donationList = donationList;
     }
 
-    public void searchPets(List<PetsPending> newList) {
-        petList = newList;
+    public void searchPets(List<Donation> newList) {
+        donationList = newList;
         notifyDataSetChanged();
     }
 
@@ -52,49 +53,43 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
     @NonNull
     @Override
     public DonationView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adoptlist, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.donationlist, parent, false);
         return new DonationView(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DonationView holder, int position) {
-        PetsPending info = petList.get(position);
+        Donation info = donationList.get(position);
         holder.bind(info);
     }
 
     @Override
     public int getItemCount() {
-        return petList.size();
+        return donationList.size();
     }
 
     // ViewHolder class
     public class DonationView extends RecyclerView.ViewHolder {
 
         // Views in your item layout
-        private final TextView dogname;
-        private final TextView dogbreed;
-        private final TextView dogowner;
+        private final TextView DonateName;
+        private final TextView DoneOwner;
 
-        private final EditText description;
+        private final EditText Donatedescription;
 
-        private final TextView Adoptrequest;
+
 
         private final Button Cancel;
 
-        private final ImageView dogImage; // Add this line
 
 
         public DonationView(@NonNull View itemView) {
             super(itemView);
             // Initialize views
-            dogname = itemView.findViewById(R.id.dogname);
-            dogbreed = itemView.findViewById(R.id.dogbreed);
-            dogowner = itemView.findViewById(R.id.dogowner);
-            description = itemView.findViewById(R.id.description);
-            description.setEnabled(false);
-            Adoptrequest = itemView.findViewById(R.id.adoptowner);
-            dogImage = itemView.findViewById(R.id.dogimage); // Add this line
-            Cancel = itemView.findViewById(R.id.deletebutton);
+            DonateName = itemView.findViewById(R.id.donatename);
+            DoneOwner = itemView.findViewById(R.id.donateowner);
+            Donatedescription = itemView.findViewById(R.id.petdescription);
+            Cancel = itemView.findViewById(R.id.donate);
 
 
 
@@ -110,19 +105,13 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
 
         }
 
-        public void bind(PetsPending info) {
+        public void bind(Donation info) {
             // Bind data to views
-            dogname.setText(info.getDogname());
-            dogbreed.setText(info.getBreed());
-            dogowner.setText(info.getOwner());
-            description.setText(info.getDescription());
-            Adoptrequest.setText(info.getAdopt_requets());
+            DonateName.setText(info.getDonationName());
+            DoneOwner.setText(info.getDogOwner());
+            Donatedescription.setText(info.getDescription());
 
 
-            // Use Glide to load the image from the URL into the ImageView
-            Glide.with(itemView.getContext())
-                    .load(info.getImageUrl())
-                    .into(dogImage);
 
         }
 

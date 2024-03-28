@@ -2,11 +2,11 @@ package ClassPackage;
 
 public class Donation {
 
-    public String  DogOwner, DonationName, Description;
+    public String  DonationName, DogOwner, Description;
 
-    public Donation(String DogOwner, String DonationName, String Description) {
-        this.DogOwner = DogOwner;
+    public Donation(String DonationName, String DogOwner, String Description) {
         this.DonationName = DonationName;
+        this.DogOwner = DogOwner;
         this.Description = Description;
 
     }

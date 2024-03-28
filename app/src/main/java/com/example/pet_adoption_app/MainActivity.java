@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             } else {
                 // Check if the username and password fields are not empty
-
+                progressDialog.show();
                 LoginVerification(username, password);
             }
 

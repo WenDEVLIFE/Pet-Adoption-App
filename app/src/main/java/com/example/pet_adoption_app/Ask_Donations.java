@@ -1,11 +1,17 @@
 package com.example.pet_adoption_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +20,27 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ClassPackage.Donation;
+import ClassPackage.Pets;
+import adapter.DonationAdapter;
+import adapter.PetAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Ask_Donations#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Ask_Donations extends Fragment {
+public class Ask_Donations extends Fragment implements  DonationAdapter.onCancelListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +52,13 @@ public class Ask_Donations extends Fragment {
     private String mParam2;
 
     String username,name;
+    RecyclerView recyclerView;
 
+    private List<Donation> donationList;
+
+    private DonationAdapter adapter;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     public Ask_Donations() {
@@ -108,8 +134,41 @@ public class Ask_Donations extends Fragment {
         });
 
 
+        recyclerView = rootview.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        donationList = new ArrayList<>();
+        adapter = new DonationAdapter(donationList);
+        recyclerView.setAdapter(adapter);
+
+        // Ensure MainActivity implements OnDeleteClickListener
+        adapter.setOnCancelListener(this);
+        LoadDonations();
 
     return rootview;
+    }
+
+    private void LoadDonations() {
+        // Retrieve the data from Firestore
+        db.collection("Donations").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                donationList.clear();
+                for (QueryDocumentSnapshot doc : value) {
+                    if (doc.get("name") != null) {
+                        Donation donation = new Donation(doc.getString("donateName"), doc.getString("donateOwner"), doc.getString("donateDescription"));
+                        donationList.add(donation);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+
     }
 
     private void replaceFragement(Fragment fragment) {
@@ -121,4 +180,25 @@ public class Ask_Donations extends Fragment {
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void onCancel(int position) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Go TO Donation");
+        builder.setMessage("Do you want to go to donation page?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            // This will go to ask donation form
+            Add_Donations add_donations = new Add_Donations();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            add_donations.setArguments(bundle);
+            replaceFragement(add_donations);
+        });
+        builder.setNegativeButton("No", (dialog, which) -> {
+            // Do nothing
+        });
+        builder.show();
+
+    }
 }
