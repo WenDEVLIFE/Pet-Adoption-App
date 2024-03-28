@@ -2,6 +2,7 @@ package com.example.pet_adoption_app;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -59,6 +61,8 @@ public class Fragment_Your_Donations extends Fragment implements DonationRequest
     private DonationRequestAdapter adapter;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    ProgressDialog progressDialog;
 
     public Fragment_Your_Donations() {
         // Required empty public constructor
@@ -179,21 +183,28 @@ public class Fragment_Your_Donations extends Fragment implements DonationRequest
     }
     @Override
     public void onCancel(int position) {
-
         AlertDialog deletedialog = new AlertDialog.Builder(getContext())
                 .setTitle("Delete Donation")
                 .setMessage("Are you sure you want to delete this donation?")
                 .setPositiveButton("Yes", (dialog, which) -> {
                     Donation donations = donationList.get(position);
+
+                    progressDialog = new ProgressDialog(getContext());
+                    progressDialog.setTitle("Deleting Donation");
+                    progressDialog.show();
+
+
                     // Fetch the donation
                     db.collection("Donations")
-                            .whereEqualTo("donateOwner", donations.getDogOwner())
+                            .whereEqualTo("donateName", donations.getDonationName())
                             .get()
                             .addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         // Delete the donation
                                         db.collection("Donations").document(document.getId()).delete();
+                                        Toast.makeText(getContext(), "Donation deleted", Toast.LENGTH_SHORT).show();
+                                        progressDialog.dismiss();
                                     }
                                 } else {
                                     Log.d(TAG, "Error getting documents: ", task.getException());

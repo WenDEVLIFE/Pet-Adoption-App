@@ -1,5 +1,6 @@
 package com.example.pet_adoption_app;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -44,6 +45,8 @@ public class Add_Donations extends Fragment {
     Button AddDonations;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    ProgressDialog progressDialog;
     public Add_Donations() {
         // Required empty public constructor
     }
@@ -152,6 +155,10 @@ public class Add_Donations extends Fragment {
 
     private void InsertDatabase(String donateName, String donateOwner, String donateDescription) {
 
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Adding Donation");
+        progressDialog.show();
+
         // This will insert the data to the database
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
@@ -179,6 +186,7 @@ public class Add_Donations extends Fragment {
                                     // This will clear the EditText on the Ui
                                     DonationName.setText("");
                                     Descriptions.setText("");
+                                    progressDialog.dismiss();
                                 })
                                 .show();
                         alertDialog.show();
@@ -190,6 +198,7 @@ public class Add_Donations extends Fragment {
                                 .setPositiveButton("OK", null)
                                 .show();
                         alertDialog.show();
+                        progressDialog.dismiss();
                     });
 
 
