@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -134,41 +136,49 @@ public class ReportFragment extends Fragment {
             bundle.putString("username", username);
             bundle.putString("name", name);
             homeFragment.setArguments(bundle);
+            replaceFragement(homeFragment);
         });
+
 
         // Get the add button and set the on click listener
         addReport = rootview.findViewById(R.id.AddButton);
         addReport.setOnClickListener(v->{
 
             // Get the values from the edit text fields
-            long phone_number = Long.parseLong(phone.getText().toString());
-            String phone_number_string = Long.toString(phone_number);
+            String phoneNumberString = phone.getText().toString();
+            long phoneNumber = 0;
+            if (!phoneNumberString.isEmpty() && phoneNumberString.matches("[0-9]+")) {
+                phoneNumber = Long.parseLong(phoneNumberString);
+            } else {
+                Toast.makeText(getContext(), "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
+                return;
+            }
             String email_address = email.getText().toString();
             String dog_owner = dogOwner.getText().toString();
             String description = descriptions.getText().toString();
 
 
             // Check if the fields are empty
-            if( email_address.equals("") || dog_owner.equals("") || description.equals("") || imageUri == null || phone_number_string.length()<=12) {
+            if( email_address.equals("") || dog_owner.equals("") || description.equals("") || imageUri == null || phoneNumberString.length()<=12) {
                 Toast.makeText(getContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
             }
             else {
 
                 // Check if the email address is valid
-             if(email_address.endsWith( "@gmail.com") || email_address.endsWith( "@yahoo.com") || email_address.endsWith( "@hotmail.com") || email_address.endsWith( "@outlook.com") || email_address.endsWith( "@aol.com") || email_address.endsWith( "@protonmail.com") || email_address.endsWith( "@zoho.com") || email_address.endsWith( "@icloud.com") || email_address.endsWith( "@yandex.com") || email_address.endsWith( "@mail.com") || email_address.endsWith( "@gmx.com") || email_address.endsWith( "@tutanota.com") || email_address.endsWith( "@mail.ru") || email_address.endsWith( "@inbox.lv") || email_address.endsWith( "@yopmail.com") || email_address.endsWith( "@mailinator.com") || email_address.endsWith( "@guerrillamail.com") || email_address.endsWith( "@10minutemail.com") || email_address.endsWith( "@temp-mail.org") || email_address.endsWith( "@maildrop.cc") || email_address.endsWith( "@mailnesia.com") || email_address.endsWith( "@mailinator2.com") || email_address.endsWith( "@mailinator.net") || email_address.endsWith( "@mailinator.org") || email_address.endsWith( "@sogetthis.com") || email_address.endsWith( "@mailinator.com") || email_address.endsWith( "@mailinator.co.uk") || email_address.endsWith( "@mailinator.co") || email_address.endsWith( "@mailinator.biz") || email_address.endsWith( "@mailinator.info") || email_address.endsWith( "@mailinator.jp") || email_address.endsWith( "@mailinator.us") || email_address.endsWith( "@mailinator.ca") || email_address.endsWith( "@mailinator.net") || email_address.endsWith( "@mailinator.org") || email_address.endsWith( "@mailinator.info") || email_address.endsWith( "@mailinator.jp") || email_address.endsWith( "@mailinator.us") || email_address.endsWith( "@mailinator.ca") || email_address.endsWith( "@mailinator.net") || email_address.endsWith( "@mailinator.org") || email_address.endsWith( "@mailinator.info") || email_address.endsWith( "@mailinator.jp") || email_address.endsWith( "@mailinator.us") || email_address.endsWith( "@mailinator.ca") || email_address.endsWith( "@mailinator.net") || email_address.endsWith( "@mailinator.org") || email_address.endsWith( "@mailinator.info") || email_address.endsWith( "@mailinator.jp") || email_address.endsWith( "@mailinator.us")) {
+                if(email_address.endsWith( "@gmail.com") || email_address.endsWith( "@yahoo.com") || email_address.endsWith( "@hotmail.com") || email_address.endsWith( "@outlook.com") || email_address.endsWith( "@aol.com") || email_address.endsWith( "@protonmail.com") || email_address.endsWith( "@zoho.com") || email_address.endsWith( "@icloud.com") || email_address.endsWith( "@yandex.com") || email_address.endsWith( "@mail.com") || email_address.endsWith( "@gmx.com") || email_address.endsWith( "@tutanota.com") || email_address.endsWith( "@mail.ru") || email_address.endsWith( "@inbox.lv") || email_address.endsWith( "@yopmail.com") || email_address.endsWith( "@mailinator.com") || email_address.endsWith( "@guerrillamail.com") || email_address.endsWith( "@10minutemail.com") || email_address.endsWith( "@temp-mail.org") || email_address.endsWith( "@maildrop.cc") || email_address.endsWith( "@mailnesia.com") || email_address.endsWith( "@mailinator2.com") || email_address.endsWith( "@mailinator.net") || email_address.endsWith( "@mailinator.org") || email_address.endsWith( "@sogetthis.com") || email_address.endsWith( "@mailinator.com") || email_address.endsWith( "@mailinator.co.uk") || email_address.endsWith( "@mailinator.co") || email_address.endsWith( "@mailinator.biz") || email_address.endsWith( "@mailinator.info") || email_address.endsWith( "@mailinator.jp") || email_address.endsWith( "@mailinator.us") || email_address.endsWith( "@mailinator.ca") || email_address.endsWith( "@mailinator.net") || email_address.endsWith( "@mailinator.org") || email_address.endsWith( "@mailinator.info") || email_address.endsWith( "@mailinator.jp") || email_address.endsWith( "@mailinator.us") || email_address.endsWith( "@mailinator.ca") || email_address.endsWith( "@mailinator.net") || email_address.endsWith( "@mailinator.org") || email_address.endsWith( "@mailinator.info") || email_address.endsWith( "@mailinator.jp") || email_address.endsWith( "@mailinator.us")) {
 
-                 // Check if the phone number is 10 digits
-                 if(phone_number_string.length() == 10) {
+                    // Check if the phone number is 10 digits
+                    if(phoneNumberString.length() == 11) {
 
-                     // Call the insert report method
-                     InsertReport(phone_number, email_address, dog_owner, description, imageUri);
-                 }
+                        // Call the insert report method
+                        InsertReport(phoneNumber, email_address, dog_owner, description, imageUri);
+                    }
 
                 } else{
 
                     Toast.makeText(getContext(), "Please enter a valid email address", Toast.LENGTH_SHORT).show();
 
-             }
+                }
 
             }
 
@@ -176,7 +186,9 @@ public class ReportFragment extends Fragment {
 
 
 
-    return rootview;
+
+
+        return rootview;
     }
 
     private void InsertReport(long phoneNumber, String emailAddress, String dogOwner, String description, Uri imageUri) {
@@ -275,6 +287,13 @@ public class ReportFragment extends Fragment {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
+    private void replaceFragement(Fragment fragment) {
 
+        // Call the fragment manager and begin the transaction to replace the fragment
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+    }
 
 }
