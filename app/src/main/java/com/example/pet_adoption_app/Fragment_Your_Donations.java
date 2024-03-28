@@ -127,6 +127,20 @@ public class Fragment_Your_Donations extends Fragment implements DonationRequest
                     if (donation.getDonationName().toLowerCase().contains(userInput)) {
                         searchList.add(donation);
                     }
+
+                    else {
+
+                        // Check if the pet name or breed contains the search query
+                        if (donation.getDonationName().toLowerCase().contains(userInput) || donation.getDogOwner().toLowerCase().contains(userInput)) {
+                            searchList.add(donation);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Search Results");
+                            builder.setMessage("No results found");
+                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                            builder.show();
+                        }
+                    }
                 }
 
                 // This will search the donation list
@@ -151,6 +165,20 @@ public class Fragment_Your_Donations extends Fragment implements DonationRequest
                     // This will search the donation list
                     if (donation.getDonationName().toLowerCase().contains(userInput)) {
                         searchList.add(donation);
+                    }
+
+                    else {
+                        // Check if the pet name or breed contains the search query
+                        if (donation.getDonationName().toLowerCase().contains(userInput) || donation.getDogOwner().toLowerCase().contains(userInput)) {
+                            searchList.add(donation);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Search Results");
+                            builder.setMessage("No results found");
+                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                            builder.show();
+                        }
+
                     }
                 }
 

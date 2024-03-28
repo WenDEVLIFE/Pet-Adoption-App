@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -123,6 +124,17 @@ public class Fragment_Lost_Pets extends Fragment implements  LostAdapter.onCance
                     // Check if the pet name or breed contains the search query
                     if (pet.getName().toLowerCase().contains(userInput) || pet.getBreed().toLowerCase().contains(userInput)) {
                         newList.add(pet);
+                    } else{
+                        // Check if the pet name or breed contains the search query
+                        if (pet.getName().toLowerCase().contains(userInput) || pet.getBreed().toLowerCase().contains(userInput)) {
+                            newList.add(pet);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Search Results");
+                            builder.setMessage("No results found");
+                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                            builder.show();
+                        }
                     }
                 }
 
@@ -145,6 +157,18 @@ public class Fragment_Lost_Pets extends Fragment implements  LostAdapter.onCance
                     // Check if the pet name or breed contains the search query
                     if (pet.getName().toLowerCase().contains(userInput) || pet.getBreed().toLowerCase().contains(userInput)) {
                         newList.add(pet);
+                    }
+                    else {
+                        // Check if the pet name or breed contains the search query
+                        if (pet.getName().toLowerCase().contains(userInput) || pet.getBreed().toLowerCase().contains(userInput)) {
+                            newList.add(pet);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Search Results");
+                            builder.setMessage("No results found");
+                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                            builder.show();
+                        }
                     }
                 }
 

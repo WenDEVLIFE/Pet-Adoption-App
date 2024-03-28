@@ -125,6 +125,17 @@ public class YourPet_Fragement extends Fragment implements YourPetAdapter.onCanc
 
                        // Add the pet to the new list
                         newList.add(pet);
+                    } else{
+                        // Check if the pet name or breed contains the search query
+                        if  (pet.getName().toLowerCase().contains(userInput)) {
+                            newList.add(pet);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Search Results");
+                            builder.setMessage("No results found");
+                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                            builder.show();
+                        }
                     }
                 }
 
@@ -148,6 +159,17 @@ public class YourPet_Fragement extends Fragment implements YourPetAdapter.onCanc
                     if (pet.getName().toLowerCase().contains(userInput) || pet.getBreed().toLowerCase().contains(userInput)) {
                         // Add the pet to the new list
                         newList.add(pet);
+                    } else{
+                        // Check if the pet name or breed contains the search query
+                        if  (pet.getName().toLowerCase().contains(userInput)) {
+                            newList.add(pet);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Search Results");
+                            builder.setMessage("No results found");
+                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                            builder.show();
+                        }
                     }
                 }
 

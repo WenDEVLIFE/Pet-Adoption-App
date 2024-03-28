@@ -129,6 +129,17 @@ public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapt
 
                         // then add the pet to the new list
                         newList.add(pet);
+                    } else{
+                        // Check if the pet name or breed contains the search query
+                        if  (pet.getName().toLowerCase().contains(userInput)) {
+                            newList.add(pet);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Search Results");
+                            builder.setMessage("No results found");
+                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                            builder.show();
+                        }
                     }
                 }
 
@@ -154,6 +165,17 @@ public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapt
 
                         // then add the pet to the new list
                         newList.add(pet);
+                    } else{
+                        // Check if the pet name or breed contains the search query
+                        if  (pet.getName().toLowerCase().contains(userInput)) {
+                            newList.add(pet);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Search Results");
+                            builder.setMessage("No results found");
+                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                            builder.show();
+                        }
                     }
                 }
 
