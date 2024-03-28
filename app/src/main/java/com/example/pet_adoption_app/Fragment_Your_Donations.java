@@ -115,11 +115,49 @@ public class Fragment_Your_Donations extends Fragment implements DonationRequest
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
+                // This will search the donation list
+                String userInput = query.toLowerCase();
+
+                // This will search the donation list
+                ArrayList<Donation> searchList = new ArrayList<>();
+                for (Donation donation : donationList) {
+
+                    // This will search the donation list
+                    if (donation.getDonationName().toLowerCase().contains(userInput)) {
+                        searchList.add(donation);
+                    }
+                }
+
+                // This will search the donation list
+                adapter.searchList(searchList);
+
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
+                // This will search the donation list
+               String userInput = newText.toLowerCase();
+
+               // This will search the donation list
+                ArrayList<Donation> searchList = new ArrayList<>();
+
+                // This will search the donation list
+                for (Donation donation : donationList) {
+
+                    // This will search the donation list
+                    if (donation.getDonationName().toLowerCase().contains(userInput)) {
+                        searchList.add(donation);
+                    }
+                }
+
+                // This will search the donation list
+                adapter.searchList(searchList);
+
+
                 return true;
             }
         });

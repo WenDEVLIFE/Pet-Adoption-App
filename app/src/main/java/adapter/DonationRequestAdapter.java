@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.pet_adoption_app.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ClassPackage.Donation;
@@ -35,6 +36,11 @@ public class DonationRequestAdapter extends RecyclerView.Adapter<DonationRequest
 
     public void SearchDonations(List<Donation> newList) {
         donationList = newList;
+        notifyDataSetChanged();
+    }
+
+    public void searchList(ArrayList<Donation> searchList) {
+        donationList = searchList;
         notifyDataSetChanged();
     }
 
