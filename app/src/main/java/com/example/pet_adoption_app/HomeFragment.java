@@ -1,5 +1,6 @@
 package com.example.pet_adoption_app;
 
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -83,6 +84,7 @@ public class HomeFragment extends Fragment {
             ImageButton ButtonAdoptRequest = rootView.findViewById(R.id.adopt_request);
             ImageButton Transaction_History = rootView.findViewById(R.id.transaction_history);
             ImageButton Report = rootView.findViewById(R.id.report);
+            ImageButton Donationreceive = rootView.findViewById(R.id.donatebutton2);
 
 
             // Get the username and name from the bundle
@@ -177,6 +179,19 @@ public class HomeFragment extends Fragment {
                 bundle.putString("name", name);
                 fragment.setArguments(bundle);
                 replaceFragement(fragment);
+            });
+
+            Donationreceive.setOnClickListener(v -> {
+                // Handle button pending click
+                // This will go to report
+             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Donation Received");
+                builder.setMessage("Thank you for your donation");
+                builder.setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                });
+                builder.show();
+
             });
         }
 
