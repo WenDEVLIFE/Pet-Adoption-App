@@ -90,7 +90,7 @@ public class DonationRequestAdapter extends RecyclerView.Adapter<DonationRequest
             DoneOwner = itemView.findViewById(R.id.donateowner);
             Donatedescription = itemView.findViewById(R.id.petdescription);
             Donatedescription.setEnabled(false);
-            Cancel = itemView.findViewById(R.id.donate);
+            Cancel = itemView.findViewById(R.id.deletebutton);
 
 
 

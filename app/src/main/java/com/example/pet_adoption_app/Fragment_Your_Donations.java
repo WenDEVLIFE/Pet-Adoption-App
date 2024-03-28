@@ -1,23 +1,45 @@
 package com.example.pet_adoption_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import ClassPackage.Donation;
+import ClassPackage.PetsPending;
+import adapter.DonationAdapter;
+import adapter.DonationRequestAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Fragment_Your_Donations#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Your_Donations extends Fragment {
+public class Fragment_Your_Donations extends Fragment implements DonationRequestAdapter.onCancelListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +51,14 @@ public class Fragment_Your_Donations extends Fragment {
     private String mParam2;
 
      String username, name;
+
+    RecyclerView recyclerView;
+
+    private List<Donation> donationList;
+
+    private DonationRequestAdapter adapter;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public Fragment_Your_Donations() {
         // Required empty public constructor
@@ -96,6 +126,15 @@ public class Fragment_Your_Donations extends Fragment {
         btnback.setOnClickListener(v ->
                 goHomeFragmenet());
 
+        recyclerView = rootview.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        donationList = new ArrayList<>();
+        adapter = new DonationRequestAdapter(donationList);
+        recyclerView.setAdapter(adapter);
+
+        adapter.setOnCancelListener(this);
+        LoadDonations();
+
     return rootview;
     }
 
@@ -116,4 +155,75 @@ public class Fragment_Your_Donations extends Fragment {
         fragment.setArguments(bundle);
         replaceFragement(fragment);
     }
+    private void LoadDonations() {
+        // Retrieve the data from Firestore
+        db.collection("Donations").addSnapshotListener((value, e) -> {
+            if (e != null) {
+                Log.w(TAG, "Listen failed.", e);
+                return;
+            }
+
+            donationList.clear();
+            for (QueryDocumentSnapshot doc : value) {
+
+            String donateOwner = doc.getString("donateOwner");
+            if (donateOwner.equals(name)) {
+                Donation donation = new Donation(doc.getString("donateName"), doc.getString("donateOwner"), doc.getString("donateDescription"));
+                donationList.add(donation);
+            }
+
+            }
+            adapter.notifyDataSetChanged();
+        });
+
+    }
+    @Override
+    public void onCancel(int position) {
+
+        AlertDialog deletedialog = new AlertDialog.Builder(getContext())
+                .setTitle("Delete Donation")
+                .setMessage("Are you sure you want to delete this donation?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    Donation donations = donationList.get(position);
+                    // Fetch the donation
+                    db.collection("Donations")
+                            .whereEqualTo("donateOwner", donations.getDogOwner())
+                            .get()
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        // Delete the donation
+                                        db.collection("Donations").document(document.getId()).delete();
+                                    }
+                                } else {
+                                    Log.d(TAG, "Error getting documents: ", task.getException());
+                                }
+                            });
+                    donationList.remove(position);
+                    adapter.notifyDataSetChanged();
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        // Get the current date
+                        LocalDate date = LocalDate.now();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String formattedDate = date.format(formatter);
+
+                        // Create a new transaction
+                        HashMap<String, Object> transaction = new HashMap<>();
+                        transaction.put("Transaction", "You have deleted an adoption request for " + donations.getDogOwner() + " on " + formattedDate);
+                        transaction.put("name", name);
+                        transaction.put("date", formattedDate);
+
+                        db.collection("Transaction").document().set(transaction);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .create();
+        deletedialog.show();
+        deletedialog.show();
+
+
+
+    }
+
+
 }
