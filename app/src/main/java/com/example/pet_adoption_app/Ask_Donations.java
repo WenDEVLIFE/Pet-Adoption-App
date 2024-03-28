@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -132,7 +133,59 @@ public class Ask_Donations extends Fragment implements  DonationAdapter.onCancel
             replaceFragement(add_donations);
 
         });
+        // Our search view
+        SearchView searchView = rootview.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
 
+                // This will search the pet by name
+                String userInput = query.toLowerCase();
+
+                // filtered the value
+                List<Donation> newList = new ArrayList<>();
+
+                // This will search the pet by name
+                for (Donation donate : newList) {
+
+                    // then if the pet name contains the user input
+                    if (donate.getDonationName().toLowerCase().contains(userInput)) {
+
+                        // then add the pet to the new list
+                        newList.add(donate);
+                    }
+                }
+
+                // then search the pet
+                adapter.SearchDonations(newList);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                // This will search the pet by name
+                String userInput = newText.toLowerCase();
+
+                // filtered the value
+                List<Donation> newList = new ArrayList<>();
+
+                // This will search the pet by name
+                for (Donation donate : newList) {
+
+                    // then if the pet name contains the user input
+                    if (donate.getDonationName().toLowerCase().contains(userInput)) {
+
+                        // then add the pet to the new list
+                        newList.add(donate);
+                    }
+                }
+
+                // then search the pet
+                adapter.SearchDonations(newList);
+                return  true;
+            }
+        });
 
         recyclerView = rootview.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

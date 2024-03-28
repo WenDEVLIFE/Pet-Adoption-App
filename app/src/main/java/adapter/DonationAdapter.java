@@ -33,7 +33,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.Donati
         this.donationList = donationList;
     }
 
-    public void searchPets(List<Donation> newList) {
+    public void SearchDonations(List<Donation> newList) {
         donationList = newList;
         notifyDataSetChanged();
     }
