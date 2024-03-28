@@ -33,6 +33,7 @@ import java.util.List;
 
 import ClassPackage.Donation;
 import ClassPackage.Pets;
+import adapter.DonateFragments;
 import adapter.DonationAdapter;
 import adapter.PetAdapter;
 
@@ -233,14 +234,17 @@ public class Ask_Donations extends Fragment implements  DonationAdapter.onCancel
     public void onCancel(int position) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Go TO Donation");
+        builder.setTitle("Go To Donation");
         builder.setMessage("Do you want to go to donation page?");
         builder.setPositiveButton("Yes", (dialog, which) -> {
+
+            Donation donation = donationList.get(position);
             // This will go to ask donation form
-            Add_Donations add_donations = new Add_Donations();
+            DonateFragments add_donations = new DonateFragments();
             Bundle bundle = new Bundle();
             bundle.putString("username", username);
             bundle.putString("name", name);
+            bundle.putString("donateName", donation.getDogOwner());
             add_donations.setArguments(bundle);
             replaceFragement(add_donations);
         });

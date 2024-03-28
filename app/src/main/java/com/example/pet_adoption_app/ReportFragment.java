@@ -129,7 +129,7 @@ public class ReportFragment extends Fragment {
         ImageButton btnback = rootview.findViewById(R.id.buttonnback);
         btnback.setOnClickListener(v->{
             // This will go back to home fragments
-            HomeFragment homeFragment = new HomeFragment();
+            Fragment_Lost_Pets homeFragment = new Fragment_Lost_Pets();
             Bundle bundle = new Bundle();
             bundle.putString("username", username);
             bundle.putString("name", name);
@@ -149,7 +149,7 @@ public class ReportFragment extends Fragment {
 
 
             // Check if the fields are empty
-            if(phone_number == 0 || email_address.equals("") || dog_owner.equals("") || description.equals("") || imageUri == null) {
+            if( email_address.equals("") || dog_owner.equals("") || description.equals("") || imageUri == null || phone_number_string.length()<=12) {
                 Toast.makeText(getContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
             }
             else {

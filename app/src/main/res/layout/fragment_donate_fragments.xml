@@ -1,13 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="adapter.DonateFragments">
+        tools:context=".AddAdopt"
+        android:background="@drawable/background_gradient">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="@dimen/_310sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@drawable/panes2"
+                    android:id="@+id/constraintLayout3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="4dp">
+
+                <TextView
+                        android:layout_width="305dp"
+                        android:layout_height="55dp"
+                        android:textColor="@color/white"
+                        android:id="@+id/textVie1"
+                        android:text="Donate"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textSize="@dimen/_30sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintVertical_bias="0.516" />
+
+                <ImageButton
+                        android:src="?attr/homeAsUpIndicator"
+                        android:layout_width="60dp"
+                        android:layout_height="56dp"
+                        android:id="@+id/buttonnback"
+                        app:tint="@drawable/buttontint"
+                        android:background="@android:color/transparent"
+                        app:layout_constraintEnd_toStartOf="@+id/textVie1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintHorizontal_bias="0.432"
+                        app:layout_constraintVertical_bias="0.516" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <EditText
+                    android:layout_width="@dimen/_280sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:hint="Donated Name"
+                    android:padding="@dimen/_15sdp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:background="@drawable/textfield"
+                    android:id="@+id/donatednames"
+                    app:layout_constraintTop_toBottomOf="@+id/donatename"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintHorizontal_bias="0.448" />
+
+            <EditText
+                    android:layout_width="@dimen/_280sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:padding="@dimen/_15sdp"
+                    android:hint="Donate Item Name"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:background="@drawable/textfield"
+                    android:id="@+id/donatename"
+                    app:layout_constraintTop_toBottomOf="@+id/importimage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintHorizontal_bias="0.425" />
+
+            <EditText
+                    android:layout_width="@dimen/_280sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:hint="Donate To "
+                    android:textColor="@color/black"
+                    android:padding="@dimen/_15sdp"
+                    android:textColorHint="@color/black"
+                    android:background="@drawable/textfield"
+                    android:id="@+id/donatesended"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/donatednames"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintHorizontal_bias="0.36" />
+
+            <EditText
+                    android:layout_width="@dimen/_280sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    android:ems="10"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:gravity="top|start"
+                    android:maxLength="500"
+                    android:hint="Description"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:background="@drawable/textfield"
+                    android:id="@+id/description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/donatesended"
+                    app:layout_constraintHorizontal_bias="0.375"
+                    android:layout_marginTop="16dp" />
+
+            <Button
+                    android:text="Submit Donation"
+                    android:background="@drawable/button"
+                    android:layout_width="227dp"
+                    android:layout_height="79dp"
+                    android:id="@+id/AddButton"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@+id/description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="28dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.559"
+                    app:layout_constraintVertical_bias="1.0" />
+
+            <Button
+                    android:text="Import Image"
+                    android:background="@drawable/button"
+                    android:layout_width="205dp"
+                    android:layout_height="54dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/importimage"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="123dp"
+                    android:layout_height="123dp"
+                    android:background="@drawable/panes"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+                    android:id="@+id/constraintLayout4"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintHorizontal_bias="0.496">
+
+                <ImageView
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        tools:src="@tools:sample/avatars"
+                        android:id="@+id/imageView4"
+                        android:scaleType="fitXY"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0.515"
+                        app:layout_constraintVertical_bias="0.473" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                    android:text="Donate Image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView9"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_20sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+                    android:layout_marginTop="28dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </FrameLayout>
