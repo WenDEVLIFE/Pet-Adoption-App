@@ -139,24 +139,24 @@ public class Ask_Donations extends Fragment implements  DonationAdapter.onCancel
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                // This will search the pet by name
+                // This will search the donations by name
                 String userInput = query.toLowerCase();
 
                 // filtered the value
                 List<Donation> newList = new ArrayList<>();
 
-                // This will search the pet by name
+                // This will search the donations by name
                 for (Donation donate : newList) {
 
-                    // then if the pet name contains the user input
+                    // then if the donations name contains the user input
                     if (donate.getDonationName().toLowerCase().contains(userInput)) {
 
-                        // then add the pet to the new list
+                        // then add the donations to the new list
                         newList.add(donate);
                     }
                 }
 
-                // then search the pet
+                // then search the donations
                 adapter.SearchDonations(newList);
                 return false;
             }
@@ -164,24 +164,24 @@ public class Ask_Donations extends Fragment implements  DonationAdapter.onCancel
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                // This will search the pet by name
+                // This will search the donations by name
                 String userInput = newText.toLowerCase();
 
                 // filtered the value
                 List<Donation> newList = new ArrayList<>();
 
-                // This will search the pet by name
+                // This will search the donations by name
                 for (Donation donate : newList) {
 
-                    // then if the pet name contains the user input
+                    // then if donations pet name contains the user input
                     if (donate.getDonationName().toLowerCase().contains(userInput)) {
 
-                        // then add the pet to the new list
+                        // then donations the pet to the new list
                         newList.add(donate);
                     }
                 }
 
-                // then search the pet
+                // then search the donations
                 adapter.SearchDonations(newList);
                 return  true;
             }
@@ -202,24 +202,20 @@ public class Ask_Donations extends Fragment implements  DonationAdapter.onCancel
 
     private void LoadDonations() {
         // Retrieve the data from Firestore
-        db.collection("Donations").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value,
-                                @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.w(TAG, "Listen failed.", e);
-                    return;
-                }
-
-                donationList.clear();
-                for (QueryDocumentSnapshot doc : value) {
-                    if (doc.get("name") != null) {
-                        Donation donation = new Donation(doc.getString("donateName"), doc.getString("donateOwner"), doc.getString("donateDescription"));
-                        donationList.add(donation);
-                    }
-                }
-                adapter.notifyDataSetChanged();
+        db.collection("Donations").addSnapshotListener((value, e) -> {
+            if (e != null) {
+                Log.w(TAG, "Listen failed.", e);
+                return;
             }
+
+            donationList.clear();
+            for (QueryDocumentSnapshot doc : value) {
+
+                    Donation donation = new Donation(doc.getString("donateName"), doc.getString("donateOwner"), doc.getString("donateDescription"));
+                    donationList.add(donation);
+
+            }
+            adapter.notifyDataSetChanged();
         });
 
     }
