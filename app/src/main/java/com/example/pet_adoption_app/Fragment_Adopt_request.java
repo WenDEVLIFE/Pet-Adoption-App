@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -276,10 +277,12 @@ public class Fragment_Adopt_request extends Fragment implements PendingPetsAdapt
             // Notify adapter about the change in data set
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 LocalDate date = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String formattedDate = date.format(formatter);
                 HashMap <String, Object> Notifications = new HashMap<>();
                 Notifications.put("Notifications details", "The adoption request for " + pet.getName() + " has been cancelled");
                 Notifications.put("name", pet.getAdopt_requets());
-                Notifications.put("date", date);
+                Notifications.put("date", formattedDate);
                 db.collection("Notifications").document().set(Notifications);
             }
 

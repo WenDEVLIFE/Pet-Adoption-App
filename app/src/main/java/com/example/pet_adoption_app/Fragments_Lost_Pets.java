@@ -27,6 +27,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -213,11 +214,18 @@ public class Fragments_Lost_Pets extends Fragment implements  YourLostPetsAdapte
 
 
                                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                        // Get the current date
+                                        LocalDate date = LocalDate.now();
+                                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                        String formattedDate = date.format(formatter);
+
+                                       // This will insert the data to the database
                                         HashMap<String, Object> transaction = new HashMap<>();
                                         transaction.put("Transaction", "You Delete the Adoption of " + pet.getName() + " Pet from the Lost Pets List ");
-                                        LocalDate date = LocalDate.now();
                                         transaction.put("name", pet.getOwner());
-                                        transaction.put("date", date.toString());
+                                        transaction.put("date", formattedDate);
+
+                                        // This will insert the data to the database
                                         db.collection("Transaction").document().set(transaction);
                                     }
 

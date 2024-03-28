@@ -28,6 +28,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -248,11 +249,17 @@ public class Fragment_Adopted_pets extends Fragment implements AdoptedAdapter.on
 
 
                                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                        // Get the current date
+                                        LocalDate date = LocalDate.now();
+                                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                        String formattedDate = date.format(formatter);
+
+                                        // Create a new transaction
                                         HashMap<String, Object> transaction = new HashMap<>();
                                         transaction.put("Transaction", "The adoption request for " + pet.getName() + " has been cancelled");
-                                        LocalDate date = LocalDate.now();
                                         transaction.put("name", pet.getOwner());
-                                        transaction.put("date", date.toString());
+                                        transaction.put("date", formattedDate);
+
                                         db.collection("Transaction").document().set(transaction);
                                     }
 

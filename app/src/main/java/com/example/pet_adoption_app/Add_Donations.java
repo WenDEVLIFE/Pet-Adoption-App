@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 /**
@@ -153,13 +154,21 @@ public class Add_Donations extends Fragment {
 
         // This will insert the data to the database
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+            // This will get the current date
             LocalDate date = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedDate = date.format(formatter);
+
+            // This will insert the data to the database
             HashMap <String, Object> donations = new HashMap<>();
             donations.put("donateName", donateName);
             donations.put("donateOwner", donateOwner);
             donations.put("donateDescription", donateDescription);
-            donations.put("date" , date);
+            donations.put("date" , formattedDate);
 
+
+            //  This will insert the data to the database
             db.collection("Donations").document().set(donations)
                     .addOnSuccessListener(aVoid -> {
                         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
