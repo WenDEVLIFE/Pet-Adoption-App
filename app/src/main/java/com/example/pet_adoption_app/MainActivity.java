@@ -150,12 +150,18 @@ public class MainActivity extends AppCompatActivity {
 
                             } else {
                                 Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                                // Dismiss the progress dialog
+                                progressDialog.dismiss();
                             }
                         } else {
                             Toast.makeText(this, "This User don't exist", Toast.LENGTH_SHORT).show();
+                            // Dismiss the progress dialog
+                            progressDialog.dismiss();
                         }
                     } else {
                         Log.d(TAG, "onFailure: " + task.getException().toString());
+                        // Dismiss the progress dialog
+                        progressDialog.dismiss();
                     }
                 });
 

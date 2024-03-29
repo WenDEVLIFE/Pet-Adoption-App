@@ -189,25 +189,17 @@ public class DonateFragments extends Fragment {
         // Create a reference to the file to be uploaded
         StorageReference fileReference = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
 
-
         // Upload the file to Firebase Storage
         fileReference.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
             // Get the download URL of the uploaded file
             fileReference.getDownloadUrl().addOnSuccessListener(uri -> {
                 // Create a new document for the dog
-                 HashMap<String, Object> donations = new HashMap<>();
+                HashMap<String, Object> donations = new HashMap<>();
                 donations.put("donateItemName", donateItemName);
                 donations.put("donatedName", donatedName);
                 donations.put("donateTo", donateTo);
                 donations.put("donatedDescription", donatedDescription);
                 donations.put("image", uri.toString());
-
-                // Clear the EditText fields
-                DonateItem.setText("");
-                DonatedDescription.setText("");
-                imageView.setImageResource(0);
-
-
 
                 // Add the document to the Firestore collection
                 db.collection("Donated").add(donations)
@@ -224,16 +216,15 @@ public class DonateFragments extends Fragment {
 
                                 // Create a new document for the notification
                                 HashMap <String, Object> Notifications = new HashMap<>();
-                                Notifications.put("Notifications details","The user "+ DonatedName +" Successfully donated to " + donateTo + " on " + formattedDate + " Thank you for your donation");
+                                Notifications.put("Notifications details","The user "+ donatedName +" Successfully donated to " + donateTo + " on " + formattedDate + " Thank you for your donation");
                                 Notifications.put("name", donateTo);
                                 Notifications.put("date", formattedDate);
                                 db.collection("Notifications").document().set(Notifications);
 
-
                                 // Create a new transaction
                                 HashMap<String, Object> transaction = new HashMap<>();
                                 transaction.put("Transaction", "You sent a donation to " + donateTo + " on " + formattedDate + " Thank you for your donation");
-                                transaction.put("name", DonatedName);
+                                transaction.put("name", donatedName);
                                 transaction.put("date", formattedDate);
 
                                 db.collection("Transaction").document().set(transaction);

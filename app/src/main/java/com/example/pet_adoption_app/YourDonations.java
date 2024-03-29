@@ -24,6 +24,8 @@ public class YourDonations extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    String username, name;
+
     public YourDonations() {
         // Required empty public constructor
     }
@@ -52,13 +54,25 @@ public class YourDonations extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // Get the username and name from the previous fragment
+        if (getArguments() != null) {
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+        }
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_your_donations, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_your_donations, container, false);
+
+
+    return rootview;
     }
 }
