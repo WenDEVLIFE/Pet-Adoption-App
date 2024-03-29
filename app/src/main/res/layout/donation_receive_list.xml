@@ -127,11 +127,12 @@
                 android:layout_height="@dimen/_150sdp"
                 app:srcCompat="@drawable/donatebox"
                 android:id="@+id/imageView6"
+                android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="16dp"
-                app:layout_constraintHorizontal_bias="0.538" />
+                app:layout_constraintHorizontal_bias="0.507" />
 
         <EditText
                 android:layout_width="@dimen/_160sdp"

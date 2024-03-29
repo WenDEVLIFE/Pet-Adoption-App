@@ -1,22 +1,42 @@
 package com.example.pet_adoption_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ClassPackage.DonationReceive;
+import ClassPackage.Pets;
+import adapter.DonationReceivedAdapter;
+import adapter.PetAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DonationReceived#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DonationReceived extends Fragment {
+public class DonationReceived extends Fragment implements DonationReceivedAdapter.onAdoptListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +48,14 @@ public class DonationReceived extends Fragment {
     private String mParam2;
 
     String username, name;
+
+    RecyclerView recyclerView;
+
+    private List<DonationReceive> donationReceiveList;
+
+    private DonationReceivedAdapter adapter;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     public DonationReceived() {
@@ -89,7 +117,44 @@ public class DonationReceived extends Fragment {
 
         });
 
+        recyclerView = rootview.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        donationReceiveList = new ArrayList<>();
+        adapter = new DonationReceivedAdapter(donationReceiveList);
+        recyclerView.setAdapter(adapter);
+
+        // Ensure MainActivity implements OnDeleteClickListener
+        adapter.setOnAdoptListener(this);
+        LoadDonationReceive();
+
     return rootview;
+    }
+
+    private void LoadDonationReceive() {
+        // Retrieve the data from Firestore
+        db.collection("Donated").addSnapshotListener((value, e) -> {
+            if (e != null) {
+                Log.w(TAG, "Listen failed.", e);
+                return;
+            }
+
+            donationReceiveList.clear();
+            for (QueryDocumentSnapshot doc : value) {
+               String donatedby = doc.getString("donatedName");
+               if(donatedby.equals(name)){
+                   String donatename = doc.getString("donateItemName");
+                   String donateto = doc.getString("donateTo");
+                   String description = doc.getString("donatedDescription");
+                   String image = doc.getString("image");
+                      DonationReceive donationReceive = new DonationReceive(donatename, donateto, donatedby, description, image);
+                      donationReceiveList.add(donationReceive);
+
+               }
+
+            }
+            adapter.notifyDataSetChanged();
+        });
+
     }
 
     private void replaceFragement(Fragment fragment) {
@@ -101,4 +166,8 @@ public class DonationReceived extends Fragment {
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void onAdopt(int position) {
+
+    }
 }
