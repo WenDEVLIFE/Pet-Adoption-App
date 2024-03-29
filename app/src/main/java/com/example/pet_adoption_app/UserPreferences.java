@@ -80,21 +80,37 @@ public class UserPreferences extends Fragment {
         ImageButton btnback = rootview.findViewById(R.id.buttonnback);
         btnback.setOnClickListener(v->{
             // This will go back to home fragments
-            replaceFragement(new HomeFragment());
+            HomeFragment fragment = new HomeFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
         });
 
         Button ChangeUser = rootview.findViewById(R.id.change_userbutton);
         ChangeUser.setOnClickListener(v->
         {
             // This will go to change user name fragment
-            replaceFragement(new ChangeUserName_Fragment());
+            ChangeUserName_Fragment fragment = new ChangeUserName_Fragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
         });
 
         Button ChangePassword = rootview.findViewById(R.id.change_passwordbutton);
         ChangePassword.setOnClickListener(v->
         {
             // This will go to change password fragment
-            replaceFragement(new Change_Password());
+            Change_Password fragment = new Change_Password();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
+            replaceFragement(fragment);
+
         });
 
 
@@ -102,7 +118,11 @@ public class UserPreferences extends Fragment {
         ChangeEmail.setOnClickListener(v->
         {
             // This will go to change email fragment
-            replaceFragement(new Change_Email());
+            Change_Email fragment = new Change_Email();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            fragment.setArguments(bundle);
 
         });
 
