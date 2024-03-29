@@ -114,13 +114,15 @@ public class DonationReceived extends Fragment implements DonationReceivedAdapte
         //  Set the back button to go back to the previous fragment
         ImageButton btnback = rootview.findViewById(R.id.buttonnback);
         btnback.setOnClickListener(v->{
-            // This will go back to home fragments
-            Ask_Donations ask_donations = new Ask_Donations();
+
+            // Create a new instance of the HomeFragment
+            HomeFragment homeFragment = new HomeFragment();
             Bundle bundle = new Bundle();
             bundle.putString("username", username);
             bundle.putString("name", name);
-            ask_donations.setArguments(bundle);
-            replaceFragement(ask_donations);
+            homeFragment.setArguments(bundle);
+            replaceFragement(homeFragment);
+
 
         });
 
@@ -182,7 +184,7 @@ public class DonationReceived extends Fragment implements DonationReceivedAdapte
                 .setPositiveButton("Yes", (dialogInterface, i) -> {
                     DonationReceive donationReceive = donationReceiveList.get(position);
                     db.collection("Donated")
-                            .whereEqualTo("donatedName", donationReceive.getDonateName())
+                            .whereEqualTo("donateItemName", donationReceive.getDonateItemName())
                             .get()
                             .addOnSuccessListener(queryDocumentSnapshots -> {
                                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
