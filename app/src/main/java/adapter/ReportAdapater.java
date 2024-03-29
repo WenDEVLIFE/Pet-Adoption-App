@@ -35,6 +35,11 @@ public class ReportAdapater extends RecyclerView.Adapter<ReportAdapater.PetViewH
         notifyDataSetChanged();
     }
 
+    public void setFilter(List<ReportPet> newList) {
+        reportlist = newList;
+        notifyDataSetChanged();
+    }
+
 
     public interface onCancelListener {
         void onCancel(int position);

@@ -137,11 +137,35 @@ public class YourReportFragment extends Fragment implements ReportAdapater.onCan
                     }
                 }
             }
+            adapter.setFilter(newList);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
+                String userInput = newText.toLowerCase();
+                List<ReportPet> newList = new ArrayList<>();
+                for (ReportPet pet : reportlist) {
+                    if (pet.getOwner().toLowerCase().contains(userInput)) {
+                        newList.add(pet);
+                    }
+                    else {
+
+                        // If the search result is not found
+                        if (pet.getDescription().toLowerCase().contains(userInput)) {
+                            newList.add(pet);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Search Results");
+                            builder.setMessage("No results found");
+                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                            builder.show();
+
+                        }
+                    }
+                }
+                adapter.setFilter(newList);
 
                 return  true;
             }
