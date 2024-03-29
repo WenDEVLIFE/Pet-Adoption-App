@@ -51,7 +51,7 @@ public class DonationReceivedAdapter extends RecyclerView.Adapter<DonationReceiv
     @NonNull
     @Override
     public PetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.petlist, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.donation_receive_list, parent, false);
         return new PetViewHolder(view);
     }
 
@@ -70,30 +70,30 @@ public class DonationReceivedAdapter extends RecyclerView.Adapter<DonationReceiv
     public class PetViewHolder extends RecyclerView.ViewHolder {
 
         // Views in your item layout
-        private final TextView dogname;
-        private final TextView dogbreed;
-        private final TextView dogowner;
+        private final TextView DonateName;
+        private final TextView DonateTo;
+        private final TextView DonatedBy;
 
         private final EditText description;
-        private final Button ADOPTButton;
+        private final Button ReceiveButton;
 
-        private final ImageView dogImage; // Add this line
+        private final ImageView donateimage; // Add this line
 
 
         public PetViewHolder(@NonNull View itemView) {
             super(itemView);
             // Initialize views
-            dogname = itemView.findViewById(R.id.dogname);
-            dogbreed = itemView.findViewById(R.id.dogbreed);
-            dogowner = itemView.findViewById(R.id.dogowner);
-            description = itemView.findViewById(R.id.description);
+            DonateName = itemView.findViewById(R.id.donatename);
+            DonateTo = itemView.findViewById(R.id.donateowner);
+            DonatedBy = itemView.findViewById(R.id.donateby);
+            description = itemView.findViewById(R.id.petdescription);
             description.setEnabled(false);
-            ADOPTButton = itemView.findViewById(R.id.button2);
-            dogImage = itemView.findViewById(R.id.dogimage); // Add this line
+            ReceiveButton = itemView.findViewById(R.id.deletebutton);
+            donateimage = itemView.findViewById(R.id.imageView6); // Add this line
 
 
             // Set click listener for delete button
-            ADOPTButton.setOnClickListener(v -> {
+            ReceiveButton.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION && onAdoptListener != null) {
                     onAdoptListener.onAdopt(position);
@@ -104,16 +104,16 @@ public class DonationReceivedAdapter extends RecyclerView.Adapter<DonationReceiv
 
         public void bind(DonationReceive info) {
             // Bind data to views
-            dogname.setText(info.getDogname());
-            dogbreed.setText(info.getBreed());
-            dogowner.setText(info.getOwner());
-            description.setText(info.getDescription());
+            DonateName.setText(info.getDonateItemName());
+            DonateTo.setText(info.getDonateTo());
+            DonatedBy.setText(info.getDonateName());
+            description.setText(info.getDonateDescription());
 
 
             // Use Glide to load the image from the URL into the ImageView
             Glide.with(itemView.getContext())
                     .load(info.getImageUrl())
-                    .into(dogImage);
+                    .into(donateimage);
 
         }
 
