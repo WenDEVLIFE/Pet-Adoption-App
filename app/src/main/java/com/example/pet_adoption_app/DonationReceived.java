@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,12 +23,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ClassPackage.DonationReceive;
 import ClassPackage.Pets;
+import ClassPackage.PetsPending;
 import adapter.DonationReceivedAdapter;
 import adapter.PetAdapter;
 
@@ -168,6 +175,71 @@ public class DonationReceived extends Fragment implements DonationReceivedAdapte
 
     @Override
     public void onAdopt(int position) {
+
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setTitle("Receive Donation")
+                .setMessage("Are you sure this item is receive?")
+                .setPositiveButton("Yes", (dialogInterface, i) -> {
+                    DonationReceive donationReceive = donationReceiveList.get(position);
+                    db.collection("Donated")
+                            .whereEqualTo("donatedName", donationReceive.getDonateName())
+                            .get()
+                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    // Get the image URL from the document
+                                    String imageUrl = documentSnapshot.getString("image");
+
+                                    // Create a storage reference from our app
+                                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                                    StorageReference storageRef = storage.getReferenceFromUrl(imageUrl);
+
+                                    // Delete the file
+                                    storageRef.delete().addOnSuccessListener(aVoid -> {
+                                        // File deleted successfully
+                                        Log.d(TAG, "onSuccess: deleted file");
+                                    }).addOnFailureListener(exception -> {
+                                        // Uh-oh, an error occurred!
+                                        Log.d(TAG, "onFailure: did not delete file");
+                                    });
+
+                                    documentSnapshot.getReference().delete();
+                                    donationReceiveList.remove(position);
+                                    adapter.notifyDataSetChanged();
+
+                                    AlertDialog dialog1 = new AlertDialog.Builder(getContext())
+                                            .setTitle("Adoption Deleted")
+                                            .setMessage("Adoption has been deleted successfully")
+                                            .setPositiveButton("Ok", null)
+                                            .create();
+                                    dialog1.show();
+
+
+                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                        // Get the current date
+                                        LocalDate date = LocalDate.now();
+                                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                        String formattedDate = date.format(formatter);
+
+                                        // Create a new transaction
+                                        HashMap<String, Object> transaction = new HashMap<>();
+                                        transaction.put("Transaction", "You  have received a donation from " + donationReceive.getDonateName() + " on " + formattedDate + " for " + donationReceive.getDonateItemName() + " to " + donationReceive.getDonateTo());
+                                        transaction.put("name", donationReceive.getDonateName());
+                                        transaction.put("date", formattedDate);
+
+                                        // This will notify the user that the donation request has been approved and received
+                                        HashMap <String, Object> Notifications = new HashMap<>();
+                                        Notifications.put("Notifications details", " The donate has been received a donation from " + donationReceive.getDonateName() + " for " + donationReceive.getDonateItemName() + " to " + donationReceive.getDonateTo() + " on " + formattedDate + "");
+                                        Notifications.put("name", donationReceive.getDonateTo());
+                                        db.collection("Notifications").document().set(Notifications);
+
+                                    }
+
+                                }
+                            });
+                })
+                .setNegativeButton("No", null)
+                .create();
+        dialog.show();
 
     }
 }
