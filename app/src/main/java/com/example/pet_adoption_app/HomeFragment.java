@@ -183,14 +183,13 @@ public class HomeFragment extends Fragment {
 
             Donationreceive.setOnClickListener(v -> {
                 // Handle button pending click
-                // This will go to report
-             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Donation Received");
-                builder.setMessage("Thank you for your donation");
-                builder.setPositiveButton("OK", (dialog, which) -> {
-                    dialog.dismiss();
-                });
-                builder.show();
+                // This will go to donation received
+                DonationReceived fragment = new DonationReceived();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("name", name);
+                fragment.setArguments(bundle);
+                replaceFragement(fragment);
 
             });
         }
