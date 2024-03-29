@@ -29,6 +29,7 @@ public class DonationReceived extends Fragment {
 
     String username, name;
 
+
     public DonationReceived() {
         // Required empty public constructor
     }
