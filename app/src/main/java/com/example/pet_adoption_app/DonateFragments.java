@@ -228,6 +228,11 @@ public class DonateFragments extends Fragment {
                                 transaction.put("date", formattedDate);
 
                                 db.collection("Transaction").document().set(transaction);
+
+                                // Clear the EditText fields
+                                DonatedDescription.setText("");
+                                DonateItem.setText("");
+                                imageView.setImageResource(0);
                             }
                         })
                         .addOnFailureListener(e -> {
