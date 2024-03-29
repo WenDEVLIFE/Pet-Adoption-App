@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -135,6 +136,76 @@ public class DonationReceived extends Fragment implements DonationReceivedAdapte
         // Ensure MainActivity implements OnDeleteClickListener
         adapter.setOnAdoptListener(this);
         LoadDonationReceive();
+
+
+        // Our search view
+        SearchView searchView = rootview.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                // Convert the user input to lowercase
+                String userInput = query.toLowerCase();
+
+                //  Create a new list to store the search results
+                ArrayList<DonationReceive> newList = new ArrayList<>();
+
+                // Loop through the list of donation received
+                for(DonationReceive donationReceive : donationReceiveList){
+
+                    // Check if the item name contains the user input
+                    if(donationReceive.getDonateItemName().toLowerCase().contains(userInput)){
+                        newList.add(donationReceive);
+                    } else{
+                        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                                .setTitle("No Item Found")
+                                .setMessage("No item found with the name " + query)
+                                .setPositiveButton("Ok", null)
+                                .create();
+                        dialog.show();
+                    }
+                }
+
+                //  Update the adapter with the new list
+                adapter.searchList(newList);
+
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                // Convert the user input to lowercase
+                String userInput = newText.toLowerCase();
+
+                // Create a new list to store the search results
+                ArrayList<DonationReceive> newList = new ArrayList<>();
+
+                // Loop through the list of donation received
+                for(DonationReceive donationReceive : donationReceiveList){
+
+                    // Check if the item name contains the user input
+                    if(donationReceive.getDonateItemName().toLowerCase().contains(userInput)){
+                        newList.add(donationReceive);
+                    }
+                    else{
+                        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                                .setTitle("No Item Found")
+                                .setMessage("No item found with the name " + newText)
+                                .setPositiveButton("Ok", null)
+                                .create();
+                        dialog.show();
+                    }
+                }
+
+
+                // Update the adapter with the new list
+                adapter.searchList(newList);
+
+                return true;
+            }
+        });
 
     return rootview;
     }

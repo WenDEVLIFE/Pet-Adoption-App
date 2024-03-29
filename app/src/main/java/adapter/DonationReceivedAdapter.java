@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.pet_adoption_app.DonationReceived;
 import com.example.pet_adoption_app.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ClassPackage.DonationReceive;
@@ -31,8 +32,10 @@ public class DonationReceivedAdapter extends RecyclerView.Adapter<DonationReceiv
         this.donationReceiveList = donationReceiveList;
     }
 
-    public void searchDonation(List<DonationReceive> newList) {
-        donationReceiveList = newList;
+
+    public void searchList(ArrayList<DonationReceive> newList) {
+        donationReceiveList = new ArrayList<>();
+        donationReceiveList.addAll(newList);
         notifyDataSetChanged();
     }
 

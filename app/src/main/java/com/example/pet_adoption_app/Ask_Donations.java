@@ -146,17 +146,13 @@ public class Ask_Donations extends Fragment implements  DonationAdapter.onCancel
                         // then add the donations to the new list
                         newList.add(donate);
                     }
-                     else{
-                        // Check if the pet name or breed contains the search query
-                        if (donate.getDonationName().toLowerCase().contains(userInput) || donate.getDonationName().toLowerCase().contains(userInput)) {
-                            newList.add(donate);
-
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                            builder.setTitle("Search Results");
-                            builder.setMessage("No results found");
-                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
-                            builder.show();
-                        }
+                    else{
+                        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                                .setTitle("No Item Found")
+                                .setMessage("No item found with the name " + query)
+                                .setPositiveButton("Ok", null)
+                                .create();
+                        dialog.show();
                     }
                 }
 
@@ -183,18 +179,13 @@ public class Ask_Donations extends Fragment implements  DonationAdapter.onCancel
                         // then donations the pet to the new list
                         newList.add(donate);
                     }
-                     else {
-
-                        // Check if the pet name or breed contains the search query
-                        if (donate.getDonationName().toLowerCase().contains(userInput)) {
-                            newList.add(donate);
-
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                            builder.setTitle("Search Results");
-                            builder.setMessage("No results found");
-                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
-                            builder.show();
-                        }
+                    else{
+                        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                                .setTitle("No Item Found")
+                                .setMessage("No item found with the name " + newText)
+                                .setPositiveButton("Ok", null)
+                                .create();
+                        dialog.show();
                     }
 
                 }
