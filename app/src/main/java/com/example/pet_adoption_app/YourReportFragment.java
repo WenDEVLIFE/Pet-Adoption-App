@@ -116,7 +116,11 @@ public class YourReportFragment extends Fragment implements ReportAdapater.onCan
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
+                // This will search the text in the search view
             String userInput = query.toLowerCase();
+
+            // This will add the search result to the list
             List<ReportPet> newList = new ArrayList<>();
             for (ReportPet pet : reportlist) {
                 if (pet.getOwner().toLowerCase().contains(userInput)) {
@@ -144,8 +148,13 @@ public class YourReportFragment extends Fragment implements ReportAdapater.onCan
             @Override
             public boolean onQueryTextChange(String newText) {
 
+                // This will search the text in the search view
                 String userInput = newText.toLowerCase();
+
+                // This will add the search result to the list
                 List<ReportPet> newList = new ArrayList<>();
+
+                // This will check if the search result is found
                 for (ReportPet pet : reportlist) {
                     if (pet.getOwner().toLowerCase().contains(userInput)) {
                         newList.add(pet);
