@@ -119,7 +119,7 @@ public class Transaction_History extends Fragment {
 
     private void LoadTransactions() {
         // This will load the transactions from the database
-        db.collection("Transactions").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("Transaction").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value,
                                 @Nullable FirebaseFirestoreException e) {
@@ -138,7 +138,7 @@ public class Transaction_History extends Fragment {
                     if (nofname != null && nofname.equals(name)) {
 
                         // Get the transactions details
-                        String transactions = doc.getString("Transaction details");
+                        String transactions = doc.getString("Transaction");
                         Transactions info = new Transactions(transactions);
                         translist.add(info);
 
