@@ -10,7 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +39,10 @@ public class ChangeUserName_Fragment extends Fragment {
     private String mParam2;
 
     String username,  name;
+
+    EditText CurrentUsername, NewUsername, Password, ConfirmPassword;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public ChangeUserName_Fragment() {
         // Required empty public constructor
@@ -82,19 +96,96 @@ public class ChangeUserName_Fragment extends Fragment {
         ImageButton back = rootview.findViewById(R.id.buttonnback);
         back.setOnClickListener(v->{
             // This will go back to user preferences
-
-            replaceFragement(new UserPreferences());
+           UserPreferences userPreferences = new UserPreferences();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            userPreferences.setArguments(bundle);
+            replaceFragement(userPreferences);
         });
+
+        // Find the id of edit text and set the current username to the edit text
+         CurrentUsername=rootview.findViewById(R.id.oldusername);
+         CurrentUsername.setText(username);
+         CurrentUsername.setEnabled(false);
+         NewUsername=rootview.findViewById(R.id.editTextText2);
+         Password=rootview.findViewById(R.id.password);
+         ConfirmPassword=rootview.findViewById(R.id.confirmpassword);
 
         Button ChangeUsername=rootview.findViewById(R.id.button);
         ChangeUsername.setOnClickListener(v->{
             // This will go back to user preferences
+            String currentusername=CurrentUsername.getText().toString();
+            String newusername=NewUsername.getText().toString();
+            String password=Password.getText().toString();
+            String confirmpassword=ConfirmPassword.getText().toString();
+            if (newusername.isEmpty() || password.isEmpty() || confirmpassword.isEmpty())
+            {
+                CurrentUsername.setError("Please enter the current username");
+                NewUsername.setError("Please enter the new username");
+                Password.setError("Please enter the password");
+                ConfirmPassword.setError("Please enter the confirm password");
+            }
+           else {
 
-            replaceFragement(new UserPreferences());
+               ChangeCredentials( currentusername, newusername, password, confirmpassword);
+
+            }
+
+
+
+
 
         });
+
+
+
+
     return rootview;
     }
+
+    private void ChangeCredentials(String currentusername, String newusername, String password, String confirmpassword) {
+        // Query the Firestore database to find the document with the current username
+        db.collection("users").whereEqualTo("Username", currentusername)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Update the username field of the document
+                            String hashedPassword = document.getString("Password");
+                            BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
+
+                            // Check if the password is correct
+                            if (result.verified) {
+                                // Check if the new username is valid
+                                if (newusername.length() < 6) {
+                                    NewUsername.setError("Username must be at least 6 characters long");
+                                } else {
+                                    // Update the username field of the document
+                                    document.getReference().update("Username", newusername)
+                                            .addOnSuccessListener(aVoid -> {
+                                                // Username updated successfully
+                                                Toast.makeText(getContext(), "Username updated successfully", Toast.LENGTH_SHORT).show();
+
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                // Handle any errors here
+                                                Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+
+                                            });
+                                }
+                            } else {
+                                Password.setError("Incorrect password");
+                            }
+                        }
+                    } else {
+                        // Handle any errors here
+                        Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
+
     private void replaceFragement(Fragment fragment) {
 
         // Call the fragment manager and begin the transaction to replace the fragment
@@ -103,4 +194,7 @@ public class ChangeUserName_Fragment extends Fragment {
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
+
+
+
 }
