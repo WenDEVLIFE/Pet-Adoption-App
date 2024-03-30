@@ -202,12 +202,19 @@ public class Fragment_Add_Lost_Pets extends Fragment {
                 // Add the document to the Firestore collection
                 db.collection("LostPets").add(dog)
                         .addOnSuccessListener(documentReference -> {
-                            Toast.makeText(getActivity(), "Dog added", Toast.LENGTH_SHORT).show();
+                            if(isAdded()){
+                                Toast.makeText(getActivity(), "Dog added", Toast.LENGTH_SHORT).show();
+
+                            }
+
                             // Hide the ProgressDialog
                             progressDialog.dismiss();
                         })
                         .addOnFailureListener(e -> {
-                            Toast.makeText(getActivity(), "Error adding dog", Toast.LENGTH_SHORT).show();
+                            if(isAdded()){
+                                Toast.makeText(getActivity(), "Error adding dog", Toast.LENGTH_SHORT).show();
+                            }
+
                             // Hide the ProgressDialog
                             progressDialog.dismiss();
                         });

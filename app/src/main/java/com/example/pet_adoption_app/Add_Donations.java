@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -178,10 +179,16 @@ public class Add_Donations extends Fragment {
             //  This will insert the data to the database
             db.collection("Donations").document().set(donations)
                     .addOnSuccessListener(aVoid -> {
+                        if(isAdded()){
+                            Toast.makeText(getContext(), "Donations Added  ", Toast.LENGTH_SHORT).show();
+
+                        }
                         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                                 .setTitle("Success")
                                 .setMessage("Donation Added")
                                 .setPositiveButton("OK", (dialog, which) -> {
+
+
 
                                     // This will clear the EditText on the Ui
                                     DonationName.setText("");
@@ -190,15 +197,25 @@ public class Add_Donations extends Fragment {
                                 })
                                 .show();
                         alertDialog.show();
+
                     })
                     .addOnFailureListener(e -> {
-                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                                .setTitle("Error")
-                                .setMessage("Error: " + e.getMessage())
-                                .setPositiveButton("OK", null)
-                                .show();
-                        alertDialog.show();
+
+                        if(isAdded()){
+                            Toast.makeText(getContext(), "Failed to add donations", Toast.LENGTH_SHORT).show();
+
+                            AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                                    .setTitle("Error")
+                                    .setMessage("Error: " + e.getMessage())
+                                    .setPositiveButton("OK", null)
+                                    .show();
+                            alertDialog.show();
+
+                        }
+
+                        // This will dismiss the progress dialog
                         progressDialog.dismiss();
+
                     });
 
 

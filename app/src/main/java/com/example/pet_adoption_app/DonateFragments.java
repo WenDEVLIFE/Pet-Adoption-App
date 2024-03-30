@@ -208,6 +208,10 @@ public class DonateFragments extends Fragment {
                             // Hide the ProgressDialog
                             progressDialog.dismiss();
 
+                            if(isAdded()){
+                                Toast.makeText(getContext(), "Sending Donations success", Toast.LENGTH_SHORT).show();
+                            }
+
                             // Notify adapter about the change in data set
                             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                                 LocalDate date = LocalDate.now();
@@ -236,6 +240,10 @@ public class DonateFragments extends Fragment {
                             }
                         })
                         .addOnFailureListener(e -> {
+                            if(isAdded()){
+                                Toast.makeText(getContext(), "Failed to send donations", Toast.LENGTH_SHORT).show();
+                            }
+
                             Toast.makeText(getActivity(), "Error sending donations", Toast.LENGTH_SHORT).show();
                             // Hide the ProgressDialog
                             progressDialog.dismiss();
