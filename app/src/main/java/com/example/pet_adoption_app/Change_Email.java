@@ -250,7 +250,7 @@ public class Change_Email extends Fragment {
                 Timer.setText("");
                 timers = 0;
 
-                if(Timer.getText().toString().isEmpty()){
+                if(isAdded()){
                     AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
                     alertDialog.setTitle("Alert");
                     alertDialog.setMessage("You can now resend the code");
@@ -261,7 +261,6 @@ public class Change_Email extends Fragment {
                 else{
                     Timer.setText("Resend code");
                 }
-
             }
         }.start();
     }
