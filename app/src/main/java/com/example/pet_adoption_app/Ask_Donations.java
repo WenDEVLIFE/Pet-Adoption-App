@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ClassPackage.Donation;
+import ClassPackage.Pets;
 import adapter.DonationAdapter;
 
 /**
@@ -219,9 +220,13 @@ public class Ask_Donations extends Fragment implements  DonationAdapter.onCancel
 
             donationList.clear();
             for (QueryDocumentSnapshot doc : value) {
-
+                String owner = doc.getString("donateOwner");
+                if (owner != null && !owner.equals(name)) {
                     Donation donation = new Donation(doc.getString("donateName"), doc.getString("donateOwner"), doc.getString("donateDescription"));
                     donationList.add(donation);
+
+                }
+
 
             }
             adapter.notifyDataSetChanged();

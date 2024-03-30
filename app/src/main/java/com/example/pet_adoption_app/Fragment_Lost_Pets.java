@@ -29,6 +29,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import ClassPackage.Donation;
 import adapter.LostAdapter;
 import ClassPackage.Pets;
 
@@ -217,14 +218,17 @@ public class Fragment_Lost_Pets extends Fragment implements  LostAdapter.onCance
 
                 petList.clear();
                 for (QueryDocumentSnapshot doc : value) {
-                    if (doc.get("name") != null) {
+                    String owner = doc.getString("owner");
+                    if (owner != null && !owner.equals(name)) {
                         String name = doc.getString("name");
                         String breed = doc.getString("breed");
                         String description = doc.getString("description");
-                        String owner = doc.getString("owner");
+
                         String image = doc.getString("image");
                         petList.add(new Pets(name, breed, owner, description, image));
                     }
+
+
                 }
                 adapter.notifyDataSetChanged();
             }

@@ -299,13 +299,14 @@ public class AdoptionFragments extends Fragment implements PetAdapter.onAdoptLis
 
                 petList.clear();
                 for (QueryDocumentSnapshot doc : value) {
-                    if (doc.get("name") != null) {
-                        String name = doc.getString("name");
+                    String owner = doc.getString("owner");
+                    if (owner != null && !owner.equals(name)) {
+                        String dataname = doc.getString("name");
                         String breed = doc.getString("breed");
                         String description = doc.getString("description");
-                        String owner = doc.getString("owner");
+
                         String image = doc.getString("image");
-                        petList.add(new Pets(name, breed, owner, description, image));
+                        petList.add(new Pets(dataname, breed, owner, description, image));
                     }
                 }
                 adapter.notifyDataSetChanged();
