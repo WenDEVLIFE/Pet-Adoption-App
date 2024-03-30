@@ -17,7 +17,9 @@
                 android:layout_height="@dimen/_50sdp"
                 android:inputType="text"
                 android:background="@drawable/textfield"
-                android:text="Old Email"
+                android:hint="Old Email"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
                 android:ems="10"
                 android:id="@+id/oldemail"
                 android:padding="@dimen/_15sdp"
@@ -32,7 +34,9 @@
                 android:layout_height="@dimen/_50sdp"
                 android:inputType="text"
                 android:background="@drawable/textfield"
-                android:text="New Email"
+                android:hint="New Email "
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
                 android:ems="10"
                 android:id="@+id/newemail"
                 android:padding="@dimen/_15sdp"
@@ -43,34 +47,20 @@
                 app:layout_constraintHorizontal_bias="0.337" />
 
         <EditText
-                android:layout_width="@dimen/_180sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:inputType="text"
-                android:background="@drawable/textfield"
-                android:text="Email"
-                android:ems="10"
-                android:id="@+id/emailtext"
-                android:padding="@dimen/_15sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/sendcode"
-                app:layout_constraintHorizontal_bias="0.659"
-                app:layout_constraintTop_toBottomOf="@+id/newemail"
-                android:layout_marginTop="36dp" />
-
-        <EditText
                 android:layout_width="@dimen/_250sdp"
                 android:layout_height="@dimen/_50sdp"
                 android:inputType="text"
                 android:background="@drawable/textfield"
-                android:text="Code"
+                android:hint="Code"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:ems="10"
                 android:id="@+id/codetext"
                 android:padding="@dimen/_15sdp"
-                app:layout_constraintTop_toBottomOf="@+id/emailtext"
-                android:layout_marginTop="32dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.305" />
+                app:layout_constraintHorizontal_bias="0.305"
+                tools:layout_editor_absoluteY="502dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -125,7 +115,9 @@
                 android:layout_height="@dimen/_50sdp"
                 android:inputType="text"
                 android:background="@drawable/textfield"
-                android:text="Username"
+                android:hint="Username"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
                 android:padding="@dimen/_15sdp"
                 android:ems="10"
                 android:id="@+id/editTextText2"
@@ -142,22 +134,25 @@
                 android:id="@+id/changeEmail"
                 android:textColor="@color/white"
                 android:background="@drawable/button"
-                android:layout_marginTop="60dp"
-                app:layout_constraintTop_toBottomOf="@+id/codetext"
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         <Button
                 android:text="Send Code"
-                android:layout_width="@dimen/_69sdp"
+                android:layout_width="@dimen/_129sdp"
                 android:layout_height="@dimen/_50sdp"
                 android:id="@+id/sendcode"
                 android:textColor="@color/white"
                 android:background="@drawable/button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/codetext"
-                android:layout_marginBottom="32dp"
-                android:layout_marginEnd="44dp" />
+                android:layout_marginBottom="44dp"
+                app:layout_constraintTop_toBottomOf="@+id/newemail"
+                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.444" />
 
         <TextView
                 android:text="Time:00:00"
@@ -169,7 +164,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/codetext"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="24dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

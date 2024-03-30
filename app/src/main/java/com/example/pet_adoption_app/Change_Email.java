@@ -1,16 +1,27 @@
 package com.example.pet_adoption_app;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +39,17 @@ public class Change_Email extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    String username, name;
+    String username, name, code_send;
+
+    EditText Username, OldEmail, NewEmail, codetype;
+
+    TextView Timer;
+
+    long timers = 0;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    ProgressDialog progressDialog;
     public Change_Email() {
         // Required empty public constructor
     }
@@ -78,14 +99,46 @@ public class Change_Email extends Fragment {
         // our image button code here
         ImageButton btnback = rootview.findViewById(R.id.buttonnback);
         btnback.setOnClickListener(v->{
-            // This will go back to user preferences fragments
-            replaceFragement(new UserPreferences());
+            // This will go back to user preferences
+            UserPreferences userPreferences = new UserPreferences();
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            userPreferences.setArguments(bundle);
+            replaceFragement(userPreferences);
         });
+
+        // This is to send the code
+        Username = rootview.findViewById(R.id.editTextText2);
+        Username.setText(username); // This will set the username to the edit text
+        OldEmail = rootview.findViewById(R.id.oldemail);
+        NewEmail = rootview.findViewById(R.id.newemail);
+        codetype = rootview.findViewById(R.id.codetext);
+
+        Timer = rootview.findViewById(R.id.textView10);
+
 
         // This button will send code to the user email
         Button sendcode = rootview.findViewById(R.id.sendcode);
         sendcode.setOnClickListener(v->{
-            // This will go to change email code fragments
+          if(timers == 0){
+
+              // This will go to change email code fragments
+              String email = OldEmail.getText().toString();
+              code_send = generateCode();
+              SendMail(email, code_send);
+
+              // Start the countdown timer
+              startCountdownTimer();
+          }
+          else{
+              AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+              alertDialog.setTitle("Alert");
+              alertDialog.setMessage("You can only send the code once the timer is done.");
+              alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                      (dialog, which) -> dialog.dismiss());
+              alertDialog.show();
+          }
 
         });
 
@@ -94,6 +147,23 @@ public class Change_Email extends Fragment {
         changeEmail.setOnClickListener(v->
         {
             // This will go to change email fragment
+            String user = Username.getText().toString();
+            String oldemail = OldEmail.getText().toString();
+            String newemail = NewEmail.getText().toString();
+            String code = codetype.getText().toString();
+
+            if(code.equals(code_send)) {
+                // This will change the email
+                // Call the method to
+                ChangeEmailCredentials( user, oldemail, newemail);
+                progressDialog = new ProgressDialog(getContext());
+                progressDialog.setTitle("Changing Email");
+                progressDialog.show();
+            } else{
+                Toast.makeText(getContext(), "Invalid code", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+
 
         });
 
@@ -102,6 +172,72 @@ public class Change_Email extends Fragment {
         return rootview;
     }
 
+    private void ChangeEmailCredentials(String user, String oldemail, String newemail) {
+    db.collection("users").whereEqualTo("Username", user).whereEqualTo("Email", oldemail).get().addOnCompleteListener(task -> {
+        if(task.isSuccessful()){
+            for(QueryDocumentSnapshot doc: task.getResult()){
+                String id = doc.getId();
+                db.collection("users").document(id).update("Email", newemail).addOnCompleteListener(task1 -> {
+                    if(task1.isSuccessful()){
+                        Toast.makeText(getContext(), "Email changed successfully", Toast.LENGTH_SHORT).show();
+
+                        // Clear the edit text
+                        OldEmail.setText("");
+                        NewEmail.setText("");
+                        codetype.setText("");
+
+                        // Dismiss the progress dialog
+                        progressDialog.dismiss();
+
+                    }
+                    else{
+                        Toast.makeText(getContext(), "Email not changed", Toast.LENGTH_SHORT).show();
+
+                        // Dismiss the progress dialog
+                        progressDialog.dismiss();
+                    }
+                });
+            }
+        } else{
+            Toast.makeText(getContext(), "Email not existed changed", Toast.LENGTH_SHORT).show();
+
+            // Dismiss the progress dialog
+            progressDialog.dismiss();
+        }
+    });
+
+    }
+
+    private void startCountdownTimer() {
+        new CountDownTimer(60000, 1000) { // 60000 milliseconds = 60 seconds
+
+            public void onTick(long millisUntilFinished) {
+                Timer.setText("Time remaining: " + millisUntilFinished / 1000 + " seconds");
+                timers = millisUntilFinished / 1000;
+
+
+
+            }
+
+            public void onFinish() {
+                Timer.setText("");
+                timers = 0;
+
+                if(Timer.getText().toString().isEmpty()){
+                    AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("You can now resend the code");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            (dialog, which) -> dialog.dismiss());
+                    alertDialog.show();
+                }
+                else{
+                    Timer.setText("Resend code");
+                }
+
+            }
+        }.start();
+    }
     // This will call the fragments
     private void replaceFragement(Fragment fragment) {
 
@@ -110,6 +246,18 @@ public class Change_Email extends Fragment {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void SendMail(String Email, String code){
+        JavaMailAPI mailAPI = new JavaMailAPI(getContext(), Email, "The Verification Code for changing email", "The verification code is:" + code, code);
+        Toast.makeText(getContext(), " Email Sended", Toast.LENGTH_SHORT).show();
+        mailAPI.execute();
+    }
+    private String generateCode() {
+        // Implement code generation logic here
+        Random random = new Random();
+        int code = random.nextInt(900000) + 100000; // This will generate a random 6-digit number
+        return String.valueOf(code);
     }
 
 }

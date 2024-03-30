@@ -126,6 +126,7 @@ public class UserPreferences extends Fragment {
             bundle.putString("username", username);
             bundle.putString("name", name);
             fragment.setArguments(bundle);
+            replaceFragement(fragment);
 
         });
 
