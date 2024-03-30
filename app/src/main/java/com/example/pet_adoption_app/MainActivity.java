@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -97,14 +98,14 @@ public class MainActivity extends AppCompatActivity {
         // This is our checkbox for the password
         checkBox = findViewById(R.id.checkBox);
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
+            if(isChecked){
+                // Show the password
+                passwordfield.setTransformationMethod(null);
 
-                // Set to show the password
-                passwordfield.setInputType(0);
-            } else {
+            }else{
+                //hide password
+                passwordfield.setTransformationMethod(new PasswordTransformationMethod());
 
-                // Set to hide the password
-                passwordfield.setInputType(129);
             }
         });
 

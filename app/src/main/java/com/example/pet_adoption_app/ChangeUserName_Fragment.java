@@ -1,17 +1,21 @@
 package com.example.pet_adoption_app;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,7 +46,11 @@ public class ChangeUserName_Fragment extends Fragment {
 
     EditText CurrentUsername, NewUsername, Password, ConfirmPassword;
 
+    CheckBox checkBox;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    ProgressDialog progressDialog;
 
     public ChangeUserName_Fragment() {
         // Required empty public constructor
@@ -127,6 +135,10 @@ public class ChangeUserName_Fragment extends Fragment {
                 ConfirmPassword.setError("Please enter the confirm password");
             }
            else {
+               progressDialog = new ProgressDialog(getContext());
+               progressDialog.setTitle("Changing Username");
+                progressDialog.show();
+
 
                ChangeCredentials( currentusername, newusername, password, confirmpassword);
 
@@ -136,6 +148,23 @@ public class ChangeUserName_Fragment extends Fragment {
 
 
 
+        });
+
+        // This will show the password
+        checkBox=rootview.findViewById(R.id.checkBox);
+        checkBox.setOnClickListener(v->{
+            if(checkBox.isChecked())
+            {
+                // Show the password
+                Password.setTransformationMethod(null);
+                ConfirmPassword.setTransformationMethod(null);
+            }
+            else
+            {
+                // Hide the password
+                Password.setTransformationMethod(new PasswordTransformationMethod());
+                ConfirmPassword.setTransformationMethod(new PasswordTransformationMethod());
+            }
         });
 
 
@@ -160,6 +189,9 @@ public class ChangeUserName_Fragment extends Fragment {
                                 // Check if the new username is valid
                                 if (newusername.length() < 6) {
                                     NewUsername.setError("Username must be at least 6 characters long");
+
+                                    // Dismiss the progress dialog
+                                    progressDialog.dismiss();
                                 } else {
                                     // Update the username field of the document
                                     document.getReference().update("Username", newusername)
@@ -167,21 +199,30 @@ public class ChangeUserName_Fragment extends Fragment {
                                                 // Username updated successfully
                                                 Toast.makeText(getContext(), "Username updated successfully", Toast.LENGTH_SHORT).show();
 
+                                                // Dismiss the progress dialog
+                                                progressDialog.dismiss();
+
+                                                username = newusername;
                                             })
                                             .addOnFailureListener(e -> {
                                                 // Handle any errors here
                                                 Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
 
+                                                // Dismiss the progress dialog
+                                                progressDialog.dismiss();
                                             });
                                 }
                             } else {
                                 Password.setError("Incorrect password");
+                                // Dismiss the progress dialog
+                                progressDialog.dismiss();
                             }
                         }
                     } else {
                         // Handle any errors here
                         Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
-
+                        // Dismiss the progress dialog
+                        progressDialog.dismiss();
                     }
                 });
     }
