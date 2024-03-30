@@ -33,6 +33,8 @@ public class UserPreferences extends Fragment {
 
     TextView NameText, UsernameText;
 
+
+
     public UserPreferences() {
         // Required empty public constructor
     }

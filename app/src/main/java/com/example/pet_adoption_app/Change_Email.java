@@ -111,6 +111,7 @@ public class Change_Email extends Fragment {
         // This is to send the code
         Username = rootview.findViewById(R.id.editTextText2);
         Username.setText(username); // This will set the username to the edit text
+        Username.setEnabled(false); // This will disable the edit text
         OldEmail = rootview.findViewById(R.id.oldemail);
         NewEmail = rootview.findViewById(R.id.newemail);
         codetype = rootview.findViewById(R.id.codetext);
