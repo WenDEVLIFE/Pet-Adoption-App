@@ -184,6 +184,8 @@ public class Change_Email extends Fragment {
                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                        (dialog, which) -> dialog.dismiss());
                alertDialog.show();
+
+
            }
 
 
