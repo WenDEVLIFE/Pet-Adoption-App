@@ -29,6 +29,8 @@ public class Change_Password extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    String username, name;
+
     public Change_Password() {
         // Required empty public constructor
     }
@@ -57,12 +59,22 @@ public class Change_Password extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // Get the username and name from the arguments
+        if (getArguments() != null) {
+
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+        }
+
         // Inflate the layout for this fragment
         View rootview =  inflater.inflate(R.layout.fragment_change__password, container, false);
 

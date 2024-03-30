@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +30,8 @@ public class UserPreferences extends Fragment {
     private String mParam2;
 
     String username,  name;
+
+    TextView NameText, UsernameText;
 
     public UserPreferences() {
         // Required empty public constructor
@@ -125,6 +128,14 @@ public class UserPreferences extends Fragment {
             fragment.setArguments(bundle);
 
         });
+
+        // Find the textview id and set text to the username and name
+        NameText = rootview.findViewById(R.id.Name_display);
+        NameText.setText(name);
+        UsernameText = rootview.findViewById(R.id.username_display);
+        UsernameText.setText(username);
+
+
 
         return rootview;
     }

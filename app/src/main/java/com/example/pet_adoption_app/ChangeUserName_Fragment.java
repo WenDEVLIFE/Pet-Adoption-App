@@ -28,6 +28,8 @@ public class ChangeUserName_Fragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    String username,  name;
+
     public ChangeUserName_Fragment() {
         // Required empty public constructor
     }
@@ -60,12 +62,21 @@ public class ChangeUserName_Fragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // Get the username and name from the bundle
+        if (getArguments() != null) {
+            username = getArguments().getString("username");
+            name = getArguments().getString("name");
+        }
+
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_change_user_name_, container, false);
         ImageButton back = rootview.findViewById(R.id.buttonnback);
