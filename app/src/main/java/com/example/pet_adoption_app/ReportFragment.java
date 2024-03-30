@@ -159,8 +159,8 @@ public class ReportFragment extends Fragment {
 
 
             // Check if the fields are empty
-            if( email_address.equals("") || dog_owner.equals("") || description.equals("") || imageUri == null || phoneNumberString.length()<=12) {
-                Toast.makeText(getContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            if(email_address.equals("") || dog_owner.equals("") || description.equals("") || imageUri == null || phoneNumberString.length() != 12) {
+                Toast.makeText(getContext(), "Please fill all the fields or check the phone number is 12 digit", Toast.LENGTH_SHORT).show();
             }
             else {
 
