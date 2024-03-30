@@ -116,6 +116,7 @@ public class Change_Email extends Fragment {
         codetype = rootview.findViewById(R.id.codetext);
 
         Timer = rootview.findViewById(R.id.textView10);
+        Timer.setText("");
 
 
         // This button will send code to the user email
@@ -125,11 +126,22 @@ public class Change_Email extends Fragment {
 
               // This will go to change email code fragments
               String email = OldEmail.getText().toString();
-              code_send = generateCode();
-              SendMail(email, code_send);
+             if (email.endsWith( "@gmail.com") || email.endsWith("@yahoo.com") || email.endsWith("@hotmail.com") || email.endsWith("@outlook.com") || email.endsWith("@aol.com") || email.endsWith("@icloud.com") || email.endsWith("@protonmail.com") || email.endsWith("@zoho.com") || email.endsWith("@yandex.com") || email.endsWith("@gmx.com") || email.endsWith("@mail.com") || email.endsWith("@tutanota.com") || email.endsWith("@tutanota.com") || email.endsWith("@yopmail.com") || email.endsWith("@mailinator.com") || email.endsWith("@guerrillamail.com") || email.endsWith("@10minutemail.com") || email.endsWith("@temp-mail.org") || email.endsWith("@mohmal.com")){
+                  code_send = generateCode();
+                  SendMail(email, code_send);
 
-              // Start the countdown timer
-              startCountdownTimer();
+                  // Start the countdown timer
+                  startCountdownTimer();
+              }
+             else{
+                 AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                 alertDialog.setTitle("Alert");
+                 alertDialog.setMessage("Invalid email address");
+                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                         (dialog, which) -> dialog.dismiss());
+                 alertDialog.show();
+
+             }
           }
           else{
               AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
@@ -152,17 +164,27 @@ public class Change_Email extends Fragment {
             String newemail = NewEmail.getText().toString();
             String code = codetype.getText().toString();
 
-            if(code.equals(code_send)) {
-                // This will change the email
-                // Call the method to
-                ChangeEmailCredentials( user, oldemail, newemail);
-                progressDialog = new ProgressDialog(getContext());
-                progressDialog.setTitle("Changing Email");
-                progressDialog.show();
-            } else{
-                Toast.makeText(getContext(), "Invalid code", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
+           if(newemail.endsWith( "@gmail.com") || newemail.endsWith("@yahoo.com") || newemail.endsWith("@hotmail.com") || newemail.endsWith("@outlook.com") || newemail.endsWith("@aol.com") || newemail.endsWith("@icloud.com") || newemail.endsWith("@protonmail.com") || newemail.endsWith("@zoho.com") || newemail.endsWith("@yandex.com") || newemail.endsWith("@gmx.com") || newemail.endsWith("@mail.com") || newemail.endsWith("@tutanota.com") || newemail.endsWith("@tutanota.com") || newemail.endsWith("@yopmail.com") || newemail.endsWith("@mailinator.com") || newemail.endsWith("@guerrillamail.com") || newemail.endsWith("@10minutemail.com") || newemail.endsWith("@temp-mail.org") || newemail.endsWith("@mohmal.com") ){
+               if(code.equals(code_send)) {
+                   // This will change the email
+                   // Call the method to
+                   ChangeEmailCredentials( user, oldemail, newemail);
+                   progressDialog = new ProgressDialog(getContext());
+                   progressDialog.setTitle("Changing Email");
+                   progressDialog.show();
+               } else{
+                   Toast.makeText(getContext(), "Invalid code", Toast.LENGTH_SHORT).show();
+                   progressDialog.dismiss();
+               }
+           }
+           else{
+               AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+               alertDialog.setTitle("Alert");
+               alertDialog.setMessage("Invalid email address");
+               alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                       (dialog, which) -> dialog.dismiss());
+               alertDialog.show();
+           }
 
 
         });
@@ -208,6 +230,8 @@ public class Change_Email extends Fragment {
 
     }
 
+
+    // This will start the countdown timer
     private void startCountdownTimer() {
         new CountDownTimer(60000, 1000) { // 60000 milliseconds = 60 seconds
 
