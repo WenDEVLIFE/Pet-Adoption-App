@@ -202,7 +202,11 @@ public class ChangeUserName_Fragment extends Fragment {
                                                 // Dismiss the progress dialog
                                                 progressDialog.dismiss();
 
+                                                // Update the username in the activity
+                                                ((FragementController) getActivity()).updateUsername(newusername);
+
                                                 username = newusername;
+                                                CurrentUsername.setText(username);
                                             })
                                             .addOnFailureListener(e -> {
                                                 // Handle any errors here

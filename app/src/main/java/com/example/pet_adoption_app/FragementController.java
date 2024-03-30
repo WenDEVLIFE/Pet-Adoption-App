@@ -176,5 +176,8 @@ public class FragementController extends AppCompatActivity {
         fragment.setArguments(bundle);
         replaceFragement(fragment);
     }
-
+    public void updateUsername(String newUsername) {
+        this.username = newUsername;
+        usernametext.setText("Username:" + newUsername);
+    }
 }
