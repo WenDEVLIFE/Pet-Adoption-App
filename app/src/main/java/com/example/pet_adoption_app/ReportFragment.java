@@ -113,7 +113,7 @@ public class ReportFragment extends Fragment {
         phone = rootview.findViewById(R.id.phonenum);
         dogOwner = rootview.findViewById(R.id.petowner);
         dogOwner.setEnabled(false);
-        dogOwner.setText(name);
+        dogOwner.setText(owner);
         descriptions = rootview.findViewById(R.id.petdescription);
         imageView = rootview.findViewById(R.id.imageView4);
 

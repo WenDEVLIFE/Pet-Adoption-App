@@ -223,8 +223,8 @@ public class YourReportFragment extends Fragment implements ReportAdapater.onCan
     @Override
     public void onCancel(int position) {
         AlertDialog dialog = new AlertDialog.Builder(getContext())
-                .setTitle("Cancel Adoption")
-                .setMessage("Are you sure you want to delete this adoption?")
+                .setTitle("Delete Reports")
+                .setMessage("Are you sure you want to delete this report?")
                 .setPositiveButton("Yes", (dialogInterface, i) -> {
                     ReportPet pet = reportlist.get(position);
                     db.collection("Reports")
