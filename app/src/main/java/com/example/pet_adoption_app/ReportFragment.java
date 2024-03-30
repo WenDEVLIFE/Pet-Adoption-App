@@ -144,13 +144,20 @@ public class ReportFragment extends Fragment {
         addReport = rootview.findViewById(R.id.AddButton);
         addReport.setOnClickListener(v->{
 
+
+
+
             // Get the values from the edit text fields
             String phoneNumberString = phone.getText().toString();
             long phoneNumber = 0;
             if (!phoneNumberString.isEmpty() && phoneNumberString.matches("[0-9]+")) {
                 phoneNumber = Long.parseLong(phoneNumberString);
+
+
             } else {
                 Toast.makeText(getContext(), "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
+
+
                 return;
             }
             String email_address = email.getText().toString();
@@ -159,8 +166,9 @@ public class ReportFragment extends Fragment {
 
 
             // Check if the fields are empty
-            if(email_address.equals("") || dog_owner.equals("") || description.equals("") || imageUri == null || phoneNumberString.length() != 12) {
-                Toast.makeText(getContext(), "Please fill all the fields or check the phone number is 12 digit", Toast.LENGTH_SHORT).show();
+            if(email_address.equals("") || dog_owner.equals("") || description.equals("") || imageUri == null || phoneNumberString.length() != 11) {
+                Toast.makeText(getContext(), "Please fill all the fields or check the phone number is 11 digit", Toast.LENGTH_SHORT).show();
+
             }
             else {
 
@@ -169,6 +177,10 @@ public class ReportFragment extends Fragment {
 
                     // Check if the phone number is 10 digits
                     if(phoneNumberString.length() == 11) {
+
+                        progressDialog = new ProgressDialog(getContext());
+                        progressDialog.setMessage("Uploading...");
+                        progressDialog.show();
 
                         // Call the insert report method
                         InsertReport(phoneNumber, email_address, dog_owner, description, imageUri);
@@ -192,11 +204,6 @@ public class ReportFragment extends Fragment {
     }
 
     private void InsertReport(long phoneNumber, String emailAddress, String dogOwner, String description, Uri imageUri) {
-
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Uploading...");
-        progressDialog.show();
-
         // Create a storage reference
         StorageReference storageRef = FirebaseStorage.getInstance().getReference("uploads");
 
@@ -205,7 +212,6 @@ public class ReportFragment extends Fragment {
 
         fileReference.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
             fileReference.getDownloadUrl().addOnSuccessListener(uri -> {
-
                 // Create a hashmap to store the report
                 HashMap<String, Object> report = new HashMap<>();
                 report.put("email", emailAddress);
@@ -218,7 +224,9 @@ public class ReportFragment extends Fragment {
                 db.collection("Reports").add(report).addOnSuccessListener(documentReference -> {
                     // Dismiss the progress dialog
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(), "Report Added", Toast.LENGTH_SHORT).show();
+                    if(isAdded()){
+                        Toast.makeText(getContext(), "Report Added", Toast.LENGTH_SHORT).show();
+                    }
 
                     // Clear the edit text fields
                     email.setText("");
@@ -235,23 +243,22 @@ public class ReportFragment extends Fragment {
                     }
 
                 }).addOnFailureListener(e -> {
-
                     // Dismiss the progress dialog
                     progressDialog.dismiss();
 
                     // Show a toast message
-                    Toast.makeText(getContext(), "Failed to add report", Toast.LENGTH_SHORT).show();
+                    if(isAdded()){
+                        Toast.makeText(getContext(), "Failed to add report", Toast.LENGTH_SHORT).show();
+                    }
                 });
             });
         }).addOnFailureListener(e -> {
-
             // Dismiss the progress dialog
             progressDialog.dismiss();
-
-            // Show a toast message
-            Toast.makeText(getContext(), "Failed to upload image", Toast.LENGTH_SHORT).show();
+            if(isAdded()){
+                Toast.makeText(getContext(), "Failed to upload image", Toast.LENGTH_SHORT).show();
+            }
         });
-
     }
 
 
