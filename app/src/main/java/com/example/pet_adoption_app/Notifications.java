@@ -106,7 +106,13 @@ public class Notifications extends Fragment {
         ImageButton btnback = rootview.findViewById(R.id.buttonnback);
         btnback.setOnClickListener(v->{
             // This will go back to home fragments
-            replaceFragement(new HomeFragment());
+          HomeFragment homeFragment = new HomeFragment();
+          Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("name", name);
+            homeFragment.setArguments(bundle);
+            replaceFragement(homeFragment);
+
         });
 
         // our recycler view code here
