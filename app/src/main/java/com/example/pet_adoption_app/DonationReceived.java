@@ -185,12 +185,7 @@ public class DonationReceived extends Fragment implements DonationReceivedAdapte
                         newList.add(donationReceive);
                     }
                     else{
-                        AlertDialog dialog = new AlertDialog.Builder(getContext())
-                                .setTitle("No Item Found")
-                                .setMessage("No item found with the name " + newText)
-                                .setPositiveButton("Ok", null)
-                                .create();
-                        dialog.show();
+
                     }
                 }
 
