@@ -127,12 +127,7 @@ public class Fragment_Lost_Pets extends Fragment implements  LostAdapter.onCance
                         newList.add(pet);
                     }
                     else{
-                        AlertDialog dialog = new AlertDialog.Builder(getContext())
-                                .setTitle("No Item Found")
-                                .setMessage("No item found with the name " + query)
-                                .setPositiveButton("Ok", null)
-                                .create();
-                        dialog.show();
+
                     }
                 }
 
@@ -157,12 +152,7 @@ public class Fragment_Lost_Pets extends Fragment implements  LostAdapter.onCance
                         newList.add(pet);
                     }
                     else{
-                        AlertDialog dialog = new AlertDialog.Builder(getContext())
-                                .setTitle("No Item Found")
-                                .setMessage("No item found with the name " + newText)
-                                .setPositiveButton("Ok", null)
-                                .create();
-                        dialog.show();
+
                     }
                 }
 

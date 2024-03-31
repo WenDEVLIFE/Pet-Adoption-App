@@ -129,12 +129,7 @@ public class Fragment_Your_Donations extends Fragment implements DonationRequest
                     }
 
                     else{
-                        AlertDialog dialog = new AlertDialog.Builder(getContext())
-                                .setTitle("No Item Found")
-                                .setMessage("No item found with the name " + query)
-                                .setPositiveButton("Ok", null)
-                                .create();
-                        dialog.show();
+
                     }
                 }
 

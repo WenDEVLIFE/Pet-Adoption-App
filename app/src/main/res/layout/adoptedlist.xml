@@ -187,7 +187,7 @@
         <Button
                 android:text="Delete the pet"
                 android:background="@drawable/button"
-                android:textColor="@color/white"
+                android:textColor="#0C690B"
                 android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:id="@+id/acceptbutton"

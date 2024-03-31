@@ -148,12 +148,7 @@ public class Ask_Donations extends Fragment implements  DonationAdapter.onCancel
                         newList.add(donate);
                     }
                     else{
-                        AlertDialog dialog = new AlertDialog.Builder(getContext())
-                                .setTitle("No Item Found")
-                                .setMessage("No item found with the name " + query)
-                                .setPositiveButton("Ok", null)
-                                .create();
-                        dialog.show();
+
                     }
                 }
 
@@ -181,12 +176,7 @@ public class Ask_Donations extends Fragment implements  DonationAdapter.onCancel
                         newList.add(donate);
                     }
                     else{
-                        AlertDialog dialog = new AlertDialog.Builder(getContext())
-                                .setTitle("No Item Found")
-                                .setMessage("No item found with the name " + newText)
-                                .setPositiveButton("Ok", null)
-                                .create();
-                        dialog.show();
+
                     }
 
                 }

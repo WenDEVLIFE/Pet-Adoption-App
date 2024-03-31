@@ -145,7 +145,7 @@
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_50sdp"
                 android:id="@+id/button"
-                android:textColor="@color/white"
+                android:textColor="#0C690B"
                 android:background="@drawable/button"
                 app:layout_constraintTop_toBottomOf="@+id/checkBox"
                 app:layout_constraintBottom_toBottomOf="parent"

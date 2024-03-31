@@ -188,7 +188,7 @@
         <Button
                 android:text="Accept Adoption"
                 android:background="@drawable/button"
-                android:textColor="@color/white"
+                android:textColor="#0C690B"
                 android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:id="@+id/acceptbutton"
@@ -196,13 +196,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/adoptreq"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/cancelbutton"
-                app:layout_constraintHorizontal_bias="0.421"
-                app:layout_constraintVertical_bias="0.466" />
+                app:layout_constraintHorizontal_bias="0.347"
+                app:layout_constraintVertical_bias="0.529" />
 
         <Button
                 android:text="Cancel Adoption"
                 android:background="@drawable/button"
-                android:textColor="@color/white"
+                android:textColor="#0C690B"
                 android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:id="@+id/cancelbutton"

@@ -161,7 +161,7 @@
         <Button
                 android:text="Report to the owner"
                 android:background="@drawable/button"
-                android:textColor="@color/white"
+                android:textColor="#0C690B"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_50sdp"
                 android:id="@+id/reportbutton"

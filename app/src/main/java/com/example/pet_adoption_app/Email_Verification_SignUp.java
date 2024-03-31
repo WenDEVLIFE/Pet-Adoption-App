@@ -117,6 +117,7 @@ public class Email_Verification_SignUp extends AppCompatActivity {
         db.collection("users")
                 .add(user)
                 .addOnSuccessListener(documentReference -> {
+
                     Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
 
                     // Alert Success
@@ -124,8 +125,11 @@ public class Email_Verification_SignUp extends AppCompatActivity {
 
                     Intent intent = new Intent(Email_Verification_SignUp.this, Signin_Activity.class);
                     startActivity(intent);
+
+
                 })
                 .addOnFailureListener(e -> {
+
 
                     // Alert Errors
                     Log.w(TAG, "Error adding document", e);
