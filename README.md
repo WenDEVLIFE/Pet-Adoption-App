@@ -6,3 +6,5 @@ Login
 Sign up
 ![Uploading image.png…]()
 
+Email verification :
+![Uploading image.png…]()
