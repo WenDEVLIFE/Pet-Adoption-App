@@ -20,7 +20,9 @@ Transaction:
 ![image](https://github.com/WenDEVLIFE/Pet-Adoption-App/assets/117834496/1249a073-925d-47b7-95c8-bb3b0fe26fb0)
 
 Lost pets
-![Uploading image.png…]()
+![image](https://github.com/WenDEVLIFE/Pet-Adoption-App/assets/117834496/83091f07-0046-4fd6-a662-e93425c6b32d)
+
 
 User preferences:
-![Uploading image.png…]()
+![image](https://github.com/WenDEVLIFE/Pet-Adoption-App/assets/117834496/e957c2cf-206b-4bdd-aa88-1e547c3f1d1e)
+
